@@ -1,16 +1,6 @@
 /* ==========================================================================
-   Fluent 2 for Obsidian
-   Design System: Microsoft Fluent 2 Design System (Fluent UI v9 + Windows 11)
-   References:
-     - https://fluent2.microsoft.design/
-     - https://github.com/microsoft/fluentui (@fluentui/tokens)
-   Features:
-     - Authentic Fluent 2 Light & Dark semantic token architecture
-     - Windows 11 Native Mica / Mica Alt / Acrylic support (body.is-translucent)
-     - Pure-CSS Simulated Mica fallback & Acrylic flyouts (zero plugin needed)
-     - Windows 11 System AccentColor support via CSS color-mix()
-     - Windows 11 Segoe UI Variable & Cascadia Code typography
-     - Windows Contrast Themes (@media (forced-colors: active)) & Reduced Motion
+   Fluent 2 for Obsidian (v1.0.1)
+   Microsoft Fluent 2 Design System (@fluentui/tokens + Windows 11 WinUI 3)
    ========================================================================== */
 
 /* @settings
@@ -21,7 +11,7 @@ settings:
   - id: fluent2-info
     type: info-text
     markdown: true
-    description: "**Fluent 2 Design System for Obsidian** — Built on Microsoft Fluent UI v9 design tokens and Windows 11 material layering. Enable the companion plugin **Fluent 2 Windows Native** for real Windows 11 Mica / Mica Alt / Acrylic and live 7-shade system accent sync."
+    description: "**Fluent 2 Design System for Obsidian** — Built on Microsoft Fluent UI v9 design tokens and Windows 11 material layering. Pair with **Fluent 2 Windows Native** for real Windows 11 Mica / Mica Alt / Acrylic and live 7-shade system accent sync."
     description.zh: "**Obsidian 的微软 Fluent 2 主题** —— 基于 Microsoft Fluent UI v9 设计令牌与 Windows 11 材质层级构建。搭配配套插件 **Fluent 2 Windows Native** 可开启原生 Windows 11 云母（含独立设置窗口）与 7 阶系统主题色实时同步。"
 
   - id: fluent2-heading-material
@@ -54,7 +44,7 @@ settings:
   - id: fluent2-editor-mica
     title: "Note Editor Mica Backdrop"
     title.zh: "笔记正文区域启用 Mica 材质"
-    description: "Lets the native Windows 11 Mica backdrop show through the note editor & reading view with an adjustable solid tint overlay on top."
+    description: "Lets the native Windows 11 Mica backdrop show through the note editor and reading view with an adjustable solid tint overlay on top."
     description.zh: "让笔记正文编辑区与阅读区也透出原生 Windows 11 Mica 云母材质，并在其上叠加一层可自由调节颜色与透明度的纯色叠层。"
     type: class-toggle
     default: false
@@ -123,7 +113,7 @@ settings:
   - id: fluent2-accent-source
     title: "Accent Color Source"
     title.zh: "强调色来源"
-    description: "Choose Fluent 2 Web Blue, Custom Color (pick below), Obsidian's native accent, or preset ramps. Note — when Fluent 2 Windows Native plugin sync is ON, your live Windows 11 accent takes priority automatically."
+    description: "Choose Fluent 2 Web Blue, Custom Color (pick below), Obsidian's native accent, or preset ramps. When Fluent 2 Windows Native plugin sync is ON, live Windows 11 accent takes priority automatically."
     description.zh: "可选用微软 Fluent 2 官方蓝、下方自定义品牌色、Obsidian 原生强调色或预设配色。若已开启「Fluent 2 Windows Native」插件的系统主题色同步，将自动优先跟随 Windows 11 实时主题色。"
     type: class-select
     allowEmpty: false
@@ -196,7 +186,7 @@ settings:
   - id: fluent2-use-obsidian-fonts
     title: "Use Obsidian Custom Fonts (Disable Segoe UI Variable Override)"
     title.zh: "使用 Obsidian 原生自定义字体（关闭 Segoe UI Variable 覆盖）"
-    description: "By default, Fluent 2 applies Windows 11 Segoe UI Variable & Cascadia Code. Enable this if you prefer your own fonts set in Appearance."
+    description: "By default, Fluent 2 applies Windows 11 Segoe UI Variable and Cascadia Code. Enable this if you prefer your own fonts set in Appearance."
     description.zh: "默认优先使用 Windows 11 Segoe UI Variable 与 Cascadia Code；如希望完全使用「外观 → 字体」中的自定义字体，请开启此项。"
     type: class-toggle
     default: false
@@ -236,14 +226,14 @@ settings:
 */
 
 /* ==========================================================================
-   1. FLUENT 2 DESIGN TOKENS (Global, Motion, Shape, Typography, Brand Ramps)
+   1. GLOBAL FLUENT 2 DESIGN TOKENS
    ========================================================================== */
 
+html {
+  background-color: transparent;
+}
+
 :root {
-  /* --- Fluent 2 BrandWeb Global Ramp (@fluentui/tokens brandWeb) --- */
-  --f2-brand-10: #061724;
-  --f2-brand-20: #082338;
-  --f2-brand-30: #0a2e4a;
   --f2-brand-40: #0c3b5e;
   --f2-brand-50: #0e4775;
   --f2-brand-60: #0f548c;
@@ -253,12 +243,10 @@ settings:
   --f2-brand-100: #479ef5;
   --f2-brand-110: #62abf5;
   --f2-brand-120: #77b7f7;
-  --f2-brand-130: #96c6fa;
   --f2-brand-140: #b4d6fa;
   --f2-brand-150: #cfe4fa;
   --f2-brand-160: #ebf3fc;
 
-  /* --- Fluent 2 Corner Radius Tokens --- */
   --borderRadiusNone: 0px;
   --borderRadiusSmall: 2px;
   --borderRadiusMedium: 4px;
@@ -267,37 +255,15 @@ settings:
   --borderRadius2XLarge: 12px;
   --borderRadiusCircular: 9999px;
 
-  /* --- Fluent 2 Spacing Scale --- */
-  --spacingHorizontalXXS: 2px;
-  --spacingHorizontalXS: 4px;
-  --spacingHorizontalSNudge: 6px;
-  --spacingHorizontalS: 8px;
-  --spacingHorizontalMNudge: 10px;
-  --spacingHorizontalM: 12px;
-  --spacingHorizontalL: 16px;
-  --spacingHorizontalXL: 20px;
-  --spacingHorizontalXXL: 24px;
-
-  /* --- Fluent 2 Motion Tokens --- */
   --durationUltraFast: 50ms;
   --durationFaster: 100ms;
   --durationFast: 150ms;
   --durationNormal: 200ms;
-  --durationGentle: 250ms;
   --durationSlow: 300ms;
-  --durationSlower: 400ms;
 
-  --curveAccelerateMax: cubic-bezier(0.9, 0.1, 1, 0.2);
-  --curveAccelerateMid: cubic-bezier(1, 0, 1, 1);
-  --curveAccelerateMin: cubic-bezier(0.8, 0, 0.78, 1);
-  --curveDecelerateMax: cubic-bezier(0.1, 0.9, 0.2, 1);
   --curveDecelerateMid: cubic-bezier(0, 0, 0, 1);
-  --curveDecelerateMin: cubic-bezier(0.33, 0, 0.1, 1);
-  --curveEasyEaseMax: cubic-bezier(0.8, 0, 0.2, 1);
   --curveEasyEase: cubic-bezier(0.33, 0, 0.67, 1);
-  --curveLinear: cubic-bezier(0, 0, 1, 1);
 
-  /* --- Fluent 2 Typography Font Stacks --- */
   --fontFamilyBase: "Segoe UI Variable Text", "Segoe UI Variable", "Segoe UI",
     "Segoe UI Web (West European)", "Microsoft YaHei UI", "PingFang SC",
     -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
@@ -306,61 +272,33 @@ settings:
     BlinkMacSystemFont, sans-serif;
   --fontFamilyMonospace: "Cascadia Code", "Cascadia Mono", Consolas,
     "JetBrains Mono", "Courier New", monospace;
+  --fontFamilyWinSettings: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Text", sans-serif;
 
-  /* --- Material Controls (Exposed to Style Settings) --- */
   --fluent2-layer-opacity: 0.78;
   --fluent2-acrylic-blur: 28px;
   --fluent2-editor-overlay-opacity: 60%;
 }
 
-.theme-light {
-  --fluent2-custom-accent: #9d5000;
-  --fluent2-editor-overlay-color: #ffffff;
-}
-
-.theme-dark {
-  --fluent2-custom-accent: #e08b3e;
-  --fluent2-editor-overlay-color: #202020;
-}
-
 /* ==========================================================================
-   2. LIGHT THEME TOKENS (Fluent 2 webLightTheme + Windows 11 Light Mica)
+   2. LIGHT & DARK SEMANTIC TOKENS (Fluent 2 Web + VS Code 2026 Syntax)
    ========================================================================== */
 
 .theme-light {
   color-scheme: light;
+  --fluent2-custom-accent: #9d5000;
+  --fluent2-editor-overlay-color: #ffffff;
 
-  /* --- Neutral Backgrounds --- */
   --colorNeutralBackground1: #ffffff;
-  --colorNeutralBackground1Hover: #f5f5f5;
-  --colorNeutralBackground1Pressed: #e0e0e0;
-  --colorNeutralBackground1Selected: #ebebeb;
-
   --colorNeutralBackground2: #fafafa;
-  --colorNeutralBackground2Hover: #f0f0f0;
-  --colorNeutralBackground2Pressed: #dbdbdb;
-  --colorNeutralBackground2Selected: #e6e6e6;
-
   --colorNeutralBackground3: #f5f5f5;
-  --colorNeutralBackground3Hover: #ebebeb;
-  --colorNeutralBackground3Pressed: #d6d6d6;
-  --colorNeutralBackground3Selected: #e0e0e0;
-
-  --colorNeutralBackground4: #f0f0f0;
-  --colorNeutralBackground5: #ebebeb;
   --colorNeutralBackground6: #e6e6e6;
-  --colorNeutralBackgroundDisabled: #f0f0f0;
-
-  --colorSubtleBackground: transparent;
   --colorSubtleBackgroundHover: rgba(0, 0, 0, 0.0373);
   --colorSubtleBackgroundPressed: rgba(0, 0, 0, 0.0241);
   --colorSubtleBackgroundSelected: rgba(0, 0, 0, 0.0373);
 
-  /* Translucent Layer & Acrylic Surfaces */
   --f2-layer-bg-rgb: 255, 255, 255;
   --f2-mica-base-solid: #f3f3f3;
   --f2-mica-alt-solid: #e8e8e8;
-  --f2-mica-tint: rgba(243, 243, 243, 0.45);
   --f2-acrylic-surface: rgba(252, 252, 252, 0.84);
   --f2-acrylic-surface-strong: rgba(255, 255, 255, 0.90);
   --f2-card-surface: rgba(255, 255, 255, 0.68);
@@ -371,7 +309,6 @@ settings:
   --f2-control-fill-hover: rgba(249, 249, 249, 0.50);
   --f2-control-fill-pressed: rgba(249, 249, 249, 0.30);
 
-  /* --- Neutral Foregrounds --- */
   --colorNeutralForeground1: #242424;
   --colorNeutralForeground2: #424242;
   --colorNeutralForeground3: #616161;
@@ -380,63 +317,49 @@ settings:
   --colorNeutralForegroundOnBrand: #ffffff;
   --colorNeutralForegroundInverted: #ffffff;
 
-  /* --- Neutral Strokes & Fluent 2 Bevel Edges --- */
   --colorNeutralStroke1: #d1d1d1;
   --colorNeutralStroke1Hover: #c7c7c7;
-  --colorNeutralStroke1Pressed: #b3b3b3;
   --colorNeutralStroke2: #e0e0e0;
-  --colorNeutralStroke3: #f0f0f0;
   --colorNeutralStrokeSubtle: rgba(0, 0, 0, 0.0578);
   --colorNeutralStrokeAccessible: #616161;
-  --colorNeutralStrokeDisabled: #e0e0e0;
   --f2-stroke-control-default: rgba(0, 0, 0, 0.0578);
   --f2-stroke-control-bottom: rgba(0, 0, 0, 0.1622);
   --f2-stroke-surface-flyout: rgba(0, 0, 0, 0.08);
 
-  /* --- Brand Semantic Tokens (Default: Fluent Web Blue) --- */
   --colorBrandBackground: var(--f2-brand-80);
   --colorBrandBackgroundHover: var(--f2-brand-70);
   --colorBrandBackgroundPressed: var(--f2-brand-50);
-  --colorBrandBackgroundSelected: var(--f2-brand-60);
   --colorBrandBackground2: var(--f2-brand-160);
   --colorBrandBackground2Hover: var(--f2-brand-150);
   --colorBrandForeground1: var(--f2-brand-80);
   --colorBrandForeground2: var(--f2-brand-70);
   --colorBrandForegroundLink: var(--f2-brand-70);
   --colorBrandForegroundLinkHover: var(--f2-brand-60);
-  --colorBrandForegroundLinkPressed: var(--f2-brand-40);
   --colorBrandStroke1: var(--f2-brand-80);
   --colorBrandStroke2: var(--f2-brand-140);
   --colorCompoundBrandStroke: var(--f2-brand-80);
   --colorCompoundBrandBackground: var(--f2-brand-80);
   --f2-selection-bg: rgba(15, 108, 189, 0.18);
 
-  /* --- Fluent 2 Status Palette (Light) --- */
   --f2-status-info-fg: #0f6cbd;
   --f2-status-info-bg: #ebf3fc;
   --f2-status-info-border: rgba(15, 108, 189, 0.25);
-
   --f2-status-success-fg: #0e700e;
   --f2-status-success-bg: #f1faf1;
   --f2-status-success-border: rgba(16, 124, 16, 0.25);
-
   --f2-status-warning-fg: #8a5100;
   --f2-status-warning-bg: #fff9f0;
   --f2-status-warning-border: rgba(218, 130, 0, 0.30);
-
   --f2-status-danger-fg: #b10e1c;
   --f2-status-danger-bg: #fdf3f4;
   --f2-status-danger-border: rgba(197, 15, 31, 0.25);
-
   --f2-status-important-fg: #70157e;
   --f2-status-important-bg: #f9f2fb;
   --f2-status-important-border: rgba(136, 23, 152, 0.25);
-
   --f2-status-teal-fg: #03696c;
   --f2-status-teal-bg: #eff9f9;
   --f2-status-teal-border: rgba(3, 131, 135, 0.25);
 
-  /* --- Fluent 2 Elevation Shadows (Light) --- */
   --shadow2: 0 0 2px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.14);
   --shadow4: 0 0 2px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.14);
   --shadow8: 0 0 2px rgba(0, 0, 0, 0.12), 0 4px 8px rgba(0, 0, 0, 0.14);
@@ -444,7 +367,7 @@ settings:
   --shadow28: 0 0 8px rgba(0, 0, 0, 0.12), 0 14px 28px rgba(0, 0, 0, 0.14);
   --shadow64: 0 0 8px rgba(0, 0, 0, 0.12), 0 32px 64px rgba(0, 0, 0, 0.14);
 
-  /* --- Syntax Highlighting (VS Code 2026 Light / 2026-light.json) --- */
+  /* VS Code 2026 Light (2026-light.json) */
   --code-normal: #202020;
   --code-comment: #6e7781;
   --code-keyword: #cf222e;
@@ -457,50 +380,27 @@ settings:
   --code-punctuation: #57606a;
   --code-important: #953800;
 
-  /* --- Obsidian RGB Accent Defaults --- */
   --accent-h: 207;
   --accent-s: 85%;
   --accent-l: 40%;
 }
 
-/* ==========================================================================
-   3. DARK THEME TOKENS (Fluent 2 webDarkTheme + Windows 11 Dark Mica)
-   ========================================================================== */
-
 .theme-dark {
   color-scheme: dark;
+  --fluent2-custom-accent: #e08b3e;
+  --fluent2-editor-overlay-color: #202020;
 
-  /* --- Neutral Backgrounds --- */
   --colorNeutralBackground1: #292929;
-  --colorNeutralBackground1Hover: #3d3d3d;
-  --colorNeutralBackground1Pressed: #1f1f1f;
-  --colorNeutralBackground1Selected: #383838;
-
   --colorNeutralBackground2: #1f1f1f;
-  --colorNeutralBackground2Hover: #333333;
-  --colorNeutralBackground2Pressed: #141414;
-  --colorNeutralBackground2Selected: #2e2e2e;
-
   --colorNeutralBackground3: #141414;
-  --colorNeutralBackground3Hover: #292929;
-  --colorNeutralBackground3Pressed: #0a0a0a;
-  --colorNeutralBackground3Selected: #242424;
-
-  --colorNeutralBackground4: #1c1c1c;
-  --colorNeutralBackground5: #141414;
   --colorNeutralBackground6: #333333;
-  --colorNeutralBackgroundDisabled: #1f1f1f;
-
-  --colorSubtleBackground: transparent;
   --colorSubtleBackgroundHover: rgba(255, 255, 255, 0.0605);
   --colorSubtleBackgroundPressed: rgba(255, 255, 255, 0.0419);
   --colorSubtleBackgroundSelected: rgba(255, 255, 255, 0.0605);
 
-  /* Translucent Layer & Acrylic Surfaces */
   --f2-layer-bg-rgb: 39, 39, 39;
   --f2-mica-base-solid: #202020;
   --f2-mica-alt-solid: #191919;
-  --f2-mica-tint: rgba(26, 26, 26, 0.48);
   --f2-acrylic-surface: rgba(44, 44, 44, 0.80);
   --f2-acrylic-surface-strong: rgba(40, 40, 40, 0.88);
   --f2-card-surface: rgba(255, 255, 255, 0.0512);
@@ -511,7 +411,6 @@ settings:
   --f2-control-fill-hover: rgba(255, 255, 255, 0.0837);
   --f2-control-fill-pressed: rgba(255, 255, 255, 0.0326);
 
-  /* --- Neutral Foregrounds --- */
   --colorNeutralForeground1: #ffffff;
   --colorNeutralForeground2: #d6d6d6;
   --colorNeutralForeground3: #adadad;
@@ -520,63 +419,49 @@ settings:
   --colorNeutralForegroundOnBrand: #ffffff;
   --colorNeutralForegroundInverted: #242424;
 
-  /* --- Neutral Strokes & Fluent 2 Top Specular Highlight --- */
   --colorNeutralStroke1: #666666;
   --colorNeutralStroke1Hover: #757575;
-  --colorNeutralStroke1Pressed: #6b6b6b;
   --colorNeutralStroke2: #525252;
-  --colorNeutralStroke3: #3d3d3d;
   --colorNeutralStrokeSubtle: rgba(255, 255, 255, 0.0698);
   --colorNeutralStrokeAccessible: #adadad;
-  --colorNeutralStrokeDisabled: #424242;
   --f2-stroke-control-default: rgba(255, 255, 255, 0.0698);
   --f2-stroke-control-top: rgba(255, 255, 255, 0.093);
   --f2-stroke-surface-flyout: rgba(255, 255, 255, 0.09);
 
-  /* --- Brand Semantic Tokens (Default: Fluent Web Dark) --- */
   --colorBrandBackground: #115ea3;
   --colorBrandBackgroundHover: #0f6cbd;
   --colorBrandBackgroundPressed: #0c3b5e;
-  --colorBrandBackgroundSelected: #0f548c;
   --colorBrandBackground2: #082338;
   --colorBrandBackground2Hover: #0a2e4a;
   --colorBrandForeground1: var(--f2-brand-100);
   --colorBrandForeground2: var(--f2-brand-120);
   --colorBrandForegroundLink: var(--f2-brand-100);
   --colorBrandForegroundLinkHover: var(--f2-brand-110);
-  --colorBrandForegroundLinkPressed: var(--f2-brand-90);
   --colorBrandStroke1: var(--f2-brand-100);
   --colorBrandStroke2: #0e4775;
   --colorCompoundBrandStroke: var(--f2-brand-100);
   --colorCompoundBrandBackground: var(--f2-brand-100);
   --f2-selection-bg: rgba(71, 158, 245, 0.28);
 
-  /* --- Fluent 2 Status Palette (Dark) --- */
   --f2-status-info-fg: #62abf5;
   --f2-status-info-bg: rgba(71, 158, 245, 0.12);
   --f2-status-info-border: rgba(98, 171, 245, 0.28);
-
   --f2-status-success-fg: #54b054;
   --f2-status-success-bg: rgba(84, 176, 84, 0.12);
   --f2-status-success-border: rgba(84, 176, 84, 0.28);
-
   --f2-status-warning-fg: #faa06b;
   --f2-status-warning-bg: rgba(250, 160, 107, 0.12);
   --f2-status-warning-border: rgba(250, 160, 107, 0.28);
-
   --f2-status-danger-fg: #ee6c78;
   --f2-status-danger-bg: rgba(238, 108, 120, 0.13);
   --f2-status-danger-border: rgba(238, 108, 120, 0.28);
-
   --f2-status-important-fg: #c986d6;
   --f2-status-important-bg: rgba(201, 134, 214, 0.12);
   --f2-status-important-border: rgba(201, 134, 214, 0.28);
-
   --f2-status-teal-fg: #4bb4b8;
   --f2-status-teal-bg: rgba(75, 180, 184, 0.12);
   --f2-status-teal-border: rgba(75, 180, 184, 0.28);
 
-  /* --- Fluent 2 Elevation Shadows (Dark) --- */
   --shadow2: 0 0 2px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.28);
   --shadow4: 0 0 2px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.28);
   --shadow8: 0 0 2px rgba(0, 0, 0, 0.24), 0 4px 8px rgba(0, 0, 0, 0.28);
@@ -584,7 +469,7 @@ settings:
   --shadow28: 0 0 8px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.28);
   --shadow64: 0 0 8px rgba(0, 0, 0, 0.24), 0 32px 64px rgba(0, 0, 0, 0.28);
 
-  /* --- Syntax Highlighting (VS Code 2026 Dark / 2026-dark.json) --- */
+  /* VS Code 2026 Dark (2026-dark.json) */
   --code-normal: #bbbebf;
   --code-comment: #8b949e;
   --code-keyword: #ff7b72;
@@ -597,98 +482,66 @@ settings:
   --code-punctuation: #8b949e;
   --code-important: #ffa657;
 
-  /* --- Obsidian RGB Accent Defaults --- */
   --accent-h: 210;
   --accent-s: 90%;
   --accent-l: 62%;
 }
 
 /* ==========================================================================
-   4. BRAND & WINDOWS 11 SYSTEM ACCENT COLOR PRESETS
+   3. BRAND & WINDOWS 11 SYSTEM ACCENT PRESETS (Derived via color-mix)
    ========================================================================== */
 
-/* --- 4A. Custom Brand Color (User-Picked via Style Settings) --- */
-body.fluent2-accent-custom.theme-light {
-  --colorBrandBackground: var(--fluent2-custom-accent);
-  --colorBrandBackgroundHover: color-mix(in srgb, var(--fluent2-custom-accent) 88%, black);
-  --colorBrandBackgroundPressed: color-mix(in srgb, var(--fluent2-custom-accent) 74%, black);
-  --colorBrandBackgroundSelected: color-mix(in srgb, var(--fluent2-custom-accent) 80%, black);
-  --colorBrandBackground2: color-mix(in srgb, var(--fluent2-custom-accent) 12%, white);
-  --colorBrandBackground2Hover: color-mix(in srgb, var(--fluent2-custom-accent) 20%, white);
-  --colorBrandForeground1: var(--fluent2-custom-accent);
-  --colorBrandForeground2: color-mix(in srgb, var(--fluent2-custom-accent) 85%, black);
-  --colorBrandForegroundLink: color-mix(in srgb, var(--fluent2-custom-accent) 92%, black);
-  --colorBrandForegroundLinkHover: color-mix(in srgb, var(--fluent2-custom-accent) 76%, black);
-  --colorBrandStroke1: var(--fluent2-custom-accent);
-  --colorBrandStroke2: color-mix(in srgb, var(--fluent2-custom-accent) 32%, white);
-  --colorCompoundBrandStroke: var(--fluent2-custom-accent);
-  --colorCompoundBrandBackground: var(--fluent2-custom-accent);
-  --f2-selection-bg: color-mix(in srgb, var(--fluent2-custom-accent) 20%, transparent);
+body:is(.fluent2-accent-custom, .fluent2-accent-teams, .fluent2-accent-copilot, .fluent2-accent-warm, .fluent2-accent-windows).theme-light {
+  --colorBrandBackground: var(--f2-seed);
+  --colorBrandBackgroundHover: color-mix(in srgb, var(--f2-seed) 86%, black);
+  --colorBrandBackgroundPressed: color-mix(in srgb, var(--f2-seed) 72%, black);
+  --colorBrandBackground2: color-mix(in srgb, var(--f2-seed) 12%, white);
+  --colorBrandBackground2Hover: color-mix(in srgb, var(--f2-seed) 20%, white);
+  --colorBrandForeground1: var(--f2-seed);
+  --colorBrandForeground2: color-mix(in srgb, var(--f2-seed) 85%, black);
+  --colorBrandForegroundLink: color-mix(in srgb, var(--f2-seed) 92%, black);
+  --colorBrandForegroundLinkHover: color-mix(in srgb, var(--f2-seed) 76%, black);
+  --colorBrandStroke1: var(--f2-seed);
+  --colorBrandStroke2: color-mix(in srgb, var(--f2-seed) 32%, white);
+  --colorCompoundBrandStroke: var(--f2-seed);
+  --colorCompoundBrandBackground: var(--f2-seed);
+  --f2-selection-bg: color-mix(in srgb, var(--f2-seed) 20%, transparent);
 }
 
-body.fluent2-accent-custom.theme-dark {
-  --colorBrandBackground: color-mix(in srgb, var(--fluent2-custom-accent) 82%, black);
-  --colorBrandBackgroundHover: var(--fluent2-custom-accent);
-  --colorBrandBackgroundPressed: color-mix(in srgb, var(--fluent2-custom-accent) 65%, black);
-  --colorBrandBackgroundSelected: color-mix(in srgb, var(--fluent2-custom-accent) 74%, black);
-  --colorBrandBackground2: color-mix(in srgb, var(--fluent2-custom-accent) 18%, #1f1f1f);
-  --colorBrandBackground2Hover: color-mix(in srgb, var(--fluent2-custom-accent) 26%, #1f1f1f);
-  --colorBrandForeground1: var(--fluent2-custom-accent);
-  --colorBrandForeground2: color-mix(in srgb, var(--fluent2-custom-accent) 82%, white);
-  --colorBrandForegroundLink: var(--fluent2-custom-accent);
-  --colorBrandForegroundLinkHover: color-mix(in srgb, var(--fluent2-custom-accent) 78%, white);
-  --colorBrandStroke1: var(--fluent2-custom-accent);
-  --colorBrandStroke2: color-mix(in srgb, var(--fluent2-custom-accent) 42%, #1f1f1f);
-  --colorCompoundBrandStroke: var(--fluent2-custom-accent);
-  --colorCompoundBrandBackground: var(--fluent2-custom-accent);
-  --f2-selection-bg: color-mix(in srgb, var(--fluent2-custom-accent) 28%, transparent);
+body:is(.fluent2-accent-custom, .fluent2-accent-teams, .fluent2-accent-copilot, .fluent2-accent-warm, .fluent2-accent-windows).theme-dark {
+  --colorBrandBackground: color-mix(in srgb, var(--f2-seed) 82%, black);
+  --colorBrandBackgroundHover: var(--f2-seed);
+  --colorBrandBackgroundPressed: color-mix(in srgb, var(--f2-seed) 65%, black);
+  --colorBrandBackground2: color-mix(in srgb, var(--f2-seed) 18%, #1f1f1f);
+  --colorBrandBackground2Hover: color-mix(in srgb, var(--f2-seed) 26%, #1f1f1f);
+  --colorBrandForeground1: var(--f2-seed);
+  --colorBrandForeground2: color-mix(in srgb, var(--f2-seed) 82%, white);
+  --colorBrandForegroundLink: var(--f2-seed);
+  --colorBrandForegroundLinkHover: color-mix(in srgb, var(--f2-seed) 78%, white);
+  --colorBrandStroke1: var(--f2-seed);
+  --colorBrandStroke2: color-mix(in srgb, var(--f2-seed) 42%, #1f1f1f);
+  --colorCompoundBrandStroke: var(--f2-seed);
+  --colorCompoundBrandBackground: var(--f2-seed);
+  --f2-selection-bg: color-mix(in srgb, var(--f2-seed) 28%, transparent);
 }
 
-/* --- 4B. CSS System AccentColor (Experimental / Contrast Themes) --- */
-body.fluent2-accent-windows.theme-light {
-  --colorBrandBackground: AccentColor;
-  --colorBrandBackgroundHover: color-mix(in srgb, AccentColor 88%, black);
-  --colorBrandBackgroundPressed: color-mix(in srgb, AccentColor 74%, black);
-  --colorBrandBackgroundSelected: color-mix(in srgb, AccentColor 80%, black);
-  --colorBrandBackground2: color-mix(in srgb, AccentColor 12%, white);
-  --colorBrandBackground2Hover: color-mix(in srgb, AccentColor 20%, white);
-  --colorBrandForeground1: AccentColor;
-  --colorBrandForeground2: color-mix(in srgb, AccentColor 85%, black);
-  --colorBrandForegroundLink: color-mix(in srgb, AccentColor 90%, black);
-  --colorBrandForegroundLinkHover: color-mix(in srgb, AccentColor 75%, black);
-  --colorBrandStroke1: AccentColor;
-  --colorBrandStroke2: color-mix(in srgb, AccentColor 32%, white);
-  --colorCompoundBrandStroke: AccentColor;
-  --colorCompoundBrandBackground: AccentColor;
+body.fluent2-accent-custom { --f2-seed: var(--fluent2-custom-accent); }
+body.fluent2-accent-teams.theme-light { --f2-seed: #5b5fc7; }
+body.fluent2-accent-teams.theme-dark { --f2-seed: #7f85f5; }
+body.fluent2-accent-copilot.theme-light { --f2-seed: #038387; }
+body.fluent2-accent-copilot.theme-dark { --f2-seed: #4bb4b8; }
+body.fluent2-accent-warm.theme-light { --f2-seed: #ca5010; }
+body.fluent2-accent-warm.theme-dark { --f2-seed: #ef8d58; }
+
+body.fluent2-accent-windows {
+  --f2-seed: AccentColor;
   --colorNeutralForegroundOnBrand: AccentColorText;
-  --f2-selection-bg: color-mix(in srgb, AccentColor 20%, transparent);
 }
 
-body.fluent2-accent-windows.theme-dark {
-  --colorBrandBackground: AccentColor;
-  --colorBrandBackgroundHover: color-mix(in srgb, AccentColor 86%, white);
-  --colorBrandBackgroundPressed: color-mix(in srgb, AccentColor 78%, black);
-  --colorBrandBackgroundSelected: color-mix(in srgb, AccentColor 90%, black);
-  --colorBrandBackground2: color-mix(in srgb, AccentColor 18%, #1f1f1f);
-  --colorBrandBackground2Hover: color-mix(in srgb, AccentColor 26%, #1f1f1f);
-  --colorBrandForeground1: color-mix(in srgb, AccentColor 78%, white);
-  --colorBrandForeground2: color-mix(in srgb, AccentColor 68%, white);
-  --colorBrandForegroundLink: color-mix(in srgb, AccentColor 78%, white);
-  --colorBrandForegroundLinkHover: color-mix(in srgb, AccentColor 62%, white);
-  --colorBrandStroke1: color-mix(in srgb, AccentColor 80%, white);
-  --colorBrandStroke2: color-mix(in srgb, AccentColor 42%, #1f1f1f);
-  --colorCompoundBrandStroke: color-mix(in srgb, AccentColor 80%, white);
-  --colorCompoundBrandBackground: color-mix(in srgb, AccentColor 80%, white);
-  --colorNeutralForegroundOnBrand: AccentColorText;
-  --f2-selection-bg: color-mix(in srgb, AccentColor 30%, transparent);
-}
-
-/* --- 4B. Obsidian Native Accent Color --- */
 body.fluent2-accent-obsidian {
   --colorBrandBackground: var(--color-accent);
   --colorBrandBackgroundHover: var(--color-accent-2);
   --colorBrandBackgroundPressed: var(--color-accent-1);
-  --colorBrandBackgroundSelected: var(--color-accent-1);
   --colorBrandBackground2: color-mix(in srgb, var(--color-accent) 14%, transparent);
   --colorBrandBackground2Hover: color-mix(in srgb, var(--color-accent) 22%, transparent);
   --colorBrandForeground1: var(--color-accent-2);
@@ -702,126 +555,17 @@ body.fluent2-accent-obsidian {
   --f2-selection-bg: color-mix(in srgb, var(--color-accent) 24%, transparent);
 }
 
-/* --- 4C. Microsoft Teams Purple --- */
-body.fluent2-accent-teams.theme-light {
-  --colorBrandBackground: #5b5fc7;
-  --colorBrandBackgroundHover: #4f52b2;
-  --colorBrandBackgroundPressed: #444791;
-  --colorBrandBackground2: #eeeefb;
-  --colorBrandBackground2Hover: #e0e1f8;
-  --colorBrandForeground1: #5b5fc7;
-  --colorBrandForeground2: #4f52b2;
-  --colorBrandForegroundLink: #4f52b2;
-  --colorBrandForegroundLinkHover: #444791;
-  --colorBrandStroke1: #5b5fc7;
-  --colorBrandStroke2: #c5c7f3;
-  --colorCompoundBrandStroke: #5b5fc7;
-  --colorCompoundBrandBackground: #5b5fc7;
-  --f2-selection-bg: rgba(91, 95, 199, 0.20);
-}
-
-body.fluent2-accent-teams.theme-dark {
-  --colorBrandBackground: #4f52b2;
-  --colorBrandBackgroundHover: #5b5fc7;
-  --colorBrandBackgroundPressed: #3d3e78;
-  --colorBrandBackground2: #242547;
-  --colorBrandBackground2Hover: #2f3160;
-  --colorBrandForeground1: #7f85f5;
-  --colorBrandForeground2: #9299f7;
-  --colorBrandForegroundLink: #7f85f5;
-  --colorBrandForegroundLinkHover: #a6a7dc;
-  --colorBrandStroke1: #7f85f5;
-  --colorBrandStroke2: #3d3e78;
-  --colorCompoundBrandStroke: #7f85f5;
-  --colorCompoundBrandBackground: #7f85f5;
-  --f2-selection-bg: rgba(127, 133, 245, 0.28);
-}
-
-/* --- 4D. Fluent Copilot Teal --- */
-body.fluent2-accent-copilot.theme-light {
-  --colorBrandBackground: #038387;
-  --colorBrandBackgroundHover: #026d70;
-  --colorBrandBackgroundPressed: #025659;
-  --colorBrandBackground2: #ebf7f7;
-  --colorBrandBackground2Hover: #d4eeee;
-  --colorBrandForeground1: #038387;
-  --colorBrandForeground2: #026d70;
-  --colorBrandForegroundLink: #026d70;
-  --colorBrandForegroundLinkHover: #025659;
-  --colorBrandStroke1: #038387;
-  --colorBrandStroke2: #a9dcdc;
-  --colorCompoundBrandStroke: #038387;
-  --colorCompoundBrandBackground: #038387;
-  --f2-selection-bg: rgba(3, 131, 135, 0.20);
-}
-
-body.fluent2-accent-copilot.theme-dark {
-  --colorBrandBackground: #026d70;
-  --colorBrandBackgroundHover: #038387;
-  --colorBrandBackgroundPressed: #014b4d;
-  --colorBrandBackground2: #0c2b2c;
-  --colorBrandBackground2Hover: #133f41;
-  --colorBrandForeground1: #4bb4b8;
-  --colorBrandForeground2: #6bc4c7;
-  --colorBrandForegroundLink: #4bb4b8;
-  --colorBrandForegroundLinkHover: #8ad3d6;
-  --colorBrandStroke1: #4bb4b8;
-  --colorBrandStroke2: #12494b;
-  --colorCompoundBrandStroke: #4bb4b8;
-  --colorCompoundBrandBackground: #4bb4b8;
-  --f2-selection-bg: rgba(75, 180, 184, 0.28);
-}
-
-/* --- 4E. Surface Warm Terracotta --- */
-body.fluent2-accent-warm.theme-light {
-  --colorBrandBackground: #ca5010;
-  --colorBrandBackgroundHover: #b0440d;
-  --colorBrandBackgroundPressed: #8c360a;
-  --colorBrandBackground2: #fdf2ec;
-  --colorBrandBackground2Hover: #f9e1d4;
-  --colorBrandForeground1: #ca5010;
-  --colorBrandForeground2: #a8420c;
-  --colorBrandForegroundLink: #a8420c;
-  --colorBrandForegroundLinkHover: #8c360a;
-  --colorBrandStroke1: #ca5010;
-  --colorBrandStroke2: #f0bea4;
-  --colorCompoundBrandStroke: #ca5010;
-  --colorCompoundBrandBackground: #ca5010;
-  --f2-selection-bg: rgba(202, 80, 16, 0.18);
-}
-
-body.fluent2-accent-warm.theme-dark {
-  --colorBrandBackground: #b0440d;
-  --colorBrandBackgroundHover: #ca5010;
-  --colorBrandBackgroundPressed: #7a2f09;
-  --colorBrandBackground2: #361c0f;
-  --colorBrandBackground2Hover: #4a2614;
-  --colorBrandForeground1: #ef8d58;
-  --colorBrandForeground2: #f4a478;
-  --colorBrandForegroundLink: #ef8d58;
-  --colorBrandForegroundLinkHover: #f7ba98;
-  --colorBrandStroke1: #ef8d58;
-  --colorBrandStroke2: #632c10;
-  --colorCompoundBrandStroke: #ef8d58;
-  --colorCompoundBrandBackground: #ef8d58;
-  --f2-selection-bg: rgba(239, 141, 88, 0.28);
-}
-
-/* --- 4F. Live Windows 11 Accent Palette Sync (Powered by Fluent 2 Windows Native Plugin) ---
-   Placed last in Section 4 so enabling live OS accent sync in the companion plugin
-   cleanly takes precedence over preset classes until disabled. */
+/* Live 7-shade Windows 11 Accent Palette Sync (Fluent 2 Windows Native plugin) */
 body.fluent2-win-accent-synced.theme-light {
   --colorBrandBackground: var(--f2-win-accent-dark1, var(--f2-brand-80));
   --colorBrandBackgroundHover: var(--f2-win-accent-dark2, var(--f2-brand-70));
   --colorBrandBackgroundPressed: var(--f2-win-accent-dark3, var(--f2-brand-50));
-  --colorBrandBackgroundSelected: var(--f2-win-accent-dark2, var(--f2-brand-60));
   --colorBrandBackground2: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-80)) 12%, white);
   --colorBrandBackground2Hover: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-80)) 20%, white);
   --colorBrandForeground1: var(--f2-win-accent-dark1, var(--f2-brand-80));
   --colorBrandForeground2: var(--f2-win-accent-dark2, var(--f2-brand-70));
   --colorBrandForegroundLink: var(--f2-win-accent-dark1, var(--f2-brand-70));
   --colorBrandForegroundLinkHover: var(--f2-win-accent-dark2, var(--f2-brand-60));
-  --colorBrandForegroundLinkPressed: var(--f2-win-accent-dark3, var(--f2-brand-40));
   --colorBrandStroke1: var(--f2-win-accent-dark1, var(--f2-brand-80));
   --colorBrandStroke2: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-80)) 32%, white);
   --colorCompoundBrandStroke: var(--f2-win-accent-dark1, var(--f2-brand-80));
@@ -834,14 +578,12 @@ body.fluent2-win-accent-synced.theme-dark {
   --colorBrandBackground: var(--f2-win-accent-light2, var(--f2-brand-100));
   --colorBrandBackgroundHover: var(--f2-win-accent-light3, var(--f2-brand-110));
   --colorBrandBackgroundPressed: var(--f2-win-accent-light1, var(--f2-brand-90));
-  --colorBrandBackgroundSelected: var(--f2-win-accent-light1, var(--f2-brand-90));
   --colorBrandBackground2: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-100)) 20%, #1f1f1f);
   --colorBrandBackground2Hover: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-100)) 28%, #1f1f1f);
   --colorBrandForeground1: var(--f2-win-accent-light2, var(--f2-brand-100));
   --colorBrandForeground2: var(--f2-win-accent-light3, var(--f2-brand-120));
   --colorBrandForegroundLink: var(--f2-win-accent-light2, var(--f2-brand-100));
   --colorBrandForegroundLinkHover: var(--f2-win-accent-light3, var(--f2-brand-110));
-  --colorBrandForegroundLinkPressed: var(--f2-win-accent-light1, var(--f2-brand-90));
   --colorBrandStroke1: var(--f2-win-accent-light2, var(--f2-brand-100));
   --colorBrandStroke2: color-mix(in srgb, var(--f2-win-accent-base, var(--f2-brand-100)) 40%, #1f1f1f);
   --colorCompoundBrandStroke: var(--f2-win-accent-light2, var(--f2-brand-100));
@@ -851,11 +593,10 @@ body.fluent2-win-accent-synced.theme-dark {
 }
 
 /* ==========================================================================
-   5. OBSIDIAN CORE VARIABLE MAPPING
+   4. OBSIDIAN CORE VARIABLE MAPPING
    ========================================================================== */
 
 body {
-  /* Backgrounds */
   --background-primary: var(--colorNeutralBackground1);
   --background-primary-alt: var(--colorNeutralBackground2);
   --background-secondary: var(--f2-mica-base-solid);
@@ -873,7 +614,6 @@ body {
   --background-modifier-form-field: var(--f2-control-fill);
   --background-modifier-cover: rgba(0, 0, 0, 0.36);
 
-  /* Text */
   --text-normal: var(--colorNeutralForeground1);
   --text-muted: var(--colorNeutralForeground3);
   --text-faint: var(--colorNeutralForeground4);
@@ -886,13 +626,11 @@ body {
   --text-accent: var(--colorBrandForegroundLink);
   --text-accent-hover: var(--colorBrandForegroundLinkHover);
 
-  /* Interactive Elements */
   --interactive-normal: var(--f2-control-fill);
   --interactive-hover: var(--f2-control-fill-hover);
   --interactive-accent: var(--colorBrandBackground);
   --interactive-accent-hover: var(--colorBrandBackgroundHover);
 
-  /* Icons */
   --icon-color: var(--colorNeutralForeground2);
   --icon-color-hover: var(--colorNeutralForeground1);
   --icon-color-active: var(--colorBrandForeground1);
@@ -901,13 +639,11 @@ body {
   --icon-opacity-hover: 1;
   --icon-opacity-active: 1;
 
-  /* Corner Radius */
   --radius-s: var(--borderRadiusMedium);
   --radius-m: var(--borderRadiusLarge);
   --radius-l: var(--borderRadiusXLarge);
   --radius-xl: var(--borderRadius2XLarge);
 
-  /* Workspace Chrome */
   --titlebar-background: var(--f2-mica-base-solid);
   --titlebar-background-focused: var(--f2-mica-base-solid);
   --titlebar-text-color: var(--colorNeutralForeground3);
@@ -923,7 +659,6 @@ body {
   --divider-width: 1px;
   --divider-width-hover: 2px;
 
-  /* Tabs */
   --tab-container-background: transparent;
   --tab-background-active: var(--colorNeutralBackground1);
   --tab-text-color: var(--colorNeutralForeground3);
@@ -936,9 +671,7 @@ body {
   --tab-radius: var(--borderRadiusXLarge);
   --tab-radius-active: var(--borderRadiusXLarge);
   --tab-curve: 8px;
-  --tab-stacked-header-width: 40px;
 
-  /* Navigation */
   --nav-item-color: var(--colorNeutralForeground2);
   --nav-item-color-hover: var(--colorNeutralForeground1);
   --nav-item-color-active: var(--colorNeutralForeground1);
@@ -952,7 +685,6 @@ body {
   --nav-indentation-guide-width: 1px;
   --nav-indentation-guide-color: var(--colorNeutralStrokeSubtle);
 
-  /* Inputs & Controls */
   --input-radius: var(--borderRadiusMedium);
   --input-height: 32px;
   --input-border-width: 1px;
@@ -963,12 +695,11 @@ body {
   --checkbox-border-color: var(--colorNeutralStrokeAccessible);
   --checkbox-border-color-hover: var(--colorBrandStroke1);
   --toggle-width: 40px;
-  --toggle-border-width: 4px;
+  --toggle-border-width: 0px;
   --toggle-thumb-height: 14px;
   --toggle-thumb-width: 14px;
   --toggle-radius: var(--borderRadiusCircular);
 
-  /* Modals, Menus & Prompts */
   --modal-background: var(--f2-acrylic-surface-strong);
   --modal-border-color: var(--f2-stroke-surface-flyout);
   --modal-border-width: 1px;
@@ -978,7 +709,6 @@ body {
   --shadow-s: var(--shadow4);
   --shadow-l: var(--shadow28);
 
-  /* Editor & Markdown */
   --line-height-normal: 1.65;
   --line-height-tight: 1.35;
   --inline-title-size: 1.85em;
@@ -1019,6 +749,7 @@ body {
   --code-radius: var(--borderRadiusLarge);
   --code-size: 0.88em;
 
+  --table-background: transparent;
   --table-header-background: var(--colorNeutralBackground2);
   --table-header-background-hover: var(--colorNeutralBackground3);
   --table-header-weight: 600;
@@ -1027,6 +758,7 @@ body {
   --table-row-background-hover: var(--colorSubtleBackgroundHover);
   --table-row-alt-background: transparent;
   --table-column-alt-background: transparent;
+  --metadata-background: var(--colorNeutralBackground2);
 
   --tag-background: var(--colorBrandBackground2);
   --tag-background-hover: var(--colorBrandBackground2Hover);
@@ -1041,19 +773,16 @@ body {
   --hr-color: var(--colorNeutralStroke2);
   --hr-thickness: 1px;
 
-  /* Scrollbars */
   --scrollbar-bg: transparent;
   --scrollbar-thumb-bg: rgba(128, 128, 128, 0.28);
   --scrollbar-active-thumb-bg: rgba(128, 128, 128, 0.52);
 
-  /* Status Bar */
   --status-bar-background: transparent;
   --status-bar-border-color: transparent;
   --status-bar-border-width: 0px;
   --status-bar-text-color: var(--colorNeutralForeground3);
   --status-bar-font-size: 12px;
 
-  /* Graph */
   --graph-line: var(--colorNeutralStroke2);
   --graph-node: var(--colorNeutralForeground3);
   --graph-node-focused: var(--colorBrandForeground1);
@@ -1062,7 +791,6 @@ body {
   --graph-node-unresolved: var(--colorNeutralForegroundDisabled);
 }
 
-/* Windows 11 Official Typography Stack */
 body:not(.fluent2-use-obsidian-fonts) {
   --font-interface-theme: var(--fontFamilyBase);
   --font-text-theme: var(--fontFamilyBase);
@@ -1072,90 +800,52 @@ body:not(.fluent2-use-obsidian-fonts) {
 }
 
 /* ==========================================================================
-   6. WINDOWS 11 MATERIAL SYSTEM
-      - Auto + Simulated Mica (Pure CSS ambient desktop feel, zero plugins)
-      - Native Windows 11 Mica / Mica Alt (Electron setBackgroundMaterial)
-      - Native Windows 11 Acrylic (Frosted translucent shell + cards)
-      - Solid Fluent 2 Web (Opaque)
+   5. WINDOWS 11 MATERIAL SYSTEM (Simulated Mica, Native Mica, Acrylic, Editor Mica)
    ========================================================================== */
 
-/* --- 6A. Pure CSS Simulated Mica (Default in Auto when NOT translucent) --- */
-body.fluent2-material-simulated-mica.theme-light,
-body.fluent2-material-auto:not(.is-translucent).theme-light,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic).theme-light {
+body.theme-light:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) {
   --f2-shell-gradient: radial-gradient(
-      120% 90% at 8% 0%,
-      color-mix(in srgb, var(--colorBrandBackground) 7%, #f3f3f3) 0%,
-      #f3f3f3 55%,
-      color-mix(in srgb, var(--colorBrandBackground) 4%, #eceff4) 100%
-    );
+    120% 90% at 8% 0%,
+    color-mix(in srgb, var(--colorBrandBackground) 7%, #f3f3f3) 0%,
+    #f3f3f3 55%,
+    color-mix(in srgb, var(--colorBrandBackground) 4%, #eceff4) 100%
+  );
 }
 
-body.fluent2-material-simulated-mica.theme-dark,
-body.fluent2-material-auto:not(.is-translucent).theme-dark,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic).theme-dark {
+body.theme-dark:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) {
   --f2-shell-gradient: radial-gradient(
-      120% 90% at 8% 0%,
-      color-mix(in srgb, var(--colorBrandBackground) 14%, #1f1f1f) 0%,
-      #202020 52%,
-      #1a1b1f 100%
-    );
+    120% 90% at 8% 0%,
+    color-mix(in srgb, var(--colorBrandBackground) 14%, #1f1f1f) 0%,
+    #202020 52%,
+    #1a1b1f 100%
+  );
 }
 
-body.fluent2-material-simulated-mica,
-body.fluent2-material-auto:not(.is-translucent),
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic),
-body.fluent2-material-simulated-mica .app-container,
-body.fluent2-material-auto:not(.is-translucent) .app-container,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .app-container {
+body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)),
+body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) .app-container {
   background: var(--f2-shell-gradient);
 }
 
-/* Keep pop-out / Settings window titlebars matched to the Mica shell (never transparent-to-black) */
-body:not(.is-translucent):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .titlebar,
-body.is-popout-window:not(.is-translucent):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .titlebar {
+body:not(.is-translucent):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .titlebar {
   background-color: var(--titlebar-background);
   color: var(--titlebar-text-color-focused);
 }
 
-body.fluent2-material-simulated-mica .workspace-ribbon,
-body.fluent2-material-simulated-mica .workspace-split.mod-left-split,
-body.fluent2-material-simulated-mica .workspace-split.mod-right-split,
-body.fluent2-material-simulated-mica .workspace-split.mod-left-split .workspace-tabs,
-body.fluent2-material-simulated-mica .workspace-split.mod-right-split .workspace-tabs,
-body.fluent2-material-simulated-mica .workspace-split.mod-left-split .workspace-leaf-content,
-body.fluent2-material-simulated-mica .workspace-split.mod-right-split .workspace-leaf-content,
-body.fluent2-material-auto:not(.is-translucent) .workspace-ribbon,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-left-split,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-right-split,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-left-split .workspace-tabs,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-right-split .workspace-tabs,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-left-split .workspace-leaf-content,
-body.fluent2-material-auto:not(.is-translucent) .workspace-split.mod-right-split .workspace-leaf-content,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-ribbon,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-left-split,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-right-split,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-left-split .workspace-tabs,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-right-split .workspace-tabs,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-left-split .workspace-leaf-content,
-body:not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .workspace-split.mod-right-split .workspace-leaf-content {
+body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) :is(
+  .workspace-ribbon,
+  .workspace-split.mod-left-split,
+  .workspace-split.mod-right-split,
+  .workspace-split.mod-left-split .workspace-tabs,
+  .workspace-split.mod-right-split .workspace-tabs,
+  .workspace-split.mod-left-split .workspace-leaf-content,
+  .workspace-split.mod-right-split .workspace-leaf-content
+) {
   background-color: transparent;
 }
 
-/* --- 6B. Native Windows 11 Mica / Mica Alt & Acrylic Mode ---
-   Activates automatically when:
-   1) A plugin (Pseudo Mica / Translucent BG) or macOS vibrancy adds `body.is-translucent`
-      (unless user explicitly selects Solid mode), OR
-   2) User selects `Native Windows 11 Mica` or `Native Windows 11 Acrylic` in Style Settings
-      (useful with Mica For Everyone DWM hook!). */
-
-html:has(body.is-translucent:not(.fluent2-material-solid)),
-html:has(body.fluent2-material-native-mica),
-html:has(body.fluent2-material-native-acrylic),
-body.is-translucent:not(.fluent2-material-solid),
-body.fluent2-material-native-mica,
-body.fluent2-material-native-acrylic {
-  background-color: transparent !important;
+/* Native Windows 11 Mica / Mica Alt / Acrylic Shell */
+html body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica, .fluent2-material-native-acrylic) {
+  background-color: transparent;
   --background-secondary: transparent;
   --background-secondary-alt: transparent;
   --titlebar-background: transparent;
@@ -1165,151 +855,111 @@ body.fluent2-material-native-acrylic {
   --tab-container-background: transparent;
 }
 
-body.is-translucent:not(.fluent2-material-solid):not(.is-popout-window):has(.workspace) .titlebar,
-body.fluent2-material-native-mica:not(.is-popout-window):has(.workspace) .titlebar,
-body.fluent2-material-native-acrylic:not(.is-popout-window):has(.workspace) .titlebar {
-  background-color: transparent !important;
+html body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica, .fluent2-material-native-acrylic):not(.is-popout-window) .titlebar {
+  background-color: transparent;
 }
 
-/* Pop-out & Obsidian 1.15+ Standalone Settings Windows:
-   By default keep opaque Fluent 2 surface so secondary windows never turn black.
-   When the companion plugin explicitly applies Mica to a pop-out window, it adds
-   `body.fluent2-popout-mica` so the window chrome turns cleanly translucent too! */
-body.is-popout-window:not(.fluent2-popout-mica),
-body:not(:has(.workspace)):not(.fluent2-popout-mica) {
-  background-color: var(--f2-mica-base-solid) !important;
+html body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica, .fluent2-material-native-acrylic) :is(
+  .app-container,
+  .horizontal-main-container,
+  .workspace,
+  .workspace-ribbon,
+  .workspace-split.mod-left-split,
+  .workspace-split.mod-right-split,
+  .workspace-split.mod-left-split .workspace-tabs,
+  .workspace-split.mod-right-split .workspace-tabs,
+  .workspace-split.mod-left-split .workspace-leaf,
+  .workspace-split.mod-right-split .workspace-leaf,
+  .workspace-split.mod-left-split .workspace-leaf-content,
+  .workspace-split.mod-right-split .workspace-leaf-content,
+  .workspace-split.mod-root,
+  .workspace-split.mod-root .workspace-tabs
+) {
+  background-color: transparent;
 }
 
-body.is-popout-window:not(.fluent2-popout-mica) .titlebar,
-body:not(:has(.workspace)):not(.fluent2-popout-mica) .titlebar {
-  background-color: var(--f2-mica-base-solid) !important;
-  color: var(--colorNeutralForeground1) !important;
-  border-bottom: 1px solid var(--colorNeutralStrokeSubtle);
+/* Pop-out & Standalone Settings Windows */
+html body.is-popout-window:not(.fluent2-popout-mica) {
+  background-color: var(--f2-mica-base-solid);
 }
 
-body.is-popout-window.fluent2-popout-mica,
-body:not(:has(.workspace)).fluent2-popout-mica,
-body.is-popout-window.fluent2-popout-mica .titlebar,
-body:not(:has(.workspace)).fluent2-popout-mica .titlebar,
-body:not(:has(.workspace)).fluent2-popout-mica .modal.mod-settings,
-body:not(:has(.workspace)).fluent2-popout-mica .modal-content,
-body:not(:has(.workspace)).fluent2-popout-mica .vertical-tabs-container,
-body:not(:has(.workspace)).fluent2-popout-mica .vertical-tab-header,
-body:not(:has(.workspace)).fluent2-popout-mica .vertical-tab-content-container,
-body:not(:has(.workspace)).fluent2-popout-mica .vertical-tab-content {
-  background-color: transparent !important;
+html body.is-popout-window:not(.fluent2-popout-mica) .titlebar {
+  background-color: var(--f2-mica-base-solid);
+  color: var(--colorNeutralForeground1);
 }
 
-/* Windows 11 Settings Window Titlebar Style:
-   Increased height (44px), left-aligned title, Segoe UI + Microsoft YaHei UI, regular weight (not bold). */
-body.is-popout-window .titlebar,
-body:not(:has(.workspace)) .titlebar {
+html body.fluent2-popout-mica,
+html body.fluent2-popout-mica :is(
+  .titlebar,
+  .modal.mod-settings,
+  .modal-content,
+  .vertical-tabs-container,
+  .vertical-tab-header,
+  .vertical-tab-content-container,
+  .vertical-tab-content
+) {
+  background-color: transparent;
+}
+
+/* Windows 11 Pop-out / Settings Titlebar (44px, left-aligned, regular weight) */
+html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar {
   height: 44px;
   min-height: 44px;
-  border-bottom: none !important;
+  border-bottom: none;
 }
 
-body.is-popout-window .titlebar-inner,
-body:not(:has(.workspace)) .titlebar-inner {
+html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-inner {
   height: 44px;
   align-items: center;
   justify-content: space-between;
 }
 
-body.is-popout-window .titlebar-text,
-body:not(:has(.workspace)) .titlebar-text {
+html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-text {
   flex: 1 1 auto;
   text-align: left;
   justify-content: flex-start;
   padding-inline-start: 16px;
-  font-family: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Text", sans-serif !important;
-  font-weight: 400 !important;
+  font-family: var(--fontFamilyWinSettings);
+  font-weight: 400;
   font-size: 13px;
   line-height: 44px;
-  color: var(--colorNeutralForeground1) !important;
+  color: var(--colorNeutralForeground1);
 }
 
-body.is-popout-window .titlebar-button,
-body:not(:has(.workspace)) .titlebar-button {
+html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-button {
   height: 44px;
 }
 
-body.is-translucent:not(.fluent2-material-solid) .app-container,
-body.is-translucent:not(.fluent2-material-solid) .horizontal-main-container,
-body.is-translucent:not(.fluent2-material-solid) .workspace,
-body.is-translucent:not(.fluent2-material-solid) .workspace-ribbon,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-left-split,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-right-split,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-left-split .workspace-tabs,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-right-split .workspace-tabs,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-left-split .workspace-leaf,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-right-split .workspace-leaf,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-left-split .workspace-leaf-content,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-right-split .workspace-leaf-content,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .workspace-tabs,
-body.fluent2-material-native-mica .app-container,
-body.fluent2-material-native-mica .horizontal-main-container,
-body.fluent2-material-native-mica .workspace,
-body.fluent2-material-native-mica .workspace-ribbon,
-body.fluent2-material-native-mica .workspace-split.mod-left-split,
-body.fluent2-material-native-mica .workspace-split.mod-right-split,
-body.fluent2-material-native-mica .workspace-split.mod-left-split .workspace-tabs,
-body.fluent2-material-native-mica .workspace-split.mod-right-split .workspace-tabs,
-body.fluent2-material-native-mica .workspace-split.mod-left-split .workspace-leaf,
-body.fluent2-material-native-mica .workspace-split.mod-right-split .workspace-leaf,
-body.fluent2-material-native-mica .workspace-split.mod-left-split .workspace-leaf-content,
-body.fluent2-material-native-mica .workspace-split.mod-right-split .workspace-leaf-content,
-body.fluent2-material-native-mica .workspace-split.mod-root,
-body.fluent2-material-native-mica .workspace-split.mod-root .workspace-tabs,
-body.fluent2-material-native-acrylic .app-container,
-body.fluent2-material-native-acrylic .horizontal-main-container,
-body.fluent2-material-native-acrylic .workspace,
-body.fluent2-material-native-acrylic .workspace-ribbon,
-body.fluent2-material-native-acrylic .workspace-split.mod-left-split,
-body.fluent2-material-native-acrylic .workspace-split.mod-right-split,
-body.fluent2-material-native-acrylic .workspace-split.mod-left-split .workspace-tabs,
-body.fluent2-material-native-acrylic .workspace-split.mod-right-split .workspace-tabs,
-body.fluent2-material-native-acrylic .workspace-split.mod-left-split .workspace-leaf,
-body.fluent2-material-native-acrylic .workspace-split.mod-right-split .workspace-leaf,
-body.fluent2-material-native-acrylic .workspace-split.mod-left-split .workspace-leaf-content,
-body.fluent2-material-native-acrylic .workspace-split.mod-right-split .workspace-leaf-content,
-body.fluent2-material-native-acrylic .workspace-split.mod-root,
-body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tabs {
-  background-color: transparent !important;
-}
-
-/* WinUI Layer Card over Native Mica: Keeps Editor crisp & readable while Mica breathes around it.
-   Avoid double-stacking alpha by keeping inner editor layers transparent while the outer
-   .workspace-tab-container holds the single translucent surface fill. */
-body.is-translucent:not(.fluent2-material-solid),
-body.fluent2-material-native-mica {
+/* Default WinUI Layer Card over Native Mica (single-layer alpha, no double-stacking) */
+body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica) {
   --background-primary: rgba(var(--f2-layer-bg-rgb), var(--fluent2-layer-opacity));
   --tab-background-active: rgba(var(--f2-layer-bg-rgb), var(--fluent2-layer-opacity));
 }
 
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .workspace-leaf,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .workspace-leaf-content,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .view-content,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .markdown-source-view,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .markdown-preview-view,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .cm-editor,
-body.is-translucent:not(.fluent2-material-solid) .workspace-split.mod-root .cm-scroller,
-body.fluent2-material-native-mica .workspace-split.mod-root .workspace-leaf,
-body.fluent2-material-native-mica .workspace-split.mod-root .workspace-leaf-content,
-body.fluent2-material-native-mica .workspace-split.mod-root .view-content,
-body.fluent2-material-native-mica .workspace-split.mod-root .markdown-source-view,
-body.fluent2-material-native-mica .workspace-split.mod-root .markdown-preview-view,
-body.fluent2-material-native-mica .workspace-split.mod-root .cm-editor,
-body.fluent2-material-native-mica .workspace-split.mod-root .cm-scroller {
-  background-color: transparent !important;
+body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica) .workspace-split.mod-root :is(
+  .workspace-leaf,
+  .workspace-leaf-content,
+  .view-content,
+  .markdown-source-view,
+  .markdown-preview-view,
+  .cm-editor,
+  .cm-scroller
+) {
+  background-color: transparent;
 }
 
-/* --- 6C. Note Editor Mica Backdrop + Adjustable Solid Tint Overlay (Style Settings) ---
-   Applies a single controllable solid color overlay (0%–100% opacity) directly over the
-   native Windows 11 Mica backdrop across the main note editor & reading canvas.
-   Unifies nested Markdown surfaces (table headers, blockquotes, code blocks, properties)
-   through Obsidian's native surface variables so Reading View & Live Preview match identically. */
+/* Native Acrylic Mode */
+body.fluent2-material-native-acrylic {
+  --background-primary: rgba(var(--f2-layer-bg-rgb), calc(var(--fluent2-layer-opacity) - 0.14));
+  --tab-background-active: rgba(var(--f2-layer-bg-rgb), calc(var(--fluent2-layer-opacity) - 0.10));
+}
+
+body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-container {
+  backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(140%);
+}
+
+/* Note Editor Mica Backdrop + Adjustable Solid Tint Overlay */
 body.fluent2-editor-mica {
   --f2-editor-mica-tint: color-mix(
     in srgb,
@@ -1317,8 +967,6 @@ body.fluent2-editor-mica {
     transparent
   );
   --tab-background-active: var(--f2-editor-mica-tint);
-
-  /* Unified recessed translucent surfaces across all Markdown elements */
   --blockquote-background-color: var(--f2-mica-recessed-1);
   --code-background: var(--f2-mica-recessed-2);
   --table-background: transparent;
@@ -1331,46 +979,36 @@ body.fluent2-editor-mica {
   --metadata-background: var(--f2-mica-recessed-1);
 }
 
-body.fluent2-editor-mica .workspace-split.mod-root .workspace-tab-container {
-  background-color: var(--f2-editor-mica-tint) !important;
+html body.fluent2-editor-mica .workspace-split.mod-root .workspace-tab-container {
+  background-color: var(--f2-editor-mica-tint);
 }
 
-body.fluent2-editor-mica .workspace-split.mod-root .workspace-leaf,
-body.fluent2-editor-mica .workspace-split.mod-root .workspace-leaf-content,
-body.fluent2-editor-mica .workspace-split.mod-root .view-header,
-body.fluent2-editor-mica .workspace-split.mod-root .view-content,
-body.fluent2-editor-mica .workspace-split.mod-root .markdown-source-view,
-body.fluent2-editor-mica .workspace-split.mod-root .markdown-preview-view,
-body.fluent2-editor-mica .workspace-split.mod-root .cm-editor,
-body.fluent2-editor-mica .workspace-split.mod-root .cm-scroller,
-body.fluent2-editor-mica .workspace-split.mod-root .cm-gutters,
-body.fluent2-editor-mica .workspace-split.mod-root .empty-state,
-body.fluent2-editor-mica .cm-table-widget,
-body.fluent2-editor-mica .table-wrapper,
-body.fluent2-editor-mica .markdown-rendered table {
-  background-color: transparent !important;
+html body.fluent2-editor-mica .workspace-split.mod-root :is(
+  .workspace-leaf,
+  .workspace-leaf-content,
+  .view-header,
+  .view-content,
+  .markdown-source-view,
+  .markdown-preview-view,
+  .cm-editor,
+  .cm-scroller,
+  .cm-gutters,
+  .empty-state,
+  .cm-table-widget,
+  .table-wrapper,
+  .markdown-rendered table
+) {
+  background-color: transparent;
 }
 
-body.fluent2-editor-mica .cm-s-obsidian .HyperMD-codeblock {
-  background-color: var(--code-background) !important;
-}
-
-/* Native Acrylic Mode: Extra frosted glass diffusion on editor layer */
-body.fluent2-material-native-acrylic {
-  --background-primary: rgba(var(--f2-layer-bg-rgb), calc(var(--fluent2-layer-opacity) - 0.14));
-  --tab-background-active: rgba(var(--f2-layer-bg-rgb), calc(var(--fluent2-layer-opacity) - 0.10));
-}
-
-body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-container {
-  backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(140%);
+html body.fluent2-editor-mica .cm-s-obsidian .HyperMD-codeblock {
+  background-color: var(--code-background);
 }
 
 /* ==========================================================================
-   7. WINDOW SHELL, TITLEBAR, WINDOWS 11 CAPTION CONTROLS & LAYERED WORKSPACE
+   6. WINDOW SHELL, CAPTION CONTROLS, RIBBON & ELEVATED WORKSPACE CARD
    ========================================================================== */
 
-/* Windows 11 Native-Style Window Caption Buttons (Min / Max / Close) */
 .titlebar-button-container.mod-right {
   gap: 0;
 }
@@ -1393,29 +1031,26 @@ body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-co
   background-color: var(--colorSubtleBackgroundPressed);
 }
 
-/* Signature Windows 11 Red Close Button (Zero Glow/Halo) */
-.titlebar-button.mod-close:hover {
+body .titlebar-button.mod-close:hover {
   background-color: #c42b1c;
   color: #ffffff;
-  box-shadow: none !important;
-  filter: none !important;
+  box-shadow: none;
+  filter: none;
 }
 
-.titlebar-button.mod-close:active {
+body .titlebar-button.mod-close:active {
   background-color: rgba(196, 43, 28, 0.88);
   color: #ffffff;
-  box-shadow: none !important;
+  box-shadow: none;
 }
 
-/* Ribbon (Left Activity Bar) */
 .workspace-ribbon.mod-left {
   border-right: none;
   padding: 6px 4px;
   gap: 2px;
 }
 
-.workspace-ribbon .side-dock-actions,
-.workspace-ribbon .side-dock-settings {
+.workspace-ribbon :is(.side-dock-actions, .side-dock-settings) {
   gap: 2px;
 }
 
@@ -1444,7 +1079,6 @@ body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-co
   transform: scale(0.96);
 }
 
-/* Elevated WinUI Layer Card for Main Editor Workspace */
 body:not(.fluent2-flat-workspace) .workspace-split.mod-root {
   padding: 0 6px 6px 2px;
   gap: 6px;
@@ -1459,15 +1093,10 @@ body:not(.fluent2-flat-workspace) .workspace-split.mod-root .workspace-tab-conta
   overflow: hidden;
 }
 
-.workspace-split.mod-root .workspace-leaf {
+.workspace-split.mod-root :is(.workspace-leaf, .workspace-leaf-content) {
   background-color: transparent;
 }
 
-.workspace-split.mod-root .workspace-leaf-content {
-  background-color: transparent;
-}
-
-/* Clean View Header (Breadcrumb bar inside Editor Card) */
 .view-header {
   background-color: transparent;
   border-bottom: 1px solid var(--colorNeutralStrokeSubtle);
@@ -1495,74 +1124,66 @@ body:not(.fluent2-flat-workspace) .workspace-split.mod-root .workspace-tab-conta
 }
 
 /* ==========================================================================
-   8. FLUENT 2 TABS (WinUI TabView / Windows 11 Notepad & Edge Style)
-      - Fitts's Law: Zero top gap on header containers & full-height no-drag hit area
-        so maximized top-edge (y=0) clicks hit tabs directly.
-      - Identical vertical text baseline between active and inactive tabs.
-      - Seamless merge ("打通") into the rounded Editor Card below.
+   7. FLUENT 2 TABS (Fitts's Law y=0 + Equal Baseline + Seamless Merge)
    ========================================================================== */
 
-.workspace-tab-header-container,
-.workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-container {
+body .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-container,
+body .workspace-tab-header-container {
   background-color: transparent;
   border-bottom: none;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  margin-top: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
 }
 
-/* Preserve top-left / top-right window caption button clearance (especially when sidebars collapse) */
-.workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-left-space) .workspace-tab-header-container {
+body .workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-left-space) .workspace-tab-header-container {
   padding-left: 8px;
 }
 
-.workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-right-space) .workspace-tab-header-container {
+body .workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-right-space) .workspace-tab-header-container {
   padding-right: 4px;
 }
 
+body.is-hidden-frameless:not(.is-fullscreen) .workspace-split.mod-root .workspace-tabs.mod-top-right-space .workspace-tab-header-container,
 body.is-hidden-frameless:not(.is-fullscreen) .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
-  padding-right: max(var(--frame-right-space, 138px), 144px) !important;
+  padding-right: max(var(--frame-right-space, 138px), 144px);
 }
 
-.workspace-tab-header-container-inner,
-.workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-container-inner {
+body .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-container-inner,
+body .workspace-tab-header-container-inner {
   gap: 2px;
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
   align-items: stretch;
   height: 100%;
 }
 
-.workspace .mod-root .workspace-tab-header {
+body .workspace .mod-root .workspace-tab-header {
   display: flex;
   align-items: stretch;
-  height: 100% !important;
+  height: 100%;
   border-radius: 0;
-  padding: 0 !important;
-  margin: 0 !important;
+  padding: 0;
+  margin: 0;
   max-width: 240px;
-  background-color: transparent !important;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-app-region: no-drag !important;
+  background-color: transparent;
+  box-shadow: none;
+  border: none;
+  -webkit-app-region: no-drag;
 }
 
-/* Remove all Obsidian curved tab wings, bottom lines, and hover shadows */
-.workspace .mod-root .workspace-tab-header::before,
-.workspace .mod-root .workspace-tab-header::after,
-.workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::before,
-.workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::after {
-  display: none !important;
-  content: none !important;
-  box-shadow: none !important;
+body .workspace .mod-root .workspace-tab-header::before,
+body .workspace .mod-root .workspace-tab-header::after,
+body .workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::before,
+body .workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::after {
+  display: none;
+  content: none;
+  box-shadow: none;
 }
 
-/* Identical vertical text baseline for BOTH active and inactive tabs:
-   Inactive inner box occupies [4px .. H-4px];
-   Active inner box occupies [4px .. H+1px] with 5px bottom padding -> text box is ALSO [4px .. H-4px]! */
-.workspace .mod-root .workspace-tab-header-inner {
+body .workspace .mod-root .workspace-tab-header-inner {
   display: flex;
   align-items: center;
   width: 100%;
@@ -1572,16 +1193,15 @@ body.is-hidden-frameless:not(.is-fullscreen) .workspace-tabs.mod-top-right-space
   padding: 0 8px 0 12px;
   border-radius: var(--borderRadiusLarge);
   gap: 6px;
-  box-shadow: none !important;
-  border: none !important;
-  -webkit-app-region: no-drag !important;
+  box-shadow: none;
+  border: none;
+  -webkit-app-region: no-drag;
   transition: background-color var(--durationFaster) var(--curveEasyEase),
     color var(--durationFaster) var(--curveEasyEase);
 }
 
-/* When maximized, extend visual & clickable tab cleanly to the top edge (y=0) */
 body.is-maximized .workspace-split.mod-root {
-  padding-top: 0 !important;
+  padding-top: 0;
 }
 
 body.is-maximized .workspace .mod-root .workspace-tab-header-inner {
@@ -1589,22 +1209,21 @@ body.is-maximized .workspace .mod-root .workspace-tab-header-inner {
   height: calc(100% - 4px);
 }
 
-.workspace .mod-root .workspace-tab-header:not(.is-active):hover,
-.workspace .mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
-  box-shadow: none !important;
-  border-bottom: none !important;
+body .workspace .mod-root .workspace-tab-header:not(.is-active):hover,
+body .workspace .mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
+  box-shadow: none;
+  border-bottom: none;
 }
 
-.workspace .mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
+body .workspace .mod-root .workspace-tab-header:not(.is-active):hover .workspace-tab-header-inner {
   background-color: var(--colorSubtleBackgroundHover);
 }
 
-/* Active Tab seamlessly merged ("打通") into the Editor Card below */
-.workspace .mod-root .workspace-tab-header.is-active {
+body .workspace .mod-root .workspace-tab-header.is-active {
   z-index: 2;
 }
 
-.workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
+body .workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
   height: calc(100% - 3px);
   margin-bottom: -1px;
   padding-bottom: 5px;
@@ -1612,7 +1231,7 @@ body.is-maximized .workspace .mod-root .workspace-tab-header-inner {
   border-radius: var(--borderRadiusXLarge) var(--borderRadiusXLarge) 0 0;
   box-shadow: inset 0 1px 0 var(--colorNeutralStrokeSubtle),
     inset 1px 0 0 var(--colorNeutralStrokeSubtle),
-    inset -1px 0 0 var(--colorNeutralStrokeSubtle) !important;
+    inset -1px 0 0 var(--colorNeutralStrokeSubtle);
 }
 
 body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
@@ -1622,40 +1241,29 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
   padding-bottom: 5px;
 }
 
-/* Sidebar Tab Headers (Top icon bar in left/right drawers) */
-.mod-left-split .workspace-tab-header,
-.mod-right-split .workspace-tab-header {
+:is(.mod-left-split, .mod-right-split) .workspace-tab-header {
   border-radius: var(--borderRadiusMedium);
   padding: 2px;
 }
 
-.mod-left-split .workspace-tab-header.is-active,
-.mod-right-split .workspace-tab-header.is-active {
+:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active {
   background-color: var(--colorSubtleBackgroundSelected);
   color: var(--colorBrandForeground1);
 }
 
-.mod-left-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon,
-.mod-right-split .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
+:is(.mod-left-split, .mod-right-split) .workspace-tab-header.is-active .workspace-tab-header-inner-icon {
   color: var(--colorBrandForeground1);
 }
 
-/* New Tab & Tab List Buttons */
-.workspace-tab-header-new-tab .clickable-icon,
-.workspace-tab-header-tab-list .clickable-icon {
+:is(.workspace-tab-header-new-tab, .workspace-tab-header-tab-list) .clickable-icon {
   border-radius: var(--borderRadiusMedium);
 }
 
 /* ==========================================================================
-   9. SIDEBARS, FILE EXPLORER & FLUENT 2 VERTICAL PILL INDICATOR
+   8. SIDEBARS, FILE EXPLORER & FLUENT 2 VERTICAL PILL INDICATOR
    ========================================================================== */
 
-.nav-files-container,
-.outline,
-.search-result-container,
-.backlink-pane,
-.outgoing-link-pane,
-.tag-container {
+:is(.nav-files-container, .outline, .search-result-container, .backlink-pane, .outgoing-link-pane, .tag-container) {
   padding: 4px 8px;
 }
 
@@ -1667,43 +1275,33 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
   gap: 2px;
 }
 
-.nav-file-title,
-.nav-folder-title,
-.tree-item-self {
+:is(.nav-file-title, .nav-folder-title, .tree-item-self) {
   position: relative;
   border-radius: var(--borderRadiusMedium);
   transition: background-color var(--durationFaster) var(--curveEasyEase),
     color var(--durationFaster) var(--curveEasyEase);
 }
 
-/* Ensure Outline / Tree collapse chevrons sit cleanly to the right of the 3px active pill */
-.outline .tree-item-self.mod-collapsible,
-.backlink-pane .tree-item-self.mod-collapsible,
-.outgoing-link-pane .tree-item-self.mod-collapsible,
-.tag-container .tree-item-self.mod-collapsible {
+:is(.outline, .backlink-pane, .outgoing-link-pane, .tag-container) .tree-item-self.mod-collapsible {
   padding-inline-start: 28px;
 }
 
-.outline .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon,
-.backlink-pane .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon,
-.outgoing-link-pane .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon,
-.tag-container .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon {
+:is(.outline, .backlink-pane, .outgoing-link-pane, .tag-container) .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon {
   margin-inline-start: -18px;
 }
 
-body.fluent2-compact-sidebar .nav-file-title,
-body.fluent2-compact-sidebar .nav-folder-title,
-body.fluent2-compact-sidebar .tree-item-self {
+body.fluent2-compact-sidebar :is(.nav-file-title, .nav-folder-title, .tree-item-self) {
   padding-top: 2px;
   padding-bottom: 2px;
   font-size: 13px;
 }
 
-/* Signature Fluent 2 3px Vertical Brand Pill Indicator */
-body:not(.fluent2-hide-nav-pill) .nav-file-title.is-active::before,
-body:not(.fluent2-hide-nav-pill) .vertical-tab-nav-item.is-active::before,
-body:not(.fluent2-hide-nav-pill) .workspace-ribbon .side-dock-ribbon-action.is-active::before,
-body:not(.fluent2-hide-nav-pill) .tree-item-self.is-active::before {
+body:not(.fluent2-hide-nav-pill) :is(
+  .nav-file-title.is-active,
+  .vertical-tab-nav-item.is-active,
+  .workspace-ribbon .side-dock-ribbon-action.is-active,
+  .tree-item-self.is-active
+)::before {
   content: "";
   position: absolute;
   left: 0;
@@ -1716,26 +1314,21 @@ body:not(.fluent2-hide-nav-pill) .tree-item-self.is-active::before {
   animation: fluent2-pill-in var(--durationFast) var(--curveDecelerateMid);
 }
 
-body.fluent2-disable-motion .nav-file-title.is-active::before,
-body.fluent2-disable-motion .vertical-tab-nav-item.is-active::before,
-body.fluent2-disable-motion .workspace-ribbon .side-dock-ribbon-action.is-active::before,
-body.fluent2-disable-motion .tree-item-self.is-active::before {
+body.fluent2-disable-motion :is(
+  .nav-file-title.is-active,
+  .vertical-tab-nav-item.is-active,
+  .workspace-ribbon .side-dock-ribbon-action.is-active,
+  .tree-item-self.is-active
+)::before {
   animation: none;
 }
 
 @keyframes fluent2-pill-in {
-  from {
-    opacity: 0;
-    transform: translateY(-50%) scaleY(0.35);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(-50%) scaleY(1);
-  }
+  from { opacity: 0; transform: translateY(-50%) scaleY(0.35); }
+  to { opacity: 1; transform: translateY(-50%) scaleY(1); }
 }
 
-.nav-file-title.is-active,
-.tree-item-self.is-active {
+:is(.nav-file-title.is-active, .tree-item-self.is-active) {
   background-color: var(--colorSubtleBackgroundSelected);
   color: var(--colorNeutralForeground1);
   font-weight: 600;
@@ -1746,31 +1339,24 @@ body.fluent2-disable-motion .tree-item-self.is-active::before {
   color: var(--colorNeutralForeground2);
 }
 
-.nav-folder-title:hover,
-.nav-file-title:hover,
-.tree-item-self.is-clickable:hover {
+:is(.nav-folder-title:hover, .nav-file-title:hover, .tree-item-self.is-clickable:hover) {
   background-color: var(--colorSubtleBackgroundHover);
   color: var(--colorNeutralForeground1);
 }
 
-/* Collapse Chevron Smooth Rotation */
 .collapse-icon svg.svg-icon {
   transition: transform var(--durationFast) var(--curveDecelerateMid);
 }
 
-/* Workspace Split Resize Handles */
 .workspace-leaf-resize-handle {
   transition: background-color var(--durationFast) var(--curveEasyEase);
 }
 
 /* ==========================================================================
-   10. FLUENT 2 INTERACTIVE CONTROLS
-       Buttons, Inputs (Bottom Focus Underline), Toggle Switches,
-       Checkboxes, Sliders & Dropdowns
+   9. FLUENT 2 CONTROLS (Buttons, Flat Inputs, 40x22 Toggles, Checkboxes, Sliders)
    ========================================================================== */
 
-/* --- 10A. Buttons (Fluent 2 Bevel Border + Brand CTA) --- */
-button:not(.clickable-icon):not(.copy-code-button) {
+button:not(.clickable-icon):not(.copy-code-button):not(.mod-cta):not(.mod-warning) {
   border-radius: var(--borderRadiusMedium);
   font-weight: 500;
   font-size: 13.5px;
@@ -1793,44 +1379,51 @@ button:not(.clickable-icon):not(.copy-code-button) {
   border-top-color: var(--f2-stroke-control-top);
 }
 
-button:not(.clickable-icon):not(.copy-code-button):hover {
+button:not(.clickable-icon):not(.copy-code-button):not(.mod-cta):not(.mod-warning):hover {
   background-color: var(--f2-control-fill-hover);
   border-color: var(--colorNeutralStroke1Hover);
 }
 
-button:not(.clickable-icon):not(.copy-code-button):active {
+button:not(.clickable-icon):not(.copy-code-button):not(.mod-cta):not(.mod-warning):active {
   background-color: var(--f2-control-fill-pressed);
   color: var(--colorNeutralForeground2);
 }
 
-/* Primary Brand Button (mod-cta) */
-button.mod-cta {
-  background-color: var(--colorBrandBackground) !important;
-  color: var(--colorNeutralForegroundOnBrand) !important;
-  border: 1px solid transparent !important;
+body button.mod-cta {
+  border-radius: var(--borderRadiusMedium);
+  font-weight: 500;
+  font-size: 13.5px;
+  padding: 5px 14px;
+  min-height: 32px;
+  background-color: var(--colorBrandBackground);
+  color: var(--colorNeutralForegroundOnBrand);
+  border: 1px solid transparent;
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.22);
 }
 
-button.mod-cta:hover {
-  background-color: var(--colorBrandBackgroundHover) !important;
+body button.mod-cta:hover {
+  background-color: var(--colorBrandBackgroundHover);
 }
 
-button.mod-cta:active {
-  background-color: var(--colorBrandBackgroundPressed) !important;
+body button.mod-cta:active {
+  background-color: var(--colorBrandBackgroundPressed);
 }
 
-/* Destructive Button (mod-warning) */
-button.mod-warning {
-  background-color: var(--f2-status-danger-fg) !important;
-  color: #ffffff !important;
-  border-color: transparent !important;
+body button.mod-warning {
+  border-radius: var(--borderRadiusMedium);
+  font-weight: 500;
+  font-size: 13.5px;
+  padding: 5px 14px;
+  min-height: 32px;
+  background-color: var(--f2-status-danger-fg);
+  color: #ffffff;
+  border: 1px solid transparent;
 }
 
-button.mod-warning:hover {
+body button.mod-warning:hover {
   filter: brightness(1.08);
 }
 
-/* Subtle Icon Buttons */
 .clickable-icon {
   border-radius: var(--borderRadiusMedium);
   transition: background-color var(--durationFaster) var(--curveEasyEase),
@@ -1846,16 +1439,8 @@ button.mod-warning:hover {
   background-color: var(--colorSubtleBackgroundPressed);
 }
 
-/* --- 10B. Text Inputs & Search Boxes (Flat Windows 11 Bottom Accent Bar) ---
-   Uses border-box linear-gradient instead of border-bottom / inset box-shadow so the
-   2px focus indicator stays razor-straight across the bottom without curving upward at corners. */
-input[type="text"],
-input[type="search"],
-input[type="email"],
-input[type="password"],
-input[type="number"],
-input[type="url"],
-textarea {
+/* Flat Windows 11 Text Inputs & Search Boxes */
+:is(input[type="text"], input[type="search"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea) {
   background-color: var(--f2-control-fill);
   background-origin: border-box;
   background-clip: border-box;
@@ -1875,7 +1460,6 @@ textarea {
     border-color var(--durationFast) var(--curveEasyEase);
 }
 
-/* Preserve icon clearance inside Obsidian search inputs (Settings, Sidebar Search, Plugins) */
 .search-input-container {
   position: relative;
 }
@@ -1886,33 +1470,18 @@ textarea {
   transform: translateY(-50%);
 }
 
-.search-input-container input,
-.search-input-container input[type="search"],
-.search-input-container input[type="text"],
-input[type="search"] {
+:is(.search-input-container input, input[type="search"]) {
   padding-top: 5px;
   padding-bottom: 5px;
   padding-inline-start: 32px;
   padding-inline-end: 28px;
 }
 
-input[type="text"]:hover,
-input[type="search"]:hover,
-input[type="email"]:hover,
-input[type="password"]:hover,
-input[type="number"]:hover,
-input[type="url"]:hover,
-textarea:hover {
+:is(input[type="text"], input[type="search"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea):hover {
   background-color: var(--f2-control-fill-hover);
 }
 
-input[type="text"]:focus,
-input[type="search"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus,
-input[type="number"]:focus,
-input[type="url"]:focus,
-textarea:focus {
+:is(input[type="text"], input[type="search"], input[type="email"], input[type="password"], input[type="number"], input[type="url"], textarea):focus {
   background-color: var(--colorNeutralBackground1);
   background-image: linear-gradient(
     to top,
@@ -1925,7 +1494,6 @@ textarea:focus {
   outline: none;
 }
 
-/* Dropdown Selects */
 select.dropdown {
   background-color: var(--f2-control-fill);
   color: var(--colorNeutralForeground1);
@@ -1937,29 +1505,17 @@ select.dropdown {
     border-color var(--durationFaster) var(--curveEasyEase);
 }
 
-.theme-light select.dropdown {
-  border-bottom-color: var(--f2-stroke-control-bottom);
-}
-
-.theme-dark select.dropdown {
-  border-top-color: var(--f2-stroke-control-top);
-}
-
-select.dropdown:hover {
-  background-color: var(--f2-control-fill-hover);
-}
-
+.theme-light select.dropdown { border-bottom-color: var(--f2-stroke-control-bottom); }
+.theme-dark select.dropdown { border-top-color: var(--f2-stroke-control-top); }
+select.dropdown:hover { background-color: var(--f2-control-fill-hover); }
 select.dropdown:focus {
   border-color: var(--colorCompoundBrandStroke);
   box-shadow: 0 0 0 1px var(--colorCompoundBrandStroke);
 }
 
-/* --- 10C. Fluent 2 / Windows 11 Toggle Switch (.checkbox-container) ---
-   Uses explicit pixel top/left with `transform: none !important` so Obsidian's
-   default `translate3d(...)` never overrides vertical centering.
-   Outer: 40x22px (1px border -> 38x20px inner); Thumb: 14x14px -> 3px inner gap all around. */
-.checkbox-container,
-.checkbox-container.mod-small {
+/* Windows 11 Toggle Switch (40x22px, 14px thumb, exact 3px inner inset) */
+body .checkbox-container,
+body .checkbox-container.mod-small {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -1979,17 +1535,17 @@ select.dropdown:focus {
     border-color var(--durationFast) var(--curveDecelerateMid);
 }
 
-.checkbox-container::before,
-.checkbox-container.mod-small::before {
+body .checkbox-container::before,
+body .checkbox-container.mod-small::before {
   display: none;
 }
 
-.checkbox-container:hover {
+body .checkbox-container:hover {
   background-color: var(--colorSubtleBackgroundHover);
 }
 
-.checkbox-container::after,
-.checkbox-container.mod-small::after {
+body .checkbox-container::after,
+body .checkbox-container.mod-small::after {
   content: "";
   position: absolute;
   top: 3px;
@@ -1998,11 +1554,11 @@ select.dropdown:focus {
   bottom: auto;
   width: 14px;
   height: 14px;
-  margin: 0 !important;
+  margin: 0;
   border-radius: var(--borderRadiusCircular);
   background-color: var(--colorNeutralForeground2);
   box-shadow: none;
-  transform: none !important;
+  transform: none;
   transition: left var(--durationFast) var(--curveDecelerateMid),
     top var(--durationFaster) var(--curveEasyEase),
     width var(--durationFaster) var(--curveEasyEase),
@@ -2010,48 +1566,48 @@ select.dropdown:focus {
     background-color var(--durationFast) var(--curveEasyEase);
 }
 
-.checkbox-container:hover::after {
+body .checkbox-container:hover::after {
   top: 2.5px;
   left: 2.5px;
   width: 15px;
   height: 15px;
 }
 
-.checkbox-container:active::after {
+body .checkbox-container:active::after {
   top: 3px;
   left: 3px;
   width: 17px;
   height: 14px;
 }
 
-.checkbox-container.is-enabled,
-.checkbox-container.mod-small.is-enabled {
+body .checkbox-container.is-enabled,
+body .checkbox-container.mod-small.is-enabled {
   background-color: var(--colorBrandBackground);
   border-color: var(--colorBrandBackground);
   box-shadow: none;
 }
 
-.checkbox-container.is-enabled:hover {
+body .checkbox-container.is-enabled:hover {
   background-color: var(--colorBrandBackgroundHover);
   border-color: var(--colorBrandBackgroundHover);
 }
 
-.checkbox-container.is-enabled::after,
-.checkbox-container.mod-small.is-enabled::after {
+body .checkbox-container.is-enabled::after,
+body .checkbox-container.mod-small.is-enabled::after {
   top: 3px;
   left: 21px;
   background-color: var(--colorNeutralForegroundOnBrand);
-  transform: none !important;
+  transform: none;
 }
 
-.checkbox-container.is-enabled:hover::after {
+body .checkbox-container.is-enabled:hover::after {
   top: 2.5px;
   left: 20.5px;
   width: 15px;
   height: 15px;
 }
 
-.checkbox-container.is-enabled:active::after {
+body .checkbox-container.is-enabled:active::after {
   top: 3px;
   left: 18px;
   width: 17px;
@@ -2062,7 +1618,6 @@ select.dropdown:focus {
   gap: 10px;
 }
 
-/* --- 10D. Fluent 2 Checkboxes (UI & Markdown Tasks) --- */
 input[type="checkbox"] {
   border-radius: var(--borderRadiusMedium);
   border: 1px solid var(--colorNeutralStrokeAccessible);
@@ -2086,7 +1641,6 @@ input[type="checkbox"]:checked:hover {
   border-color: var(--colorBrandBackgroundHover);
 }
 
-/* --- 10E. Fluent 2 / WinUI Range Slider --- */
 input[type="range"] {
   height: 4px;
   border-radius: var(--borderRadiusCircular);
@@ -2115,20 +1669,16 @@ input[type="range"]::-webkit-slider-thumb:active {
   transform: scale(0.98);
 }
 
-/* Focus Visible Ring (Fluent 2 Keyboard Accessibility) */
 :focus-visible {
   outline: 2px solid var(--colorCompoundBrandStroke);
   outline-offset: 2px;
 }
 
 /* ==========================================================================
-   11. FLOATING ACRYLIC SURFACES: MENUS, MODALS, SETTINGS, COMMAND PALETTE
+   10. FLOATING ACRYLIC SURFACES & WINDOWS 11 SETTINGS WINDOW
    ========================================================================== */
 
-/* Context Menus & Dropdown Popovers */
-.menu,
-.suggestion-container,
-.popover.hover-popover {
+:is(.menu, .suggestion-container, .popover.hover-popover) {
   background-color: var(--f2-acrylic-surface);
   backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(150%);
   -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(150%);
@@ -2138,33 +1688,23 @@ input[type="range"]::-webkit-slider-thumb:active {
   padding: 5px;
 }
 
-body:not(.fluent2-disable-motion) .menu,
-body:not(.fluent2-disable-motion) .suggestion-container,
-body:not(.fluent2-disable-motion) .popover.hover-popover {
+body:not(.fluent2-disable-motion) :is(.menu, .suggestion-container, .popover.hover-popover) {
   animation: fluent2-flyout-in var(--durationFast) var(--curveDecelerateMid);
 }
 
 @keyframes fluent2-flyout-in {
-  from {
-    opacity: 0;
-    transform: translateY(-4px) scale(0.985);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+  from { opacity: 0; transform: translateY(-4px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.menu-item,
-.suggestion-item {
+:is(.menu-item, .suggestion-item) {
   border-radius: var(--borderRadiusMedium);
   padding: 6px 10px;
   font-size: 13.5px;
   transition: background-color var(--durationUltraFast) var(--curveEasyEase);
 }
 
-.menu-item.selected:not(.is-disabled):not(.is-label),
-.suggestion-item.is-selected {
+:is(.menu-item.selected:not(.is-disabled):not(.is-label), .suggestion-item.is-selected) {
   background-color: var(--colorSubtleBackgroundHover);
   color: var(--colorNeutralForeground1);
 }
@@ -2174,7 +1714,6 @@ body:not(.fluent2-disable-motion) .popover.hover-popover {
   border-bottom: 1px solid var(--colorNeutralStrokeSubtle);
 }
 
-/* Modals & Settings Window (WinUI 3 Dialog & Settings Look) */
 .modal {
   background-color: var(--f2-acrylic-surface-strong);
   backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(150%);
@@ -2184,50 +1723,40 @@ body:not(.fluent2-disable-motion) .popover.hover-popover {
   box-shadow: var(--shadow64);
 }
 
-body:not(.fluent2-disable-motion) .modal,
-body:not(.fluent2-disable-motion) .prompt {
+body:not(.fluent2-disable-motion) :is(.modal, .prompt) {
   animation: fluent2-dialog-in var(--durationNormal) var(--curveDecelerateMid);
 }
 
 @keyframes fluent2-dialog-in {
-  from {
-    opacity: 0;
-    transform: scale(0.975);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+  from { opacity: 0; transform: scale(0.975); }
+  to { opacity: 1; transform: scale(1); }
 }
 
-.modal.mod-settings {
+/* Windows 11 Settings Layout (Modal & Standalone Pop-out Window, zero blur halo) */
+body .modal.mod-settings {
   background-color: var(--f2-mica-base-solid);
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   overflow: hidden;
 }
 
-body:not(:has(.workspace)) .modal.mod-settings,
-body:not(:has(.workspace)) .vertical-tabs-container {
-  background-color: var(--f2-mica-base-solid);
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  border: none !important;
-  border-radius: 0 !important;
+body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .vertical-tabs-container) {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
   overflow: hidden;
 }
 
-.modal.mod-settings .vertical-tab-header,
-body:not(:has(.workspace)) .vertical-tab-header {
+.vertical-tabs-container .vertical-tab-header {
   background-color: transparent;
   border-right: none;
   padding: 10px 12px 14px;
 }
 
-.modal.mod-settings .vertical-tab-header-group-title,
-body:not(:has(.workspace)) .vertical-tab-header-group-title {
-  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+.vertical-tabs-container .vertical-tab-header-group-title {
+  font-family: var(--fontFamilyWinSettings);
   font-size: 12px;
   font-weight: 400;
   letter-spacing: 0.01em;
@@ -2235,13 +1764,12 @@ body:not(:has(.workspace)) .vertical-tab-header-group-title {
   padding: 12px 12px 4px;
 }
 
-.modal.mod-settings .vertical-tab-nav-item,
-body:not(:has(.workspace)) .vertical-tab-nav-item {
+.vertical-tabs-container .vertical-tab-nav-item {
   position: relative;
   border-radius: var(--borderRadiusMedium);
   padding: 8px 12px;
   margin-bottom: 2px;
-  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  font-family: var(--fontFamilyWinSettings);
   font-size: 13.5px;
   font-weight: 400;
   color: var(--colorNeutralForeground2);
@@ -2249,139 +1777,103 @@ body:not(:has(.workspace)) .vertical-tab-nav-item {
     color var(--durationFaster) var(--curveEasyEase);
 }
 
-.modal.mod-settings .vertical-tab-nav-item:hover,
-body:not(:has(.workspace)) .vertical-tab-nav-item:hover {
+.vertical-tabs-container .vertical-tab-nav-item:hover {
   background-color: var(--colorSubtleBackgroundHover);
   color: var(--colorNeutralForeground1);
 }
 
-.modal.mod-settings .vertical-tab-nav-item.is-active,
-body:not(:has(.workspace)) .vertical-tab-nav-item.is-active {
+.vertical-tabs-container .vertical-tab-nav-item.is-active {
   background-color: var(--colorSubtleBackgroundSelected);
   color: var(--colorNeutralForeground1);
   font-weight: 400;
 }
 
-/* Windows 11 Settings Card-Style Rows:
-   - Card group wrappers (.setting-group, .setting-items) are 100% transparent so Mica
-     shows cleanly through every gap between cards (no opaque container box behind cards).
-   - Individual setting cards use translucent WinUI 3 CardBackgroundFillColorDefault
-     (--f2-card-surface: rgba(255,255,255,0.70) light / rgba(255,255,255,0.055) dark). */
-.modal.mod-settings .vertical-tab-content-container,
-body:not(:has(.workspace)) .vertical-tab-content-container,
-.modal.mod-settings .vertical-tab-content,
-body:not(:has(.workspace)) .vertical-tab-content {
+.vertical-tabs-container :is(.vertical-tab-content-container, .vertical-tab-content) {
   background-color: transparent;
 }
 
-.modal.mod-settings .vertical-tab-content,
-body:not(:has(.workspace)) .vertical-tab-content {
+.vertical-tabs-container .vertical-tab-content {
   position: relative;
   padding: 16px 36px 32px;
 }
 
-/* Hide underlying parent Settings page whenever a subpage (e.g. Font Picker) is mounted on top
-   so two transparent Mica pages never overlap / ghost through each other during loading or display. */
-.vertical-tab-content-container:has(> .vertical-tab-content + .vertical-tab-content) > .vertical-tab-content:not(:last-child) {
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
+/* Prevent stacked transparent Mica Settings pages from bleeding through each other */
+.vertical-tab-content-container > .vertical-tab-content:not(:only-child):not(:last-child) {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
-.modal.mod-settings .setting-group,
-.modal.mod-settings .setting-items,
-.modal.mod-settings .setting-group-content,
-body:not(:has(.workspace)) .setting-group,
-body:not(:has(.workspace)) .setting-items,
-body:not(:has(.workspace)) .setting-group-content {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
+/* Transparent setting groups + translucent WinUI 3 cards */
+.vertical-tabs-container :is(.setting-group, .setting-items, .setting-group-content) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
 
-.modal.mod-settings .setting-items,
-body:not(:has(.workspace)) .setting-items {
+.vertical-tabs-container .setting-items {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.modal.mod-settings .setting-item:not(.setting-item-heading),
-body:not(:has(.workspace)) .setting-item:not(.setting-item-heading) {
-  background-color: var(--f2-card-surface) !important;
-  border: 1px solid var(--colorNeutralStrokeSubtle) !important;
-  border-radius: var(--borderRadiusLarge) !important;
+.vertical-tabs-container .setting-item:not(.setting-item-heading) {
+  background-color: var(--f2-card-surface);
+  border: 1px solid var(--colorNeutralStrokeSubtle);
+  border-radius: var(--borderRadiusLarge);
   padding: 14px 18px;
   margin-bottom: 4px;
   box-shadow: none;
   transition: background-color var(--durationFaster) var(--curveEasyEase);
 }
 
-.modal.mod-settings .setting-items > .setting-item:not(.setting-item-heading),
-body:not(:has(.workspace)) .setting-items > .setting-item:not(.setting-item-heading) {
+.vertical-tabs-container .setting-items > .setting-item:not(.setting-item-heading) {
   margin-bottom: 0;
 }
 
-.modal.mod-settings .setting-item:not(.setting-item-heading):hover,
-body:not(:has(.workspace)) .setting-item:not(.setting-item-heading):hover {
-  background-color: var(--f2-card-surface-hover) !important;
+.vertical-tabs-container .setting-item:not(.setting-item-heading):hover {
+  background-color: var(--f2-card-surface-hover);
 }
 
-/* Remove unnecessary outer card wrapper around bare search boxes in Settings pages
-   (Font Picker, Community Plugins "搜索已安装的插件...", Core Plugins, Hotkeys, etc.).
-   Obsidian creates empty .setting-item-name nodes, so check :not(:has(.setting-item-name:not(:empty))). */
-.modal.mod-settings .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))),
-body:not(:has(.workspace)) .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))),
-.modal.mod-settings .setting-item:has(> .search-input-container),
-body:not(:has(.workspace)) .setting-item:has(> .search-input-container),
-.modal.mod-settings .setting-item.mod-search,
-body:not(:has(.workspace)) .setting-item.mod-search,
-.modal.mod-settings .installed-plugins-container .setting-item:has(.search-input-container),
-body:not(:has(.workspace)) .installed-plugins-container .setting-item:has(.search-input-container),
-.modal.mod-settings .setting-item:has(.setting-item-info:empty):not(:has(button:not(.search-input-clear-button))),
-body:not(:has(.workspace)) .setting-item:has(.setting-item-info:empty):not(:has(button:not(.search-input-clear-button))) {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 0 10px 0 !important;
-  margin-bottom: 4px !important;
+/* Strip outer card wrapper on bare Settings search items */
+.vertical-tabs-container :is(
+  .setting-item.mod-search,
+  .setting-search,
+  .installed-plugins-container > .setting-item:first-child
+) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 0 10px 0;
+  margin-bottom: 4px;
 }
 
-/* Collapse empty .setting-item-info so bare search boxes span 100% width cleanly */
-.modal.mod-settings .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .setting-item-info,
-body:not(:has(.workspace)) .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .setting-item-info {
-  display: none !important;
+.vertical-tabs-container :is(
+  .setting-item.mod-search,
+  .setting-search,
+  .installed-plugins-container > .setting-item:first-child
+) .setting-item-info {
+  display: none;
 }
 
-/* Also strip any wrapper container directly holding a bare search input */
-.modal.mod-settings .vertical-tab-content :is(.setting-items, .setting-group) > :first-child:has(.search-input-container):not(:has(.setting-item-name:not(:empty))),
-body:not(:has(.workspace)) .vertical-tab-content :is(.setting-items, .setting-group) > :first-child:has(.search-input-container):not(:has(.setting-item-name:not(:empty))) {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 0 0 10px 0 !important;
-}
-
-.modal.mod-settings .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .setting-item-control,
-body:not(:has(.workspace)) .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .setting-item-control,
-.modal.mod-settings .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .search-input-container,
-body:not(:has(.workspace)) .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .search-input-container {
+.vertical-tabs-container :is(
+  .setting-item.mod-search,
+  .setting-search,
+  .installed-plugins-container > .setting-item:first-child
+) :is(.setting-item-control, .search-input-container) {
   width: 100%;
   flex: 1 1 100%;
 }
 
-/* Reposition loading progress bar in Settings subpages (e.g. Font list loading) cleanly below the subpage title */
-.modal.mod-settings .vertical-tab-content .progress-bar,
-body:not(:has(.workspace)) .vertical-tab-content .progress-bar,
-.modal.mod-settings .vertical-tab-content .setting-progress-bar,
-body:not(:has(.workspace)) .vertical-tab-content .setting-progress-bar {
-  position: absolute !important;
+/* Settings subpage loading bar cleanly below subpage title */
+.vertical-tabs-container .vertical-tab-content :is(.progress-bar, .setting-progress-bar) {
+  position: absolute;
   top: 54px;
   left: 36px;
   right: 36px;
-  width: auto !important;
+  width: auto;
   height: 2px;
   border-radius: var(--borderRadiusCircular);
   overflow: hidden;
@@ -2389,59 +1881,35 @@ body:not(:has(.workspace)) .vertical-tab-content .setting-progress-bar {
   z-index: 5;
 }
 
-/* Settings Subpage Header (e.g. "< 正文字体" Font Picker):
-   Remove Obsidian's white fade gradient & sticky overlap; match Windows 11 Settings heading. */
-.modal-setting-nav-bar,
-.setting-nav-bar,
-.setting-subpage-header,
-.vertical-tab-content > :is(div, header):has(.modal-setting-back-button),
-.vertical-tab-content-container > :is(div, header):has(.modal-setting-back-button),
-.vertical-tab-content > :is(div, header):has(> .clickable-icon svg.lucide-chevron-left),
-.vertical-tab-content-container > :is(div, header):has(> .clickable-icon svg.lucide-chevron-left),
-.vertical-tab-content > :is(div, header):has(> button.clickable-icon > svg.lucide-chevron-left) {
-  position: static !important;
-  background: transparent !important;
-  background-color: transparent !important;
-  background-image: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  box-shadow: none !important;
-  border-bottom: none !important;
-  padding-inline-start: 0 !important;
-  padding-bottom: 12px !important;
+/* Settings Subpage Header (remove white fade gradient) */
+.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header) {
+  position: static;
+  background: transparent;
+  background-image: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-bottom: none;
+  padding-inline-start: 0;
+  padding-bottom: 12px;
 }
 
-.modal-setting-nav-bar::before,
-.modal-setting-nav-bar::after,
-.setting-nav-bar::before,
-.setting-nav-bar::after,
-.setting-subpage-header::before,
-.setting-subpage-header::after,
-.vertical-tab-content > :is(div, header):has(.modal-setting-back-button)::before,
-.vertical-tab-content > :is(div, header):has(.modal-setting-back-button)::after,
-.vertical-tab-content > :is(div, header):has(> .clickable-icon svg.lucide-chevron-left)::before,
-.vertical-tab-content > :is(div, header):has(> .clickable-icon svg.lucide-chevron-left)::after {
-  display: none !important;
-  content: none !important;
-  background: none !important;
+.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header)::before,
+.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header)::after {
+  display: none;
+  content: none;
 }
 
-.modal-setting-nav-bar *,
-.setting-nav-bar *,
-.setting-subpage-header * {
-  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
-  font-weight: 400 !important;
+.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header) * {
+  font-family: var(--fontFamilyWinSettings);
+  font-weight: 400;
 }
 
-/* Windows 11 Settings Headings (Section & Page Titles):
-   Generous height, left-aligned, Segoe UI + Microsoft YaHei UI, regular weight (not bold). */
-.modal.mod-settings .setting-item-heading,
-body:not(:has(.workspace)) .setting-item-heading,
-.modal.mod-settings .setting-group-heading,
-body:not(:has(.workspace)) .setting-group-heading {
-  background-color: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
+/* Windows 11 Settings Headings (tall, left-aligned, regular weight) */
+.vertical-tabs-container :is(.setting-item-heading, .setting-group-heading) {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   min-height: 46px;
   padding: 20px 2px 10px;
   margin: 0;
@@ -2450,25 +1918,19 @@ body:not(:has(.workspace)) .setting-group-heading {
   text-align: left;
 }
 
-.modal.mod-settings .setting-item-heading .setting-item-name,
-body:not(:has(.workspace)) .setting-item-heading .setting-item-name,
-.modal.mod-settings .setting-group-heading,
-body:not(:has(.workspace)) .setting-group-heading {
-  font-family: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Display", sans-serif !important;
+.vertical-tabs-container :is(.setting-item-heading .setting-item-name, .setting-group-heading) {
+  font-family: var(--fontFamilyWinSettings);
   font-size: 16px;
-  font-weight: 400 !important;
+  font-weight: 400;
   line-height: 1.4;
   text-align: left;
   color: var(--colorNeutralForeground1);
 }
 
-.modal.mod-settings .vertical-tab-content h1,
-.modal.mod-settings .vertical-tab-content h2,
-body:not(:has(.workspace)) .vertical-tab-content h1,
-body:not(:has(.workspace)) .vertical-tab-content h2 {
-  font-family: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Display", sans-serif !important;
+.vertical-tabs-container .vertical-tab-content :is(h1, h2) {
+  font-family: var(--fontFamilyWinSettings);
   font-size: 26px;
-  font-weight: 400 !important;
+  font-weight: 400;
   line-height: 1.4;
   min-height: 48px;
   padding: 6px 2px 16px;
@@ -2477,21 +1939,19 @@ body:not(:has(.workspace)) .vertical-tab-content h2 {
   color: var(--colorNeutralForeground1);
 }
 
-.modal.mod-settings .setting-item-name,
-body:not(:has(.workspace)) .setting-item-name {
-  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+.vertical-tabs-container .setting-item-name {
+  font-family: var(--fontFamilyWinSettings);
   font-weight: 400;
   color: var(--colorNeutralForeground1);
 }
 
-.modal.mod-settings .setting-item-description,
-body:not(:has(.workspace)) .setting-item-description {
-  font-family: "Segoe UI", "Microsoft YaHei UI", sans-serif;
+.vertical-tabs-container .setting-item-description {
+  font-family: var(--fontFamilyWinSettings);
   color: var(--colorNeutralForeground3);
   font-size: 12.5px;
 }
 
-/* Command Palette & Quick Switcher (Windows PowerToys Run / Fluent Prompt) */
+/* Command Palette & Quick Switcher */
 .prompt {
   background-color: var(--f2-acrylic-surface-strong);
   backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(160%);
@@ -2507,17 +1967,20 @@ body:not(:has(.workspace)) .setting-item-description {
   border-bottom: 1px solid var(--colorNeutralStrokeSubtle);
 }
 
-input.prompt-input {
-  border: none !important;
-  border-bottom: 2px solid transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
+body .prompt input.prompt-input {
+  border: none;
+  border-bottom: 2px solid transparent;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: none;
   font-size: 15px;
   padding: 8px 10px;
 }
 
-input.prompt-input:focus {
-  border-bottom-color: var(--colorCompoundBrandStroke) !important;
+body .prompt input.prompt-input:focus {
+  background-color: transparent;
+  background-image: none;
+  border-bottom-color: var(--colorCompoundBrandStroke);
 }
 
 .prompt-results {
@@ -2554,7 +2017,6 @@ input.prompt-input:focus {
   color: var(--colorNeutralForeground3);
 }
 
-/* Tooltips & Toast Notices */
 .tooltip {
   background-color: var(--colorNeutralBackground1);
   color: var(--colorNeutralForeground1);
@@ -2583,39 +2045,26 @@ input.prompt-input:focus {
 }
 
 /* ==========================================================================
-   12. MARKDOWN TYPOGRAPHY & EDITOR COMPONENTS
+   11. MARKDOWN TYPOGRAPHY, VS CODE 2026 CODE, TABLES, CALLOUTS & PROPERTIES
    ========================================================================== */
 
-/* Headings — Fluent 2 Display Optical Sizing */
-.inline-title,
-.markdown-rendered h1,
-.markdown-rendered h2,
-.markdown-rendered h3,
-.markdown-rendered h4,
-.HyperMD-header {
+:is(.inline-title, .markdown-rendered h1, .markdown-rendered h2, .markdown-rendered h3, .markdown-rendered h4, .HyperMD-header) {
   font-family: var(--fontFamilyDisplay);
   letter-spacing: -0.012em;
   color: var(--colorNeutralForeground1);
 }
 
-/* Optional Heading Style: Subtle Bottom Divider */
-body.fluent2-headings-divider .markdown-rendered h1,
-body.fluent2-headings-divider .markdown-rendered h2,
-body.fluent2-headings-divider .HyperMD-header-1,
-body.fluent2-headings-divider .HyperMD-header-2 {
+body.fluent2-headings-divider :is(.markdown-rendered h1, .markdown-rendered h2, .HyperMD-header-1, .HyperMD-header-2) {
   padding-bottom: 0.25em;
   border-bottom: 1px solid var(--colorNeutralStroke2);
 }
 
-/* Optional Heading Style: Fluent Accent Left Pill */
-body.fluent2-headings-accent-pill .markdown-rendered h1,
-body.fluent2-headings-accent-pill .markdown-rendered h2 {
+body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2) {
   position: relative;
   padding-left: 14px;
 }
 
-body.fluent2-headings-accent-pill .markdown-rendered h1::before,
-body.fluent2-headings-accent-pill .markdown-rendered h2::before {
+body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2)::before {
   content: "";
   position: absolute;
   left: 0;
@@ -2626,12 +2075,10 @@ body.fluent2-headings-accent-pill .markdown-rendered h2::before {
   background-color: var(--colorCompoundBrandBackground);
 }
 
-/* Push heading collapse chevron cleanly left of the 4px accent pill */
 body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2) > .heading-collapse-indicator {
   margin-inline-start: -34px;
 }
 
-/* Blockquotes */
 .markdown-rendered blockquote {
   border-left: 3px solid var(--colorBrandStroke1);
   background-color: var(--blockquote-background-color);
@@ -2641,7 +2088,7 @@ body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2) > .heading-coll
   color: var(--colorNeutralForeground2);
 }
 
-/* --- Fluent 2 MessageBar / InfoBar Callouts --- */
+/* Fluent 2 MessageBar Callouts */
 body:not(.fluent2-classic-callouts) .callout {
   border-radius: var(--borderRadiusXLarge);
   border: 1px solid var(--f2-status-info-border);
@@ -2666,104 +2113,47 @@ body:not(.fluent2-classic-callouts) .callout-content {
   padding-top: 4px;
 }
 
-/* Semantic Callout Variants */
-body:not(.fluent2-classic-callouts) .callout[data-callout="tip"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="hint"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="success"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="check"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="done"] {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) {
   background-color: var(--f2-status-success-bg);
   border-color: var(--f2-status-success-border);
 }
-body:not(.fluent2-classic-callouts) .callout[data-callout="tip"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="tip"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="hint"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="hint"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="success"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="success"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="check"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="check"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="done"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="done"] .callout-icon svg.svg-icon {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) :is(.callout-title, .callout-icon svg.svg-icon) {
   color: var(--f2-status-success-fg);
 }
 
-body:not(.fluent2-classic-callouts) .callout[data-callout="warning"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="caution"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="attention"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="question"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="faq"] {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="warning"], [data-callout="caution"], [data-callout="attention"], [data-callout="question"], [data-callout="faq"]) {
   background-color: var(--f2-status-warning-bg);
   border-color: var(--f2-status-warning-border);
 }
-body:not(.fluent2-classic-callouts) .callout[data-callout="warning"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="warning"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="caution"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="caution"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="attention"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="attention"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="question"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="question"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="faq"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="faq"] .callout-icon svg.svg-icon {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="warning"], [data-callout="caution"], [data-callout="attention"], [data-callout="question"], [data-callout="faq"]) :is(.callout-title, .callout-icon svg.svg-icon) {
   color: var(--f2-status-warning-fg);
 }
 
-body:not(.fluent2-classic-callouts) .callout[data-callout="danger"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="error"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="fail"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="failure"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="bug"] {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="danger"], [data-callout="error"], [data-callout="fail"], [data-callout="failure"], [data-callout="bug"]) {
   background-color: var(--f2-status-danger-bg);
   border-color: var(--f2-status-danger-border);
 }
-body:not(.fluent2-classic-callouts) .callout[data-callout="danger"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="danger"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="error"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="error"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="fail"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="fail"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="failure"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="failure"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="bug"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="bug"] .callout-icon svg.svg-icon {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="danger"], [data-callout="error"], [data-callout="fail"], [data-callout="failure"], [data-callout="bug"]) :is(.callout-title, .callout-icon svg.svg-icon) {
   color: var(--f2-status-danger-fg);
 }
 
-body:not(.fluent2-classic-callouts) .callout[data-callout="important"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="example"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="quote"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="cite"] {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="important"], [data-callout="example"], [data-callout="quote"], [data-callout="cite"]) {
   background-color: var(--f2-status-important-bg);
   border-color: var(--f2-status-important-border);
 }
-body:not(.fluent2-classic-callouts) .callout[data-callout="important"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="important"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="example"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="example"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="quote"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="quote"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="cite"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="cite"] .callout-icon svg.svg-icon {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="important"], [data-callout="example"], [data-callout="quote"], [data-callout="cite"]) :is(.callout-title, .callout-icon svg.svg-icon) {
   color: var(--f2-status-important-fg);
 }
 
-body:not(.fluent2-classic-callouts) .callout[data-callout="abstract"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="summary"],
-body:not(.fluent2-classic-callouts) .callout[data-callout="tldr"] {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"]) {
   background-color: var(--f2-status-teal-bg);
   border-color: var(--f2-status-teal-border);
 }
-body:not(.fluent2-classic-callouts) .callout[data-callout="abstract"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="abstract"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="summary"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="summary"] .callout-icon svg.svg-icon,
-body:not(.fluent2-classic-callouts) .callout[data-callout="tldr"] .callout-title,
-body:not(.fluent2-classic-callouts) .callout[data-callout="tldr"] .callout-icon svg.svg-icon {
+body:not(.fluent2-classic-callouts) .callout:is([data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"]) :is(.callout-title, .callout-icon svg.svg-icon) {
   color: var(--f2-status-teal-fg);
 }
 
-/* --- Code Blocks & Inline Code (Cascadia Code Card) --- */
+/* Code Blocks & Inline Code (VS Code 2026 Light / Dark + Obsidian Monospace Font) */
 .markdown-rendered pre {
   background-color: var(--code-background);
   border: 1px solid var(--colorNeutralStrokeSubtle);
@@ -2771,64 +2161,17 @@ body:not(.fluent2-classic-callouts) .callout[data-callout="tldr"] .callout-icon 
   padding: 14px 16px;
 }
 
-/* VS Code 2026 Light / Dark Syntax Token Refinements (Reading View Prism + Live Preview CM6) */
-.markdown-rendered code .token.comment,
-.markdown-rendered code .token.prolog,
-.markdown-rendered code .token.doctype,
-.markdown-rendered code .token.cdata {
-  color: var(--code-comment);
-}
+.markdown-rendered code :is(.token.comment, .token.prolog, .token.doctype, .token.cdata) { color: var(--code-comment); }
+.markdown-rendered code :is(.token.keyword, .token.operator, .token.important) { color: var(--code-keyword); }
+.markdown-rendered code :is(.token.function, .token.function-variable) { color: var(--code-function); }
+.markdown-rendered code :is(.token.string, .token.char, .token.attr-value, .token.regex) { color: var(--code-string); }
+.markdown-rendered code :is(.token.number, .token.boolean, .token.constant, .token.symbol, .token.property, .token.attr-name, .token.builtin) { color: var(--code-value); }
+.markdown-rendered code :is(.token.tag, .token.selector, .token.inserted) { color: var(--code-tag); }
+.markdown-rendered code :is(.token.class-name, .token.entity, .token.variable) { color: var(--code-important); }
+.markdown-rendered code .token.punctuation { color: var(--code-punctuation); }
+.markdown-rendered code .token.deleted { color: var(--f2-status-danger-fg); }
 
-.markdown-rendered code .token.keyword,
-.markdown-rendered code .token.operator,
-.markdown-rendered code .token.important {
-  color: var(--code-keyword);
-}
-
-.markdown-rendered code .token.function,
-.markdown-rendered code .token.function-variable {
-  color: var(--code-function);
-}
-
-.markdown-rendered code .token.string,
-.markdown-rendered code .token.char,
-.markdown-rendered code .token.attr-value,
-.markdown-rendered code .token.regex {
-  color: var(--code-string);
-}
-
-.markdown-rendered code .token.number,
-.markdown-rendered code .token.boolean,
-.markdown-rendered code .token.constant,
-.markdown-rendered code .token.symbol,
-.markdown-rendered code .token.property,
-.markdown-rendered code .token.attr-name,
-.markdown-rendered code .token.builtin {
-  color: var(--code-value);
-}
-
-.markdown-rendered code .token.tag,
-.markdown-rendered code .token.selector,
-.markdown-rendered code .token.inserted {
-  color: var(--code-tag);
-}
-
-.markdown-rendered code .token.class-name,
-.markdown-rendered code .token.entity,
-.markdown-rendered code .token.variable {
-  color: var(--code-important);
-}
-
-.markdown-rendered code .token.punctuation {
-  color: var(--code-punctuation);
-}
-
-.markdown-rendered code .token.deleted {
-  color: var(--f2-status-danger-fg);
-}
-
-.markdown-rendered :not(pre) > code,
-.cm-s-obsidian span.cm-inline-code {
+:is(.markdown-rendered :not(pre) > code, .cm-s-obsidian span.cm-inline-code) {
   background-color: var(--code-background);
   border: 1px solid var(--colorNeutralStrokeSubtle);
   border-radius: var(--borderRadiusMedium);
@@ -2850,9 +2193,7 @@ body:not(.fluent2-classic-callouts) .callout[data-callout="tldr"] .callout-icon 
   color: var(--colorNeutralForeground1);
 }
 
-/* --- Fluent 2 DataGrid Tables ---
-   Keep thead & thead tr transparent and apply a single uniform --table-header-background
-   across EVERY header column (odd & even) so columns never render with mismatched shades. */
+/* Fluent 2 DataGrid Tables & Obsidian Bases (Uniform Header Columns) */
 body:not(.fluent2-classic-tables) .markdown-rendered table {
   border-collapse: separate;
   border-spacing: 0;
@@ -2863,18 +2204,12 @@ body:not(.fluent2-classic-tables) .markdown-rendered table {
   background-color: var(--table-background, transparent);
 }
 
-body:not(.fluent2-classic-tables) .markdown-rendered thead,
-body:not(.fluent2-classic-tables) .markdown-rendered thead tr {
-  background-color: transparent !important;
+body:not(.fluent2-classic-tables) :is(.markdown-rendered, .cm-table-widget) :is(thead, thead tr) {
+  background-color: transparent;
 }
 
-body:not(.fluent2-classic-tables) .markdown-rendered th,
-body:not(.fluent2-classic-tables) .markdown-rendered thead th:nth-child(2n),
-body:not(.fluent2-classic-tables) .markdown-rendered thead th:nth-child(2n+1),
-body:not(.fluent2-classic-tables) .cm-table-widget thead th,
-body:not(.fluent2-classic-tables) .cm-table-widget thead th:nth-child(2n),
-body:not(.fluent2-classic-tables) .cm-table-widget thead th:nth-child(2n+1) {
-  background-color: var(--table-header-background) !important;
+body:not(.fluent2-classic-tables) :is(.markdown-rendered, .cm-table-widget) thead :is(th, th:nth-child(2n), th:nth-child(2n+1)) {
+  background-color: var(--table-header-background);
   border: none;
   border-bottom: 1px solid var(--table-border-color);
   padding: 9px 14px;
@@ -2884,9 +2219,7 @@ body:not(.fluent2-classic-tables) .cm-table-widget thead th:nth-child(2n+1) {
   text-align: left;
 }
 
-body:not(.fluent2-classic-tables) .markdown-rendered td,
-body:not(.fluent2-classic-tables) .markdown-rendered tbody td:nth-child(2n),
-body:not(.fluent2-classic-tables) .markdown-rendered tbody td:nth-child(2n+1) {
+body:not(.fluent2-classic-tables) .markdown-rendered tbody :is(td, td:nth-child(2n), td:nth-child(2n+1)) {
   background-color: transparent;
   border: none;
   border-bottom: 1px solid var(--colorNeutralStrokeSubtle);
@@ -2902,7 +2235,6 @@ body:not(.fluent2-classic-tables) .markdown-rendered tbody tr:hover td {
   background-color: var(--table-row-background-hover);
 }
 
-/* --- Obsidian Bases (Database View) Fluent 2 DataGrid Styling --- */
 .workspace-leaf-content[data-type="bases"] {
   --bases-table-header-background: var(--table-header-background);
   --bases-table-row-background-hover: var(--table-row-background-hover);
@@ -2923,8 +2255,7 @@ body:not(.fluent2-classic-tables) .markdown-rendered tbody tr:hover td {
     color var(--durationFaster) var(--curveEasyEase);
 }
 
-.bases-toolbar .text-icon-button:hover,
-.bases-toolbar .text-icon-button.is-active {
+.bases-toolbar :is(.text-icon-button:hover, .text-icon-button.is-active) {
   background-color: var(--colorSubtleBackgroundHover);
   color: var(--colorNeutralForeground1);
 }
@@ -2944,7 +2275,7 @@ body:not(.fluent2-classic-tables) .markdown-rendered tbody tr:hover td {
   background-color: var(--table-row-background-hover);
 }
 
-/* --- Properties / Frontmatter Expander Card --- */
+/* Properties Card & Pill Tags */
 .metadata-container {
   background-color: var(--metadata-background, var(--colorNeutralBackground2));
   border: 1px solid var(--colorNeutralStrokeSubtle);
@@ -2976,7 +2307,6 @@ body:not(.fluent2-classic-tables) .markdown-rendered tbody tr:hover td {
   padding: 1px 8px;
 }
 
-/* --- Fluent 2 Pill Badges for Tags --- */
 body:not(.fluent2-classic-tags) a.tag {
   border-radius: var(--borderRadiusCircular);
   background-color: var(--colorBrandBackground2);
@@ -2996,10 +2326,9 @@ body:not(.fluent2-classic-tags) a.tag:hover {
 }
 
 /* ==========================================================================
-   13. OBSIDIAN CORE PLUGINS: CANVAS, GRAPH, STATUS BAR & SCROLLBARS
+   12. CANVAS, GRAPH, STATUS BAR & WINDOWS 11 OVERLAY SCROLLBARS
    ========================================================================== */
 
-/* Canvas Cards (Fluent 2 Surface + Elevation) */
 .canvas-node-container {
   border-radius: var(--borderRadiusXLarge);
   border: 1px solid var(--colorNeutralStroke2);
@@ -3013,18 +2342,7 @@ body:not(.fluent2-classic-tags) a.tag:hover {
   box-shadow: var(--shadow16), 0 0 0 1px var(--colorCompoundBrandStroke);
 }
 
-.canvas-controls .canvas-control-group,
-.canvas-card-menu {
-  background-color: var(--f2-acrylic-surface);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  border: 1px solid var(--f2-stroke-surface-flyout);
-  border-radius: var(--borderRadiusXLarge);
-  box-shadow: var(--shadow8);
-}
-
-/* Graph Controls Panel (Acrylic Flyout) */
-.graph-controls {
+:is(.canvas-controls .canvas-control-group, .canvas-card-menu, .graph-controls) {
   background-color: var(--f2-acrylic-surface);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
@@ -3033,7 +2351,6 @@ body:not(.fluent2-classic-tags) a.tag:hover {
   box-shadow: var(--shadow16);
 }
 
-/* Status Bar */
 .status-bar {
   background-color: var(--f2-acrylic-surface);
   backdrop-filter: blur(18px) saturate(140%);
@@ -3057,7 +2374,6 @@ body:not(.fluent2-classic-tags) a.tag:hover {
   color: var(--colorNeutralForeground1);
 }
 
-/* Windows 11 Overlay Pill Scrollbars */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -3082,13 +2398,11 @@ body:not(.fluent2-classic-tags) a.tag:hover {
 }
 
 /* ==========================================================================
-   14. WINDOWS NATIVE ACCESSIBILITY
-       - Windows 11 Contrast Themes (@media (forced-colors: active))
-       - OS Reduced Motion (@media (prefers-reduced-motion: reduce))
+   13. WINDOWS ACCESSIBILITY (Contrast Themes & Reduced Motion)
    ========================================================================== */
 
 @media (forced-colors: active) {
-  body {
+  html body {
     --colorNeutralBackground1: Canvas;
     --colorNeutralBackground2: Canvas;
     --colorNeutralForeground1: CanvasText;
@@ -3103,40 +2417,36 @@ body:not(.fluent2-classic-tags) a.tag:hover {
     --colorNeutralStrokeSubtle: ButtonBorder;
   }
 
-  .workspace-split.mod-root .workspace-tab-container,
-  .menu,
-  .modal,
-  .prompt,
-  .callout,
-  .metadata-container {
-    border: 1px solid ButtonBorder !important;
-    backdrop-filter: none !important;
-    background-color: Canvas !important;
+  html body :is(.workspace-split.mod-root .workspace-tab-container, .menu, .modal, .prompt, .callout, .metadata-container) {
+    border: 1px solid ButtonBorder;
+    backdrop-filter: none;
+    background-color: Canvas;
   }
 
-  .nav-file-title.is-active::before,
-  .vertical-tab-nav-item.is-active::before,
-  .workspace-ribbon .side-dock-ribbon-action.is-active::before,
-  .prompt .suggestion-item.is-selected::before {
+  html body :is(
+    .nav-file-title.is-active,
+    .vertical-tab-nav-item.is-active,
+    .workspace-ribbon .side-dock-ribbon-action.is-active,
+    .prompt .suggestion-item.is-selected
+  )::before {
     forced-color-adjust: none;
-    background-color: Highlight !important;
+    background-color: Highlight;
   }
 
-  button.mod-cta,
-  .checkbox-container.is-enabled {
+  html body :is(button.mod-cta, .checkbox-container.is-enabled) {
     forced-color-adjust: none;
-    background-color: Highlight !important;
-    color: HighlightText !important;
-    border-color: Highlight !important;
+    background-color: Highlight;
+    color: HighlightText;
+    border-color: Highlight;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+  :root {
+    --durationUltraFast: 0.01ms;
+    --durationFaster: 0.01ms;
+    --durationFast: 0.01ms;
+    --durationNormal: 0.01ms;
+    --durationSlow: 0.01ms;
   }
 }
