@@ -1,1 +1,77 @@
-# Fluent-2-Obsidian
+# Fluent 2 for Obsidian
+
+基于微软 **Fluent 2 Design System**（[Fluent UI v9](https://fluent2.microsoft.design/) 与 Windows 11 WinUI 3）打造的 Obsidian 主题。完整还原微软官方设计令牌与 Windows 11 材质层级，并深度适配 Windows 11 原生云母材质与系统主题色体验。
+
+配套原生插件：[fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native)（提供 Windows 11 原生 Mica / Mica Alt / Acrylic 材质与 7 阶系统主题色自动同步）。
+
+---
+
+## 核心特性
+
+### 1. 官方 Fluent 2 设计令牌体系
+- **语义色板与品牌色阶**：完整映射 `@fluentui/tokens` 的 `webLightTheme` 与 `webDarkTheme`（`colorNeutralBackground1–6`、`colorNeutralForeground1–4`、`colorNeutralStroke1–3`、`brandWeb` 10–160 色阶）。
+- **物理阴影与动效**：内置双层环境光加关键光阴影（`shadow2` 至 `shadow64`）、Fluent 2 标准圆角标尺与贝塞尔缓动曲线（`curveDecelerateMid`、`curveEasyEase` 等），自动遵循系统「减弱动态效果」设置。
+- **Windows 11 字体排版**：默认优先使用 Windows 11 内置可变字体 `Segoe UI Variable`（支持光学字号自适应）与 `Microsoft YaHei UI` 中文协调回退；行内代码与代码块统一遵循 Obsidian「外观 → 等宽字体」设置（默认回退至 `Cascadia Code`）。
+
+### 2. WinUI 3 界面层级与控件细节
+- **层叠窗口架构**：标题栏、功能区（Ribbon）与左右侧边栏位于底层云母外壳（Shell），主编辑区以四边圆角的悬浮卡片承载，与激活标签页无缝打通；窗口最大化时支持鼠标顶到屏幕最上方直接点击标签页。
+- **标志性 Fluent 2 控件**：
+  - 侧边栏文件树、大纲、设置导航与功能区激活项左侧带平滑动效的 **3px 垂直药丸指示条**。
+  - 输入框与搜索栏采用 Windows 11 纯平底部聚焦指示线（两端不上翘）。
+  - 严格对齐 Windows 11 系统设置比例的 **40×22px 切换开关**、带微斜角描边的按钮、WinUI 3 滑块与复选框。
+  - 独立设置窗口还原 **Windows 11 设置风格**：44px 左对齐常规字重标题栏、无纯色容器底框的半透明设置卡片，以及常规字重的微软雅黑 UI / Segoe UI 标题。
+  - 亚克力毛玻璃（Acrylic）右键菜单、命令面板、快速切换、悬浮预览与图谱控制面板。
+
+### 3. Markdown 与代码阅读体验
+- **VS Code 2026 语法高亮**：代码块配色完整沿用 Visual Studio Code 默认的 **2026 Light** 与 **2026 Dark** 方案，同时覆盖阅读视图（Prism）与实时预览。
+- **正文 Mica 与纯色叠层**：可在 Style Settings 中开启「笔记正文区域启用 Mica 材质」，并在 Mica 之上自由调节纯色叠层的颜色与 `0%`–`100%` 不透明度；表格表头、引用块、代码块与属性卡片自动切换为统一的微透明内嵌层次。
+- **Fluent 2 内容组件**：MessageBar 风格 Callout 提示框、DataGrid 风格表格与 Obsidian Bases 视图、Expander 卡片风格笔记属性、圆角药丸标签。
+
+---
+
+## Windows 11 原生特性支持矩阵
+
+| Windows 11 特性 | 纯主题 CSS 支持 | 实现方式与说明 |
+| :--- | :--- | :--- |
+| **Mica / Mica Alt / Acrylic 原生云母材质** | 需搭配插件或 DWM 工具 | 纯 CSS 无法直接调用 Electron 窗口材质接口。搭配 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 插件可为主窗口及 Obsidian 1.15+ 独立设置窗口启用原生云母；未安装插件时自动回退为纯 CSS 拟真云母（Simulated Mica）。 |
+| **Windows 11 系统个性化主题色** | 需搭配插件或手动拾色 | Windows 下 Electron 内核的纯 CSS `AccentColor` 通常回退为默认蓝。安装 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 可直接读取系统注册表 `AccentPalette` 完整 7 阶色板并实时同步；也可在 Style Settings 中使用自定义品牌色拾色器自动推导全套色阶。 |
+| **Segoe UI Variable 与 Cascadia Code** | 原生支持（纯 CSS） | 自动调用 Windows 11 内置可变字体与等宽字体，支持光学字号自适应。 |
+| **Windows 对比度主题（High Contrast）** | 原生支持（纯 CSS） | 通过 `@media (forced-colors: active)` 完整兼容 Windows 水生、沙漠、黄昏、夜空等对比度主题。 |
+| **系统「减弱动态效果」** | 原生支持（纯 CSS） | 通过 `@media (prefers-reduced-motion: reduce)` 自动关闭过渡与入场动效。 |
+| **窗口控制按钮与 Snap Layouts** | 依赖窗口边框设置 | 隐藏标题栏模式下还原 Windows 11 经典三键（含 `#c42b1c` 红色关闭悬停）；如需悬停最大化按钮触发原生 Snap Layouts，可在「设置 → 界面 → 窗口边框样式」切换为原生边框。 |
+
+---
+
+## 安装与使用
+
+### 1. 安装主题
+将本仓库克隆或下载到 Obsidian 库的 `.obsidian/themes/Fluent-2-Obsidian/` 目录下：
+
+```bash
+git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git
+```
+
+随后打开 Obsidian，进入 **设置 → 外观 → 主题**，选择 **Fluent 2** 即可生效。
+
+### 2. 开启原生 Windows 11 Mica 与系统主题色（推荐）
+1. 安装配套插件 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 并在 **设置 → 第三方插件** 中启用。
+2. 在 **设置 → 界面 → 窗口边框样式**（Obsidian 1.13 及以上位于「界面」，旧版位于「外观」）中保持 **隐藏（默认）**。
+3. （备选方案）如不使用配套插件，也兼容社区插件 **Pseudo Mica** / **Translucent BG**，或使用系统工具 **Mica For Everyone** 为 `Obsidian.exe` 开启云母并在 Style Settings 中选择「Native Windows 11 Mica / Mica Alt」。
+
+### 3. 通过 Style Settings 进阶定制（可选）
+安装社区插件 **Style Settings** 后，可在 **Fluent 2** 分组下自由配置：
+- **Windows 11 材质与窗口层级**：窗口材质模式、笔记正文区域启用 Mica 材质、正文纯色叠层颜色与不透明度（`0%`–`100%`）、亚克力模糊半径、平面工作区开关。
+- **品牌色与主题色**：Fluent 2 官方蓝、自定义品牌色拾色器、Obsidian 原生强调色、Microsoft Teams 紫、Copilot 青、Surface 暖陶色等。
+- **界面、动效与排版**：左侧药丸指示条开关、紧凑侧边栏密度、过渡动效开关、标题样式（简洁、H1/H2 底部分隔线、H1/H2 左侧胶囊）、经典提示框/表格/标签切换。
+
+---
+
+## 参考资料
+
+- [Fluent 2 Design System](https://fluent2.microsoft.design/)
+- [microsoft/fluentui](https://github.com/microsoft/fluentui)（`@fluentui/tokens`）
+- [Visual Studio Code 2026 Light / Dark Theme](https://github.com/microsoft/vscode)
+
+## 开源协议
+
+本项目基于 [GNU General Public License v3.0](LICENSE) 协议开源。
