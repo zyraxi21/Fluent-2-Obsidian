@@ -1508,9 +1508,20 @@ body:not(.fluent2-flat-workspace) .workspace-split.mod-root .workspace-tab-conta
   border-bottom: none;
   padding-top: 0 !important;
   padding-bottom: 0 !important;
-  padding-left: 8px;
-  padding-right: 4px;
   margin-top: 0 !important;
+}
+
+/* Preserve top-left / top-right window caption button clearance (especially when sidebars collapse) */
+.workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-left-space) .workspace-tab-header-container {
+  padding-left: 8px;
+}
+
+.workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-right-space) .workspace-tab-header-container {
+  padding-right: 4px;
+}
+
+body.is-hidden-frameless:not(.is-fullscreen) .workspace-tabs.mod-top-right-space .workspace-tab-header-container {
+  padding-right: max(var(--frame-right-space, 138px), 144px) !important;
 }
 
 .workspace-tab-header-container-inner,

@@ -45,10 +45,10 @@
 ## 安装与使用
 
 ### 1. 安装主题
-将本仓库克隆或下载到 Obsidian 库的 `.obsidian/themes/Fluent-2-Obsidian/` 目录下：
+将本仓库克隆或下载到 Obsidian 库的 `.obsidian/themes/Fluent 2/` 目录下（文件夹名需与 `manifest.json` 中的 `"name": "Fluent 2"` 一致）：
 
 ```bash
-git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git
+git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
 ```
 
 随后打开 Obsidian，进入 **设置 → 外观 → 主题**，选择 **Fluent 2** 即可生效。
