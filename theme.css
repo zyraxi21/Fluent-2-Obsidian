@@ -271,7 +271,8 @@ html {
     "Segoe UI", "Microsoft YaHei UI", "PingFang SC", -apple-system,
     BlinkMacSystemFont, sans-serif;
   --fontFamilyMonospace: "Cascadia Code", "Cascadia Mono", Consolas,
-    "JetBrains Mono", "Courier New", monospace;
+    "JetBrains Mono", "Microsoft YaHei UI", "Microsoft YaHei", "PingFang SC",
+    "Courier New", monospace;
   --fontFamilyWinSettings: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Text", sans-serif;
 
   --fluent2-layer-opacity: 0.78;
@@ -789,6 +790,11 @@ body {
   --graph-node-tag: var(--f2-status-teal-fg);
   --graph-node-attachment: var(--f2-status-warning-fg);
   --graph-node-unresolved: var(--colorNeutralForegroundDisabled);
+
+  --font-monospace-default: ui-monospace, SFMono-Regular, "Cascadia Mono",
+    "Roboto Mono", "DejaVu Sans Mono", "Liberation Mono", Menlo, Monaco,
+    Consolas, "Source Code Pro", "Microsoft YaHei UI", "Microsoft YaHei",
+    "PingFang SC", monospace;
 }
 
 body:not(.fluent2-use-obsidian-fonts) {
@@ -880,12 +886,12 @@ html body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-nat
 
 /* Pop-out & Standalone Settings Windows */
 html body.is-popout-window:not(.fluent2-popout-mica) {
-  background-color: var(--f2-mica-base-solid);
+  background-color: var(--f2-mica-base-solid) !important;
 }
 
 html body.is-popout-window:not(.fluent2-popout-mica) .titlebar {
-  background-color: var(--f2-mica-base-solid);
-  color: var(--colorNeutralForeground1);
+  background-color: var(--f2-mica-base-solid) !important;
+  color: var(--colorNeutralForeground1) !important;
 }
 
 html body.fluent2-popout-mica,
@@ -898,18 +904,28 @@ html body.fluent2-popout-mica :is(
   .vertical-tab-content-container,
   .vertical-tab-content
 ) {
-  background-color: transparent;
+  background-color: transparent !important;
 }
 
-/* Windows 11 Pop-out / Settings Titlebar (44px, left-aligned, regular weight) */
+/* Windows 11 Pop-out / Settings Titlebar (44px, left-aligned, regular weight, no divider) */
+html body:is(.is-popout-window, .fluent2-popout-mica) {
+  --header-height: 44px;
+  --titlebar-height: 44px;
+  --frame-height: 44px;
+  --titlebar-border-width: 0px;
+  --titlebar-border-color: transparent;
+}
+
 html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar {
-  height: 44px;
-  min-height: 44px;
-  border-bottom: none;
+  height: 44px !important;
+  min-height: 44px !important;
+  flex: 0 0 44px;
+  border-bottom: none !important;
+  box-shadow: none !important;
 }
 
 html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-inner {
-  height: 44px;
+  height: 44px !important;
   align-items: center;
   justify-content: space-between;
 }
@@ -919,15 +935,15 @@ html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-text {
   text-align: left;
   justify-content: flex-start;
   padding-inline-start: 16px;
-  font-family: var(--fontFamilyWinSettings);
-  font-weight: 400;
+  font-family: var(--fontFamilyWinSettings) !important;
+  font-weight: 400 !important;
   font-size: 13px;
   line-height: 44px;
-  color: var(--colorNeutralForeground1);
+  color: var(--colorNeutralForeground1) !important;
 }
 
 html body:is(.is-popout-window, .fluent2-popout-mica) .titlebar-button {
-  height: 44px;
+  height: 44px !important;
 }
 
 /* Default WinUI Layer Card over Native Mica (single-layer alpha, no double-stacking) */
@@ -1187,9 +1203,9 @@ body .workspace .mod-root .workspace-tab-header-inner {
   display: flex;
   align-items: center;
   width: 100%;
-  height: calc(100% - 8px);
+  height: calc(100% - 6px);
   margin-top: 4px;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   padding: 0 8px 0 12px;
   border-radius: var(--borderRadiusLarge);
   gap: 6px;
@@ -1205,7 +1221,8 @@ body.is-maximized .workspace-split.mod-root {
 }
 
 body.is-maximized .workspace .mod-root .workspace-tab-header-inner {
-  margin-top: 0;
+  margin-top: 2px;
+  margin-bottom: 2px;
   height: calc(100% - 4px);
 }
 
@@ -1224,9 +1241,10 @@ body .workspace .mod-root .workspace-tab-header.is-active {
 }
 
 body .workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
-  height: calc(100% - 3px);
+  height: calc(100% - 1px);
+  margin-top: 2px;
   margin-bottom: -1px;
-  padding-bottom: 5px;
+  padding: 0 8px 1px 12px;
   background-color: var(--tab-background-active);
   border-radius: var(--borderRadiusXLarge) var(--borderRadiusXLarge) 0 0;
   box-shadow: inset 0 1px 0 var(--colorNeutralStrokeSubtle),
@@ -1238,7 +1256,7 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
   height: calc(100% + 1px);
   margin-top: 0;
   margin-bottom: -1px;
-  padding-bottom: 5px;
+  padding: 0 8px 1px 12px;
 }
 
 :is(.mod-left-split, .mod-right-split) .workspace-tab-header {
@@ -1282,12 +1300,25 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
     color var(--durationFaster) var(--curveEasyEase);
 }
 
-:is(.outline, .backlink-pane, .outgoing-link-pane, .tag-container) .tree-item-self.mod-collapsible {
-  padding-inline-start: 28px;
+.workspace-leaf-content:is(
+  [data-type="outline"],
+  [data-type="backlink"],
+  [data-type="outgoing-link"],
+  [data-type="tag"],
+  [data-type="search"]
+) .tree-item-self.mod-collapsible {
+  padding-inline-start: 28px !important;
 }
 
-:is(.outline, .backlink-pane, .outgoing-link-pane, .tag-container) .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon {
-  margin-inline-start: -18px;
+.workspace-leaf-content:is(
+  [data-type="outline"],
+  [data-type="backlink"],
+  [data-type="outgoing-link"],
+  [data-type="tag"],
+  [data-type="search"]
+) .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon {
+  margin-inline-start: -20px !important;
+  width: 16px;
 }
 
 body.fluent2-compact-sidebar :is(.nav-file-title, .nav-folder-title, .tree-item-self) {
@@ -1513,9 +1544,9 @@ select.dropdown:focus {
   box-shadow: 0 0 0 1px var(--colorCompoundBrandStroke);
 }
 
-/* Windows 11 Toggle Switch (40x22px, 14px thumb, exact 3px inner inset) */
-body .checkbox-container,
-body .checkbox-container.mod-small {
+/* Windows 11 Toggle Switch (40x22px, 14px thumb, relative calc() right-edge inset) */
+html body .checkbox-container,
+html body .checkbox-container.mod-small {
   position: relative;
   display: inline-block;
   box-sizing: border-box;
@@ -1535,83 +1566,87 @@ body .checkbox-container.mod-small {
     border-color var(--durationFast) var(--curveDecelerateMid);
 }
 
-body .checkbox-container::before,
-body .checkbox-container.mod-small::before {
-  display: none;
+html body .checkbox-container::before,
+html body .checkbox-container.mod-small::before {
+  display: none !important;
 }
 
-body .checkbox-container:hover {
+html body .checkbox-container:hover {
   background-color: var(--colorSubtleBackgroundHover);
 }
 
-body .checkbox-container::after,
-body .checkbox-container.mod-small::after {
+html body .checkbox-container::after,
+html body .checkbox-container.mod-small::after {
   content: "";
   position: absolute;
-  top: 3px;
-  left: 3px;
-  right: auto;
+  top: 50%;
+  left: 3px !important;
+  right: auto !important;
   bottom: auto;
-  width: 14px;
-  height: 14px;
+  width: 14px !important;
+  height: 14px !important;
   margin: 0;
   border-radius: var(--borderRadiusCircular);
   background-color: var(--colorNeutralForeground2);
   box-shadow: none;
-  transform: none;
+  transform: translateY(-50%) !important;
   transition: left var(--durationFast) var(--curveDecelerateMid),
-    top var(--durationFaster) var(--curveEasyEase),
     width var(--durationFaster) var(--curveEasyEase),
     height var(--durationFaster) var(--curveEasyEase),
     background-color var(--durationFast) var(--curveEasyEase);
 }
 
-body .checkbox-container:hover::after {
-  top: 2.5px;
-  left: 2.5px;
-  width: 15px;
-  height: 15px;
+html body .checkbox-container:hover::after,
+html body .checkbox-container.mod-small:hover::after {
+  left: 2.5px !important;
+  width: 15px !important;
+  height: 15px !important;
+  transform: translateY(-50%) !important;
 }
 
-body .checkbox-container:active::after {
-  top: 3px;
-  left: 3px;
-  width: 17px;
-  height: 14px;
+html body .checkbox-container:active::after,
+html body .checkbox-container.mod-small:active::after {
+  left: 3px !important;
+  width: 17px !important;
+  height: 14px !important;
+  transform: translateY(-50%) !important;
 }
 
-body .checkbox-container.is-enabled,
-body .checkbox-container.mod-small.is-enabled {
+html body .checkbox-container.is-enabled,
+html body .checkbox-container.mod-small.is-enabled {
   background-color: var(--colorBrandBackground);
   border-color: var(--colorBrandBackground);
   box-shadow: none;
 }
 
-body .checkbox-container.is-enabled:hover {
+html body .checkbox-container.is-enabled:hover {
   background-color: var(--colorBrandBackgroundHover);
   border-color: var(--colorBrandBackgroundHover);
 }
 
-body .checkbox-container.is-enabled::after,
-body .checkbox-container.mod-small.is-enabled::after {
-  top: 3px;
-  left: 21px;
+html body .checkbox-container.is-enabled::after,
+html body .checkbox-container.mod-small.is-enabled::after {
+  left: calc(100% - 17px) !important;
+  width: 14px !important;
+  height: 14px !important;
   background-color: var(--colorNeutralForegroundOnBrand);
-  transform: none;
+  transform: translateY(-50%) !important;
 }
 
-body .checkbox-container.is-enabled:hover::after {
-  top: 2.5px;
-  left: 20.5px;
-  width: 15px;
-  height: 15px;
+html body .checkbox-container.is-enabled:hover::after,
+html body .checkbox-container.mod-small.is-enabled:hover::after {
+  left: calc(100% - 17.5px) !important;
+  width: 15px !important;
+  height: 15px !important;
+  transform: translateY(-50%) !important;
 }
 
-body .checkbox-container.is-enabled:active::after {
-  top: 3px;
-  left: 18px;
-  width: 17px;
-  height: 14px;
+html body .checkbox-container.is-enabled:active::after,
+html body .checkbox-container.mod-small.is-enabled:active::after {
+  left: calc(100% - 20px) !important;
+  width: 17px !important;
+  height: 14px !important;
+  transform: translateY(-50%) !important;
 }
 
 .setting-item-control {
@@ -1735,18 +1770,27 @@ body:not(.fluent2-disable-motion) :is(.modal, .prompt) {
 /* Windows 11 Settings Layout (Modal & Standalone Pop-out Window, zero blur halo) */
 body .modal.mod-settings {
   background-color: var(--f2-mica-base-solid);
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
   overflow: hidden;
 }
 
 body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .vertical-tabs-container) {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-  border: none;
-  border-radius: 0;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  border-radius: 0 !important;
   overflow: hidden;
+}
+
+.vertical-tabs-container {
+  --background-primary-alt: transparent;
+}
+
+.vertical-tabs-container select.dropdown option {
+  background-color: var(--colorNeutralBackground1);
+  color: var(--colorNeutralForeground1);
 }
 
 .vertical-tabs-container .vertical-tab-header {
@@ -1793,24 +1837,25 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
 }
 
 .vertical-tabs-container .vertical-tab-content {
+  --f2-settings-pad-x: clamp(16px, 4vw, 36px);
   position: relative;
-  padding: 16px 36px 32px;
+  padding: 16px var(--f2-settings-pad-x) 32px;
 }
 
 /* Prevent stacked transparent Mica Settings pages from bleeding through each other */
 .vertical-tab-content-container > .vertical-tab-content:not(:only-child):not(:last-child) {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 /* Transparent setting groups + translucent WinUI 3 cards */
 .vertical-tabs-container :is(.setting-group, .setting-items, .setting-group-content) {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-  padding: 0;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
 }
 
 .vertical-tabs-container .setting-items {
@@ -1820,9 +1865,9 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
 }
 
 .vertical-tabs-container .setting-item:not(.setting-item-heading) {
-  background-color: var(--f2-card-surface);
-  border: 1px solid var(--colorNeutralStrokeSubtle);
-  border-radius: var(--borderRadiusLarge);
+  background-color: var(--f2-card-surface) !important;
+  border: 1px solid var(--colorNeutralStrokeSubtle) !important;
+  border-radius: var(--borderRadiusLarge) !important;
   padding: 14px 18px;
   margin-bottom: 4px;
   box-shadow: none;
@@ -1834,46 +1879,31 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
 }
 
 .vertical-tabs-container .setting-item:not(.setting-item-heading):hover {
-  background-color: var(--f2-card-surface-hover);
+  background-color: var(--f2-card-surface-hover) !important;
 }
 
-/* Strip outer card wrapper on bare Settings search items */
+/* Strip outer card wrapper on bare Settings search bars (O(1) first-child gated, zero lag on large font lists) */
 .vertical-tabs-container :is(
   .setting-item.mod-search,
   .setting-search,
-  .installed-plugins-container > .setting-item:first-child
+  :is(.setting-items, .setting-group, .installed-plugins-container, .vertical-tab-content) > .setting-item:first-child:has(.search-input-container):not(:has(.setting-item-name:not(:empty))),
+  :is(.setting-items, .setting-group, .installed-plugins-container, .vertical-tab-content) > .setting-item-heading + .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))),
+  .vertical-tab-content :is(.setting-items, .setting-group) > :first-child:has(> .search-input-container)
 ) {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  padding: 0 0 10px 0;
-  margin-bottom: 4px;
-}
-
-.vertical-tabs-container :is(
-  .setting-item.mod-search,
-  .setting-search,
-  .installed-plugins-container > .setting-item:first-child
-) .setting-item-info {
-  display: none;
-}
-
-.vertical-tabs-container :is(
-  .setting-item.mod-search,
-  .setting-search,
-  .installed-plugins-container > .setting-item:first-child
-) :is(.setting-item-control, .search-input-container) {
-  width: 100%;
-  flex: 1 1 100%;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 0 10px 0 !important;
+  margin-bottom: 4px !important;
 }
 
 /* Settings subpage loading bar cleanly below subpage title */
 .vertical-tabs-container .vertical-tab-content :is(.progress-bar, .setting-progress-bar) {
-  position: absolute;
+  position: absolute !important;
   top: 54px;
-  left: 36px;
-  right: 36px;
-  width: auto;
+  left: var(--f2-settings-pad-x, 36px);
+  right: var(--f2-settings-pad-x, 36px);
+  width: auto !important;
   height: 2px;
   border-radius: var(--borderRadiusCircular);
   overflow: hidden;
@@ -1881,35 +1911,73 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
   z-index: 5;
 }
 
-/* Settings Subpage Header (remove white fade gradient) */
-.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header) {
-  position: static;
-  background: transparent;
-  background-image: none;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  box-shadow: none;
-  border-bottom: none;
-  padding-inline-start: 0;
-  padding-bottom: 12px;
+/* Settings Subpage Header (e.g. "< 等宽字体"): O(1) first-child match, remove sticky white fade gradient */
+.vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content {
+  --background-primary: transparent;
 }
 
-.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header)::before,
-.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header)::after {
-  display: none;
-  content: none;
+.vertical-tabs-container :is(
+  .modal-setting-nav-bar,
+  .setting-nav-bar,
+  .setting-subpage-header,
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content > :is(div, header):first-child:has(> .clickable-icon)
+) {
+  position: static !important;
+  top: auto !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: none !important;
+  border-bottom: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  padding-inline-start: 0 !important;
+  padding-bottom: 12px !important;
+  font-family: var(--fontFamilyWinSettings) !important;
+  font-weight: 400 !important;
 }
 
-.vertical-tabs-container :is(.modal-setting-nav-bar, .setting-nav-bar, .setting-subpage-header) * {
-  font-family: var(--fontFamilyWinSettings);
-  font-weight: 400;
+.vertical-tabs-container :is(
+  .modal-setting-nav-bar,
+  .setting-nav-bar,
+  .setting-subpage-header,
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content > :is(div, header):first-child:has(> .clickable-icon)
+)::before,
+.vertical-tabs-container :is(
+  .modal-setting-nav-bar,
+  .setting-nav-bar,
+  .setting-subpage-header,
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content > :is(div, header):first-child:has(> .clickable-icon)
+)::after {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+}
+
+.vertical-tabs-container :is(
+  .modal-setting-nav-bar,
+  .setting-nav-bar,
+  .setting-subpage-header,
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item)
+) > * {
+  font-family: var(--fontFamilyWinSettings) !important;
+  font-weight: 400 !important;
 }
 
 /* Windows 11 Settings Headings (tall, left-aligned, regular weight) */
-.vertical-tabs-container :is(.setting-item-heading, .setting-group-heading) {
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
+html body .vertical-tabs-container :is(.setting-item.setting-item-heading, .setting-item-heading, .setting-group-heading) {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
   min-height: 46px;
   padding: 20px 2px 10px;
   margin: 0;
@@ -1918,19 +1986,19 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
   text-align: left;
 }
 
-.vertical-tabs-container :is(.setting-item-heading .setting-item-name, .setting-group-heading) {
-  font-family: var(--fontFamilyWinSettings);
+html body .vertical-tabs-container :is(.setting-item-heading .setting-item-name, .setting-group-heading) {
+  font-family: var(--fontFamilyWinSettings) !important;
   font-size: 16px;
-  font-weight: 400;
+  font-weight: 400 !important;
   line-height: 1.4;
   text-align: left;
   color: var(--colorNeutralForeground1);
 }
 
-.vertical-tabs-container .vertical-tab-content :is(h1, h2) {
-  font-family: var(--fontFamilyWinSettings);
+html body .vertical-tabs-container .vertical-tab-content :is(h1, h2) {
+  font-family: var(--fontFamilyWinSettings) !important;
   font-size: 26px;
-  font-weight: 400;
+  font-weight: 400 !important;
   line-height: 1.4;
   min-height: 48px;
   padding: 6px 2px 16px;
