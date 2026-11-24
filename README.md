@@ -2,7 +2,9 @@
 
 基于微软 **Fluent 2 Design System**（[Fluent UI v9](https://fluent2.microsoft.design/) 与 Windows 11 WinUI 3）打造的 Obsidian 主题。完整还原微软官方设计令牌与 Windows 11 材质层级，并深度适配 Windows 11 原生云母材质与系统主题色体验。
 
-配套原生插件：[fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native)（提供 Windows 11 原生 Mica / Mica Alt / Acrylic 材质与 7 阶系统主题色自动同步）。
+配套原生插件：[Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native)（提供 Windows 11 原生 Mica / Mica Alt / Acrylic 材质与 7 阶系统主题色自动同步）。
+
+![Fluent 2 for Obsidian 预览](screenshot.png)
 
 ---
 
@@ -33,8 +35,8 @@
 
 | Windows 11 特性 | 纯主题 CSS 支持 | 实现方式与说明 |
 | :--- | :--- | :--- |
-| **Mica / Mica Alt / Acrylic 原生云母材质** | 需搭配插件或 DWM 工具 | 纯 CSS 无法直接调用 Electron 窗口材质接口。搭配 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 插件可为主窗口及 Obsidian 1.15+ 独立设置窗口启用原生云母；未安装插件时自动回退为纯 CSS 拟真云母（Simulated Mica）。 |
-| **Windows 11 系统个性化主题色** | 需搭配插件或手动拾色 | Windows 下 Electron 内核的纯 CSS `AccentColor` 通常回退为默认蓝。安装 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 可直接读取系统注册表 `AccentPalette` 完整 7 阶色板并实时同步；也可在 Style Settings 中使用自定义品牌色拾色器自动推导全套色阶。 |
+| **Mica / Mica Alt / Acrylic 原生云母材质** | 需搭配插件或 DWM 工具 | 纯 CSS 无法直接调用 Electron 窗口材质接口。搭配 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 插件可为主窗口及 Obsidian 1.15+ 独立设置窗口启用原生云母；未安装插件时自动回退为纯 CSS 拟真云母（Simulated Mica）。 |
+| **Windows 11 系统个性化主题色** | 需搭配插件或手动拾色 | Windows 下 Electron 内核的纯 CSS `AccentColor` 通常回退为默认蓝。安装 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 可直接读取系统注册表 `AccentPalette` 完整 7 阶色板并实时同步；也可在 Style Settings 中使用自定义品牌色拾色器自动推导全套色阶。 |
 | **Segoe UI Variable 与 Cascadia Code** | 原生支持（纯 CSS） | 自动调用 Windows 11 内置可变字体与等宽字体，支持光学字号自适应。 |
 | **Windows 对比度主题（High Contrast）** | 原生支持（纯 CSS） | 通过 `@media (forced-colors: active)` 完整兼容 Windows 水生、沙漠、黄昏、夜空等对比度主题。 |
 | **系统「减弱动态效果」** | 原生支持（纯 CSS） | 通过 `@media (prefers-reduced-motion: reduce)` 自动关闭过渡与入场动效。 |
@@ -54,7 +56,7 @@ git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
 随后打开 Obsidian，进入 **设置 → 外观 → 主题**，选择 **Fluent 2** 即可生效。
 
 ### 2. 开启原生 Windows 11 Mica 与系统主题色（推荐）
-1. 安装配套插件 [fluent2-windows-native](https://github.com/zyraxi21/fluent2-windows-native) 并在 **设置 → 第三方插件** 中启用。
+1. 安装配套插件 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 并在 **设置 → 第三方插件** 中启用。
 2. 在 **设置 → 界面 → 窗口边框样式**（Obsidian 1.13 及以上位于「界面」，旧版位于「外观」）中保持 **隐藏（默认）**。
 3. （备选方案）如不使用配套插件，也兼容社区插件 **Pseudo Mica** / **Translucent BG**，或使用系统工具 **Mica For Everyone** 为 `Obsidian.exe` 开启云母并在 Style Settings 中选择「Native Windows 11 Mica / Mica Alt」。
 
