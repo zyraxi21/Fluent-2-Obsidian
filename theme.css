@@ -767,22 +767,22 @@ body {
 
   --blockquote-border-thickness: 3px;
   --blockquote-border-color: var(--colorBrandStroke1);
-  --blockquote-background-color: var(--colorNeutralBackground2);
+  --blockquote-background-color: var(--f2-mica-recessed-1);
 
-  --code-background: var(--colorNeutralBackground2);
+  --code-background: var(--f2-mica-recessed-2);
   --code-radius: var(--borderRadiusLarge);
   --code-size: 0.88em;
 
   --table-background: transparent;
-  --table-header-background: var(--colorNeutralBackground2);
-  --table-header-background-hover: var(--colorNeutralBackground3);
+  --table-header-background: var(--f2-mica-recessed-1);
+  --table-header-background-hover: var(--f2-mica-recessed-2);
   --table-header-weight: 600;
-  --table-border-color: var(--colorNeutralStroke2);
+  --table-border-color: var(--colorNeutralStrokeSubtle);
   --table-border-width: 1px;
-  --table-row-background-hover: var(--colorSubtleBackgroundHover);
+  --table-row-background-hover: var(--f2-mica-recessed-1);
   --table-row-alt-background: transparent;
   --table-column-alt-background: transparent;
-  --metadata-background: var(--colorNeutralBackground2);
+  --metadata-background: var(--f2-mica-recessed-1);
 
   --tag-background: var(--colorBrandBackground2);
   --tag-background-hover: var(--colorBrandBackground2Hover);
@@ -1006,16 +1006,6 @@ body.fluent2-editor-mica {
     transparent
   );
   --tab-background-active: var(--f2-editor-mica-tint);
-  --blockquote-background-color: var(--f2-mica-recessed-1);
-  --code-background: var(--f2-mica-recessed-2);
-  --table-background: transparent;
-  --table-header-background: var(--f2-mica-recessed-1);
-  --table-header-background-hover: var(--f2-mica-recessed-2);
-  --table-row-background-hover: var(--f2-mica-recessed-1);
-  --table-row-alt-background: transparent;
-  --table-column-alt-background: transparent;
-  --table-border-color: var(--colorNeutralStrokeSubtle);
-  --metadata-background: var(--f2-mica-recessed-1);
 }
 
 html body.fluent2-editor-mica .workspace-split.mod-root .workspace-tab-container {
@@ -1030,7 +1020,13 @@ html body.fluent2-editor-mica .workspace-split.mod-root :is(
   .markdown-source-view,
   .markdown-preview-view,
   .cm-editor,
-  .cm-scroller,
+  .cm-scroller
+) {
+  background-color: transparent;
+}
+
+/* Unified recessed surface treatment for code blocks, tables & gutters across all material modes */
+html body .workspace-split.mod-root :is(
   .cm-gutters,
   .empty-state,
   .cm-table-widget,
@@ -1040,7 +1036,7 @@ html body.fluent2-editor-mica .workspace-split.mod-root :is(
   background-color: transparent;
 }
 
-html body.fluent2-editor-mica .cm-s-obsidian .HyperMD-codeblock {
+html body .cm-s-obsidian .HyperMD-codeblock {
   background-color: var(--code-background);
 }
 
