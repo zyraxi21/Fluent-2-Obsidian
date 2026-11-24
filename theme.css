@@ -999,12 +999,14 @@ body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-co
 }
 
 /* Note Editor Mica Backdrop + Adjustable Solid Tint Overlay */
-body.fluent2-editor-mica {
+html body.fluent2-editor-mica,
+html body.fluent2-editor-mica:is(.is-translucent, .fluent2-material-native-mica, .fluent2-material-native-acrylic) {
   --f2-editor-mica-tint: color-mix(
     in srgb,
     var(--fluent2-editor-overlay-color) var(--fluent2-editor-overlay-opacity),
     transparent
   );
+  --background-primary: var(--f2-editor-mica-tint);
   --tab-background-active: var(--f2-editor-mica-tint);
 }
 
