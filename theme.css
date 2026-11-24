@@ -86,10 +86,10 @@ settings:
   - id: fluent2-acrylic-blur
     title: "Acrylic Flyout Blur Radius"
     title.zh: "亚克力浮层模糊半径"
-    description: "Blur strength for menus, modals, command palette, and popovers."
-    description.zh: "控制右键菜单、弹窗、命令面板与悬浮预览的亚克力毛玻璃模糊强度。"
+    description: "Blur strength for menus, modals, command palette, and popovers. Note: Electron disables CSS blur while native Mica is active, so flyouts automatically switch to a near-opaque acrylic fallback."
+    description.zh: "控制右键菜单、弹窗、命令面板与悬浮预览的亚克力毛玻璃模糊强度。注意：开启原生 Mica 时 Electron 会使 CSS 模糊失效，此时浮层会自动切换为接近不透明的亚克力回退底色。"
     type: variable-number-slider
-    default: 28
+    default: 16
     min: 0
     max: 48
     step: 2
@@ -223,6 +223,22 @@ settings:
     type: class-toggle
     default: false
 
+  - id: fluent2-image-caption-reading
+    title: "Show Image Captions Below Images (Reading View)"
+    title.zh: "阅读视图下在图片下方显示图名"
+    description: "Displays custom alt text centered below embedded images in Reading View (ignores raw image filenames)."
+    description.zh: "在阅读视图中将自定义图片说明居中显示在图片正下方（自动忽略原始图片文件名）。"
+    type: class-toggle
+    default: false
+
+  - id: fluent2-image-caption-editing
+    title: "Show Image Captions Below Images (Editing View)"
+    title.zh: "编辑视图（实时预览）下在图片下方显示图名"
+    description: "Displays custom alt text centered below embedded images in Live Preview Editing View."
+    description.zh: "在实时预览编辑视图中将自定义图片说明居中显示在图片正下方，避免排在图片右侧。"
+    type: class-toggle
+    default: false
+
 */
 
 /* ==========================================================================
@@ -276,7 +292,7 @@ html {
   --fontFamilyWinSettings: "Segoe UI", "Microsoft YaHei UI", "Segoe UI Variable Text", sans-serif;
 
   --fluent2-layer-opacity: 0.78;
-  --fluent2-acrylic-blur: 28px;
+  --fluent2-acrylic-blur: 16px;
   --fluent2-editor-overlay-opacity: 60%;
 }
 
@@ -300,8 +316,11 @@ html {
   --f2-layer-bg-rgb: 255, 255, 255;
   --f2-mica-base-solid: #f3f3f3;
   --f2-mica-alt-solid: #e8e8e8;
-  --f2-acrylic-surface: rgba(252, 252, 252, 0.84);
-  --f2-acrylic-surface-strong: rgba(255, 255, 255, 0.90);
+  --f2-acrylic-surface: rgba(252, 252, 252, 0.72);
+  --f2-acrylic-surface-strong: rgba(255, 255, 255, 0.84);
+  --f2-acrylic-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.06) 100%);
+  --f2-acrylic-highlight: rgba(255, 255, 255, 0.58);
+  --f2-acrylic-brightness: 1.04;
   --f2-card-surface: rgba(255, 255, 255, 0.68);
   --f2-card-surface-hover: rgba(255, 255, 255, 0.82);
   --f2-mica-recessed-1: rgba(0, 0, 0, 0.032);
@@ -402,8 +421,11 @@ html {
   --f2-layer-bg-rgb: 39, 39, 39;
   --f2-mica-base-solid: #202020;
   --f2-mica-alt-solid: #191919;
-  --f2-acrylic-surface: rgba(44, 44, 44, 0.80);
-  --f2-acrylic-surface-strong: rgba(40, 40, 40, 0.88);
+  --f2-acrylic-surface: rgba(44, 44, 44, 0.72);
+  --f2-acrylic-surface-strong: rgba(40, 40, 40, 0.82);
+  --f2-acrylic-sheen: linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --f2-acrylic-highlight: rgba(255, 255, 255, 0.09);
+  --f2-acrylic-brightness: 1.08;
   --f2-card-surface: rgba(255, 255, 255, 0.0512);
   --f2-card-surface-hover: rgba(255, 255, 255, 0.0837);
   --f2-mica-recessed-1: rgba(255, 255, 255, 0.045);
@@ -668,7 +690,7 @@ body {
   --tab-text-color-focused-active: var(--colorNeutralForeground1);
   --tab-text-color-focused-active-current: var(--colorNeutralForeground1);
   --tab-outline-color: var(--colorNeutralStrokeSubtle);
-  --tab-divider-color: var(--colorNeutralStrokeSubtle);
+  --tab-divider-color: var(--colorNeutralStroke2);
   --tab-radius: var(--borderRadiusXLarge);
   --tab-radius-active: var(--borderRadiusXLarge);
   --tab-curve: 8px;
@@ -681,10 +703,11 @@ body {
   --nav-item-background-active: var(--colorSubtleBackgroundSelected);
   --nav-item-background-selected: var(--colorBrandBackground2);
   --nav-item-weight-active: 600;
+  --nav-item-weight-hover: inherit;
   --nav-item-padding: 5px 10px 5px 12px;
   --nav-item-size: 13.5px;
-  --nav-indentation-guide-width: 1px;
-  --nav-indentation-guide-color: var(--colorNeutralStrokeSubtle);
+  --nav-indentation-guide-width: 0px;
+  --nav-indentation-guide-color: transparent;
 
   --input-radius: var(--borderRadiusMedium);
   --input-height: 32px;
@@ -1104,8 +1127,9 @@ body:not(.fluent2-flat-workspace) .workspace-split.mod-root .workspace-tab-conta
   background-color: var(--background-primary);
   background-clip: padding-box;
   border: 1px solid var(--colorNeutralStrokeSubtle);
+  border-top: none;
   border-radius: var(--borderRadiusXLarge);
-  box-shadow: var(--shadow2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 
@@ -1145,15 +1169,18 @@ body:not(.fluent2-flat-workspace) .workspace-split.mod-root .workspace-tab-conta
 
 body .workspace-split.mod-root .workspace-tabs.mod-top .workspace-tab-header-container,
 body .workspace-tab-header-container {
+  position: relative;
+  z-index: 3;
   background-color: transparent;
   border-bottom: none;
   padding-top: 0;
   padding-bottom: 0;
   margin-top: 0;
+  overflow: visible;
 }
 
 body .workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-left-space) .workspace-tab-header-container {
-  padding-left: 8px;
+  padding-left: 10px;
 }
 
 body .workspace-split.mod-root .workspace-tabs.mod-top:not(.mod-top-right-space) .workspace-tab-header-container {
@@ -1177,6 +1204,7 @@ body .workspace-tab-header-container-inner {
 }
 
 body .workspace .mod-root .workspace-tab-header {
+  position: relative;
   display: flex;
   align-items: stretch;
   height: 100%;
@@ -1190,13 +1218,40 @@ body .workspace .mod-root .workspace-tab-header {
   -webkit-app-region: no-drag;
 }
 
-body .workspace .mod-root .workspace-tab-header::before,
-body .workspace .mod-root .workspace-tab-header::after,
-body .workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::before,
-body .workspace .mod-root .workspace-tabs.mod-active .workspace-tab-header.is-active::after {
+body .workspace .mod-root .workspace-tab-header:not(.is-active)::before,
+body .workspace .mod-root .workspace-tab-header:not(.is-active)::after {
   display: none;
   content: none;
   box-shadow: none;
+}
+
+/* Hide ONLY dividers touching the active tab or the left edge of the tab bar;
+   keep dividers between all inactive tabs clearly visible */
+body .workspace .mod-root .workspace-tab-header-container::before,
+body .workspace .mod-root .workspace-tab-header-container-inner::before {
+  display: none !important;
+}
+
+body .workspace .mod-root :is(
+  .workspace-tab-header.is-active,
+  .workspace-tab-header.is-before-active,
+  .workspace-tab-header:has(+ .workspace-tab-header.is-active)
+) {
+  --tab-divider-color: transparent;
+}
+
+body .workspace .mod-root :is(
+  .workspace-tab-header.is-active,
+  .workspace-tab-header.is-after-active,
+  .workspace-tab-header:first-child,
+  .workspace-tab-header.is-active + .workspace-tab-header
+) .workspace-tab-header-inner::before,
+body .workspace .mod-root :is(
+  .workspace-tab-header.is-active,
+  .workspace-tab-header.is-before-active,
+  .workspace-tab-header:has(+ .workspace-tab-header.is-active)
+) .workspace-tab-header-inner::after {
+  display: none !important;
 }
 
 body .workspace .mod-root .workspace-tab-header-inner {
@@ -1238,25 +1293,62 @@ body .workspace .mod-root .workspace-tab-header:not(.is-active):hover .workspace
 
 body .workspace .mod-root .workspace-tab-header.is-active {
   z-index: 2;
+  overflow: visible;
 }
 
 body .workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
-  height: calc(100% - 1px);
+  height: calc(100% - 2px);
   margin-top: 2px;
-  margin-bottom: -1px;
-  padding: 0 8px 1px 12px;
+  margin-bottom: 0;
+  padding: 0 8px 0 12px;
   background-color: var(--tab-background-active);
   border-radius: var(--borderRadiusXLarge) var(--borderRadiusXLarge) 0 0;
-  box-shadow: inset 0 1px 0 var(--colorNeutralStrokeSubtle),
-    inset 1px 0 0 var(--colorNeutralStrokeSubtle),
-    inset -1px 0 0 var(--colorNeutralStrokeSubtle);
+  box-shadow: none;
 }
 
 body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspace-tab-header-inner {
-  height: calc(100% + 1px);
+  height: 100%;
   margin-top: 0;
-  margin-bottom: -1px;
-  padding: 0 8px 1px 12px;
+  margin-bottom: 0;
+  padding: 0 8px 0 12px;
+}
+
+/* Microsoft Edge / Win11 inverted concave bottom fillets via true SVG quarter-circle masks (works with any Mica alpha) */
+body .workspace .mod-root .workspace-tab-header.is-active::before,
+body .workspace .mod-root .workspace-tab-header.is-active::after {
+  content: "" !important;
+  display: block !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  top: auto !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  clip-path: none !important;
+  transform: none !important;
+  background-color: var(--tab-background-active) !important;
+  background-image: none !important;
+  -webkit-mask-size: 100% 100% !important;
+  mask-size: 100% 100% !important;
+  -webkit-mask-repeat: no-repeat !important;
+  mask-repeat: no-repeat !important;
+  pointer-events: none;
+  z-index: 3;
+}
+
+body .workspace .mod-root .workspace-tab-header.is-active::before {
+  left: -10px !important;
+  right: auto !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M10 0 L10 10 L0 10 A10 10 0 0 0 10 0 Z' fill='black'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M10 0 L10 10 L0 10 A10 10 0 0 0 10 0 Z' fill='black'/%3E%3C/svg%3E") !important;
+}
+
+body .workspace .mod-root .workspace-tab-header.is-active::after {
+  right: -10px !important;
+  left: auto !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M0 0 L0 10 L10 10 A10 10 0 0 1 0 0 Z' fill='black'/%3E%3C/svg%3E") !important;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath d='M0 0 L0 10 L10 10 A10 10 0 0 1 0 0 Z' fill='black'/%3E%3C/svg%3E") !important;
 }
 
 :is(.mod-left-split, .mod-right-split) .workspace-tab-header {
@@ -1300,17 +1392,27 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
     color var(--durationFaster) var(--curveEasyEase);
 }
 
+/* Remove vertical tree indentation guide lines for a clean Win11 NavigationView hierarchy */
+.tree-item-children,
+.nav-folder-children {
+  border-inline-start: none !important;
+}
+
+/* Keep same-level tree text aligned whether or not an item has a collapse chevron,
+   and keep chevrons fully inside the hover/active background clear of the 3px left pill */
 .workspace-leaf-content:is(
+  [data-type="file-explorer"],
   [data-type="outline"],
   [data-type="backlink"],
   [data-type="outgoing-link"],
   [data-type="tag"],
   [data-type="search"]
-) .tree-item-self.mod-collapsible {
+) .tree-item-self {
   padding-inline-start: 28px !important;
 }
 
 .workspace-leaf-content:is(
+  [data-type="file-explorer"],
   [data-type="outline"],
   [data-type="backlink"],
   [data-type="outgoing-link"],
@@ -1319,6 +1421,14 @@ body.is-maximized .workspace .mod-root .workspace-tab-header.is-active .workspac
 ) .tree-item-self.mod-collapsible > .tree-item-icon.collapse-icon {
   margin-inline-start: -20px !important;
   width: 16px;
+  align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-folder-title > .nav-folder-collapse-indicator {
+  align-self: center;
 }
 
 body.fluent2-compact-sidebar :is(.nav-file-title, .nav-folder-title, .tree-item-self) {
@@ -1339,7 +1449,7 @@ body:not(.fluent2-hide-nav-pill) :is(
   top: 50%;
   transform: translateY(-50%);
   width: 3px;
-  height: 16px;
+  height: max(16px, calc(100% - 16px));
   border-radius: var(--borderRadiusCircular);
   background-color: var(--colorCompoundBrandBackground);
   animation: fluent2-pill-in var(--durationFast) var(--curveDecelerateMid);
@@ -1365,8 +1475,12 @@ body.fluent2-disable-motion :is(
   font-weight: 600;
 }
 
+html body .nav-folder-title,
+html body .nav-folder-title:hover {
+  font-weight: 500 !important;
+}
+
 .nav-folder-title {
-  font-weight: 500;
   color: var(--colorNeutralForeground2);
 }
 
@@ -1579,13 +1693,13 @@ html body .checkbox-container::after,
 html body .checkbox-container.mod-small::after {
   content: "";
   position: absolute;
-  top: 50%;
+  top: 50% !important;
   left: 3px !important;
   right: auto !important;
-  bottom: auto;
+  bottom: auto !important;
   width: 14px !important;
   height: 14px !important;
-  margin: 0;
+  margin: 0 !important;
   border-radius: var(--borderRadiusCircular);
   background-color: var(--colorNeutralForeground2);
   box-shadow: none;
@@ -1704,32 +1818,84 @@ input[type="range"]::-webkit-slider-thumb:active {
   transform: scale(0.98);
 }
 
-:focus-visible {
+:where(:focus-visible:not([contenteditable="true"]):not(.inline-title):not(input):not(textarea)) {
   outline: 2px solid var(--colorCompoundBrandStroke);
   outline-offset: 2px;
+}
+
+/* Fluent 2 bottom-only accent focus indicator for inline note title & sidebar rename */
+.inline-title:focus,
+.inline-title:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-radius: 0;
+  background-image: linear-gradient(
+    to top,
+    var(--colorCompoundBrandStroke) 0px,
+    var(--colorCompoundBrandStroke) 2px,
+    transparent 2px
+  );
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+:is(.nav-file-title-content, .nav-folder-title-content, .tree-item-inner).is-being-renamed {
+  outline: none !important;
+  border: 1px solid var(--f2-stroke-control-default);
+  border-radius: var(--borderRadiusMedium);
+  background-color: var(--colorNeutralBackground1);
+  background-origin: border-box;
+  background-clip: border-box;
+  background-image: linear-gradient(
+    to top,
+    var(--colorCompoundBrandStroke) 0px,
+    var(--colorCompoundBrandStroke) 2px,
+    transparent 2px
+  );
+  box-shadow: none !important;
 }
 
 /* ==========================================================================
    10. FLOATING ACRYLIC SURFACES & WINDOWS 11 SETTINGS WINDOW
    ========================================================================== */
 
-:is(.menu, .suggestion-container, .popover.hover-popover) {
-  background-color: var(--f2-acrylic-surface);
-  backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(150%);
-  -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(150%);
+html body :is(.menu, .suggestion-container, .popover.hover-popover) {
+  background-color: var(--f2-acrylic-surface) !important;
+  background-image: var(--f2-acrylic-sheen);
+  backdrop-filter: blur(var(--fluent2-acrylic-blur, 28px)) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur, 28px)) saturate(180%) !important;
+  contain: none !important;
+  will-change: backdrop-filter;
+  transform: translateZ(0);
   border: 1px solid var(--f2-stroke-surface-flyout);
   border-radius: var(--borderRadiusXLarge);
-  box-shadow: var(--shadow16);
+  box-shadow: var(--shadow16), inset 0 1px 0 var(--f2-acrylic-highlight);
   padding: 5px;
 }
 
-body:not(.fluent2-disable-motion) :is(.menu, .suggestion-container, .popover.hover-popover) {
+html body .menu .menu-scroll {
+  background: transparent !important;
+}
+
+/* Native Mica fallback: Electron's setBackgroundMaterial disables CSS backdrop-filter,
+   so use near-opaque acrylic (like Windows when transparency is unavailable) to keep flyouts readable */
+body.theme-light:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica, .fluent2-material-native-acrylic) {
+  --f2-acrylic-surface: rgba(249, 249, 249, 0.96);
+  --f2-acrylic-surface-strong: rgba(252, 252, 252, 0.97);
+}
+
+body.theme-dark:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-native-mica, .fluent2-material-native-acrylic) {
+  --f2-acrylic-surface: rgba(44, 44, 44, 0.96);
+  --f2-acrylic-surface-strong: rgba(40, 40, 40, 0.97);
+}
+
+body:not(.fluent2-disable-motion) :is(.suggestion-container, .popover.hover-popover) {
   animation: fluent2-flyout-in var(--durationFast) var(--curveDecelerateMid);
 }
 
 @keyframes fluent2-flyout-in {
-  from { opacity: 0; transform: translateY(-4px) scale(0.985); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 :is(.menu-item, .suggestion-item) {
@@ -1786,6 +1952,7 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
 
 .vertical-tabs-container {
   --background-primary-alt: transparent;
+  --setting-items-background: transparent;
 }
 
 .vertical-tabs-container select.dropdown option {
@@ -1882,19 +2049,29 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
   background-color: var(--f2-card-surface-hover) !important;
 }
 
-/* Strip outer card wrapper on bare Settings search bars (O(1) first-child gated, zero lag on large font lists) */
+/* Strip outer card / #fafafa wrapper on bare Settings search bars (covers non-.setting-item wrappers too, O(1) gated on large font lists) */
 .vertical-tabs-container :is(
   .setting-item.mod-search,
   .setting-search,
-  :is(.setting-items, .setting-group, .installed-plugins-container, .vertical-tab-content) > .setting-item:first-child:has(.search-input-container):not(:has(.setting-item-name:not(:empty))),
-  :is(.setting-items, .setting-group, .installed-plugins-container, .vertical-tab-content) > .setting-item-heading + .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))),
-  .vertical-tab-content :is(.setting-items, .setting-group) > :first-child:has(> .search-input-container)
+  .setting-group-search,
+  .setting-items-search,
+  .vertical-tab-content:first-child .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))),
+  :is(.setting-group, .setting-items, .setting-group-content, .installed-plugins-container, .vertical-tab-content) > :nth-child(-n+2):not(.setting-group):not(.setting-items):not(.setting-group-content):not(.installed-plugins-container):has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))),
+  :is(.setting-group, .setting-items, .setting-group-content, .installed-plugins-container, .vertical-tab-content) > :has(> .search-input-container),
+  .installed-plugins-container .setting-item:has(.search-input-container),
+  .setting-item:has(> .search-input-container)
 ) {
+  background: transparent !important;
   background-color: transparent !important;
   border: none !important;
   box-shadow: none !important;
+  border-radius: 0 !important;
   padding: 0 0 10px 0 !important;
   margin-bottom: 4px !important;
+}
+
+.vertical-tabs-container .vertical-tab-content:first-child .setting-item:has(.search-input-container):not(:has(.setting-item-name:not(:empty))):not(:has(button:not(.search-input-clear-button))) .setting-item-info {
+  display: none !important;
 }
 
 /* Settings subpage loading bar cleanly below subpage title */
@@ -1968,7 +2145,14 @@ body:is(.is-popout-window, .fluent2-popout-mica) :is(.modal.mod-settings, .verti
   .setting-subpage-header,
   .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
   .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item)
-) > * {
+) > *,
+.vertical-tabs-container :is(
+  .modal-setting-nav-bar,
+  .setting-nav-bar,
+  .setting-subpage-header,
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(div, header):first-child:not(.setting-group):not(.setting-items):not(.setting-item),
+  .vertical-tab-content-container > .vertical-tab-content + .vertical-tab-content > :is(.progress-bar, .setting-progress-bar) + :is(div, header):not(.setting-group):not(.setting-items):not(.setting-item)
+) > * > * {
   font-family: var(--fontFamilyWinSettings) !important;
   font-weight: 400 !important;
 }
@@ -2281,10 +2465,8 @@ body:not(.fluent2-classic-tables) :is(.markdown-rendered, .cm-table-widget) thea
   border: none;
   border-bottom: 1px solid var(--table-border-color);
   padding: 9px 14px;
-  font-size: 13px;
   font-weight: 600;
   color: var(--colorNeutralForeground2);
-  text-align: left;
 }
 
 body:not(.fluent2-classic-tables) .markdown-rendered tbody :is(td, td:nth-child(2n), td:nth-child(2n+1)) {
@@ -2391,6 +2573,40 @@ body:not(.fluent2-classic-tags) a.tag {
 body:not(.fluent2-classic-tags) a.tag:hover {
   background-color: var(--colorBrandBackground2Hover);
   color: var(--colorBrandForeground2);
+}
+
+/* Optional Centered Image Captions Below Images (Reading View & Editing View independently controlled via Style Settings) */
+body.fluent2-image-caption-reading .markdown-preview-view .image-embed[alt]:not([alt=""]):not(
+  [alt$=".png" i], [alt$=".jpg" i], [alt$=".jpeg" i], [alt$=".gif" i],
+  [alt$=".svg" i], [alt$=".webp" i], [alt$=".bmp" i], [alt$=".tiff" i], [alt$=".avif" i]
+),
+body.fluent2-image-caption-editing .markdown-source-view.is-live-preview .image-embed[alt]:not([alt=""]):not(
+  [alt$=".png" i], [alt$=".jpg" i], [alt$=".jpeg" i], [alt$=".gif" i],
+  [alt$=".svg" i], [alt$=".webp" i], [alt$=".bmp" i], [alt$=".tiff" i], [alt$=".avif" i]
+) {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--size-4-1) 0;
+}
+
+body.fluent2-image-caption-reading .markdown-preview-view .image-embed[alt]:not([alt=""]):not(
+  [alt$=".png" i], [alt$=".jpg" i], [alt$=".jpeg" i], [alt$=".gif" i],
+  [alt$=".svg" i], [alt$=".webp" i], [alt$=".bmp" i], [alt$=".tiff" i], [alt$=".avif" i]
+)::after,
+body.fluent2-image-caption-editing .markdown-source-view.is-live-preview .image-embed[alt]:not([alt=""]):not(
+  [alt$=".png" i], [alt$=".jpg" i], [alt$=".jpeg" i], [alt$=".gif" i],
+  [alt$=".svg" i], [alt$=".webp" i], [alt$=".bmp" i], [alt$=".tiff" i], [alt$=".avif" i]
+)::after {
+  content: attr(alt);
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  text-align: center;
+  font-size: var(--font-smaller);
+  line-height: 1.4;
+  color: var(--colorNeutralForeground3);
+  pointer-events: none;
 }
 
 /* ==========================================================================
