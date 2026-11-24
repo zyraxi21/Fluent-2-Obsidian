@@ -1,46 +1,8 @@
 # Fluent 2 for Obsidian
 
-[English](#english) | [简体中文](#简体中文)
+[简体中文](#简体中文) | [English](#english)
 
-![Fluent 2 for Obsidian Preview](screenshot.png)
-
----
-
-## English
-
-An Obsidian theme built on Microsoft's **Fluent 2 Design System** ([Fluent UI v9](https://fluent2.microsoft.design/) and Windows 11 WinUI 3). It faithfully maps official Fluent 2 design tokens, elevation shadows, motion curves, and layered material hierarchy, with deep support for native Windows 11 Mica and system accent colors.
-
-Companion plugin: [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) (enables native Windows 11 Mica, Mica Alt, and Acrylic window materials plus live 7-shade Windows 11 system accent color synchronization).
-
-### Key Features
-
-- **Authentic Fluent 2 Design Tokens**: Maps `webLightTheme` and `webDarkTheme` tokens from `@fluentui/tokens` (neutral surfaces `1–6`, foregrounds, strokes, `brandWeb` color ramp `10–160`, dual-layer ambient/key shadows `shadow2`–`shadow64`, corner radii, and physical Bezier motion curves).
-- **Windows 11 WinUI 3 Layering & Controls**:
-  - Elevated rounded editor card seamlessly connected to active tabs, with top-edge (`y = 0`) Fitts's Law click support when maximized.
-  - Signature 3px vertical brand pill indicators on active sidebar, outline, ribbon, and settings items.
-  - Flat Windows 11 bottom focus indicator on text inputs, 40×22px WinUI 3 toggle switches, subtle beveled buttons, acrylic popovers/menus/command palette, and Windows 11 Settings styling (translucent cards, left-aligned 44px regular-weight titlebar, and clean headings).
-- **Windows 11 Native Materials & Note Editor Mica**:
-  - Works out of the box with a pure-CSS Simulated Mica fallback; automatically adapts when native translucency (`body.is-translucent`) is enabled via [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native).
-  - Includes a Style Settings option to enable Mica inside the note editor itself with an adjustable solid color overlay (`0%`–`100%` opacity) and harmonized translucent tables, blockquotes, code blocks, and properties.
-- **VS Code 2026 Syntax Highlighting**: Uses Visual Studio Code's default **2026 Light** and **2026 Dark** token palettes across Reading View and Live Preview, while respecting Obsidian's configured monospace font in both code blocks and inline code.
-- **Accessibility**: Built-in support for Windows Contrast Themes (`@media (forced-colors: active)`) and OS Reduced Motion (`@media (prefers-reduced-motion: reduce)`).
-
-### Installation & Setup
-
-1. Install **Fluent 2** from Obsidian's Community Themes browser (or clone this repository into `.obsidian/themes/Fluent 2/`):
-   ```bash
-   git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
-   ```
-2. Select **Fluent 2** in **Settings → Appearance → Themes**.
-3. *(Recommended on Windows 11)* Install [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) to enable native Windows 11 Mica / Mica Alt / Acrylic (including Obsidian 1.15+ pop-out Settings windows) and live 7-shade system accent sync. Keep **Settings → Interface → Window frame style** set to **Hidden (default)**.
-4. *(Optional)* Install **Style Settings** to customize window material modes, Note Editor Mica overlay color and opacity, accent presets, heading styles, compact sidebar density, and motion.
-
-### References & License
-
-- [Fluent 2 Design System](https://fluent2.microsoft.design/)
-- [microsoft/fluentui](https://github.com/microsoft/fluentui) (`@fluentui/tokens`)
-- [Visual Studio Code 2026 Light / Dark Theme](https://github.com/microsoft/vscode)
-- Licensed under [GNU General Public License v3.0](LICENSE).
+![Fluent 2 for Obsidian 预览](screenshot.png)
 
 ---
 
@@ -84,10 +46,48 @@ Companion plugin: [Fluent 2 Windows Native](https://community.obsidian.md/plugin
 
 ### 安装与使用
 
-1. **安装主题**：从 Obsidian 社区主题市场安装，或克隆本仓库到 `.obsidian/themes/Fluent 2/` 目录下（文件夹名需与 `manifest.json` 中的 `"name": "Fluent 2"` 一致），然后在 **设置 → 外观 → 主题** 中选择 **Fluent 2**。
+1. **安装主题**：从 Obsidian 社区主题市场安装，或克隆本仓库到 `.obsidian/themes/Fluent 2/` 目录下（文件夹名需与 `manifest.json` 中的 `"name": "Fluent 2"` 一致）：
+   ```bash
+   git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
+   ```
+   随后在 **设置 → 外观 → 主题** 中选择 **Fluent 2**。
 2. **开启原生 Windows 11 Mica 与系统主题色（推荐）**：安装配套插件 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 并在 **设置 → 界面 → 窗口边框样式** 保持 **隐藏（默认）**。
 3. **通过 Style Settings 进阶定制（可选）**：安装 **Style Settings** 插件后，可自由调节窗口材质模式、正文 Mica 与纯色叠层不透明度、强调色来源、标题样式与紧凑侧边栏密度。
 
-### 开源协议
+---
 
-本项目基于 [GNU General Public License v3.0](LICENSE) 协议开源。
+## English
+
+An Obsidian theme built on Microsoft's **Fluent 2 Design System** ([Fluent UI v9](https://fluent2.microsoft.design/) and Windows 11 WinUI 3). It faithfully maps official Fluent 2 design tokens, elevation shadows, motion curves, and layered material hierarchy, with deep support for native Windows 11 Mica and system accent colors.
+
+Companion plugin: [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) (enables native Windows 11 Mica, Mica Alt, and Acrylic window materials plus live 7-shade Windows 11 system accent color synchronization).
+
+### Key Features
+
+- **Authentic Fluent 2 Design Tokens**: Maps `webLightTheme` and `webDarkTheme` tokens from `@fluentui/tokens` (neutral surfaces `1–6`, foregrounds, strokes, `brandWeb` color ramp `10–160`, dual-layer ambient/key shadows `shadow2`–`shadow64`, corner radii, and physical Bezier motion curves).
+- **Windows 11 WinUI 3 Layering & Controls**:
+  - Elevated rounded editor card seamlessly connected to active tabs, with top-edge (`y = 0`) Fitts's Law click support when maximized.
+  - Signature 3px vertical brand pill indicators on active sidebar, outline, ribbon, and settings items.
+  - Flat Windows 11 bottom focus indicator on text inputs, 40×22px WinUI 3 toggle switches, subtle beveled buttons, acrylic popovers/menus/command palette, and Windows 11 Settings styling (translucent cards, left-aligned 44px regular-weight titlebar, and clean headings).
+- **Windows 11 Native Materials & Note Editor Mica**:
+  - Works out of the box with a pure-CSS Simulated Mica fallback; automatically adapts when native translucency (`body.is-translucent`) is enabled via [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native).
+  - Includes a Style Settings option to enable Mica inside the note editor itself with an adjustable solid color overlay (`0%`–`100%` opacity) and harmonized translucent tables, blockquotes, code blocks, and properties.
+- **VS Code 2026 Syntax Highlighting**: Uses Visual Studio Code's default **2026 Light** and **2026 Dark** token palettes across Reading View and Live Preview, while respecting Obsidian's configured monospace font in both code blocks and inline code.
+- **Accessibility**: Built-in support for Windows Contrast Themes (`@media (forced-colors: active)`) and OS Reduced Motion (`@media (prefers-reduced-motion: reduce)`).
+
+### Installation & Usage
+
+1. Install **Fluent 2** from Obsidian's Community Themes browser (or clone this repository into `.obsidian/themes/Fluent 2/`):
+   ```bash
+   git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
+   ```
+2. Select **Fluent 2** in **Settings → Appearance → Themes**.
+3. *(Recommended on Windows 11)* Install [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) to enable native Windows 11 Mica / Mica Alt / Acrylic (including Obsidian 1.15+ pop-out Settings windows) and live 7-shade system accent sync. Keep **Settings → Interface → Window frame style** set to **Hidden (default)**.
+4. *(Optional)* Install **Style Settings** to customize window material modes, Note Editor Mica overlay color and opacity, accent presets, heading styles, compact sidebar density, and motion.
+
+### References & License
+
+- [Fluent 2 Design System](https://fluent2.microsoft.design/)
+- [microsoft/fluentui](https://github.com/microsoft/fluentui) (`@fluentui/tokens`)
+- [Visual Studio Code 2026 Light / Dark Theme](https://github.com/microsoft/vscode)
+- Licensed under [GNU General Public License v3.0](LICENSE).
