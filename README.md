@@ -12,6 +12,20 @@
 
 配套原生插件：[Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native)（提供 Windows 11 原生 Mica / Mica Alt / Acrylic 材质与 7 阶系统主题色自动同步）。
 
+### 界面预览
+
+云母材质与系统强调色会随 Windows 11 桌面壁纸与个性化配色自动变化：
+
+| 浅色模式（暖棕壁纸与系统强调色） | 深色模式（暖棕壁纸与系统强调色） |
+| :---: | :---: |
+| ![浅色模式：暖棕云母与主题色](screenshot_light_1.png) | ![深色模式：暖棕云母与主题色](screenshot_dark_1.png) |
+| **浅色模式（青绿壁纸与系统强调色）** | **深色模式（青绿壁纸与系统强调色）** |
+| ![浅色模式：青绿云母与主题色](screenshot_light_2.png) | ![深色模式：青绿云母与主题色](screenshot_dark_2.png) |
+
+| Windows 11 风格独立设置窗口与 Style Settings 面板 |
+| :---: |
+| ![Windows 11 风格设置窗口](screenshot_settings.png) |
+
 ### 核心特性
 
 #### 1. 官方 Fluent 2 设计令牌体系
@@ -30,8 +44,8 @@
 
 #### 3. Markdown 与代码阅读体验
 - **VS Code 2026 语法高亮**：代码块配色完整沿用 Visual Studio Code 默认的 **2026 Light** 与 **2026 Dark** 方案，同时覆盖阅读视图（Prism）与实时预览。
-- **正文 Mica 与纯色叠层**：可在 Style Settings 中开启「笔记正文区域启用 Mica 材质」，并在 Mica 之上自由调节纯色叠层的颜色与 `0%`–`100%` 不透明度；表格表头、引用块、代码块与属性卡片自动切换为统一的微透明内嵌层次。
-- **Fluent 2 内容组件**：MessageBar 风格 Callout 提示框、DataGrid 风格表格与 Obsidian Bases 视图、Expander 卡片风格笔记属性、圆角药丸标签。
+- **正文透出云母与可调底色**：默认开启「笔记正文透出云母背景」，让编辑区与阅读区也自然透出底层云母材质，支持在 Style Settings 中自由调节叠加底色与 `0%`–`100%` 不透明度（也可随时关闭切换回高不透明度卡片）；表格表头、引用块、代码块与属性卡片自动采用统一的微透明内嵌层次。
+- **Fluent 2 内容组件**：默认开启 H1/H2 左侧强调色竖条装饰（可在 Style Settings 切换为无装饰或底部分割线），内置 MessageBar 风格 Callout 提示框、DataGrid 风格表格与 Obsidian Bases 视图、Expander 卡片风格笔记属性、圆角药丸标签。
 
 ### Windows 11 原生特性支持矩阵
 
@@ -51,8 +65,13 @@
    git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
    ```
    随后在 **设置 → 外观 → 主题** 中选择 **Fluent 2**。
-2. **开启原生 Windows 11 Mica 与系统主题色（推荐）**：安装配套插件 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 并在 **设置 → 界面 → 窗口边框样式** 保持 **隐藏（默认）**。
-3. **通过 Style Settings 进阶定制（可选）**：安装 **Style Settings** 插件后，可自由调节窗口材质模式、正文 Mica 与纯色叠层不透明度、强调色来源、标题样式与紧凑侧边栏密度。
+2. **浅色、深色与跟随系统设置**：请在 Obsidian 原生的 **设置 → 外观 → 基础颜色** 中切换 **适应系统 / 浅色 / 深色**。主题未在 Style Settings 中重复提供明暗切换项，以确保 Windows 11 原生云母材质、第三方插件与界面色板始终保持一致。
+3. **开启原生 Windows 11 Mica 与系统主题色（推荐）**：安装配套插件 [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) 并在 **设置 → 界面 → 窗口边框样式** 保持 **隐藏（默认）**。
+4. **通过 Style Settings 进阶定制（可选）**：安装 **Style Settings** 插件后，可自由调节窗口材质模式、正文云母叠层颜色与不透明度、强调色来源、标题样式、图片下方说明与紧凑侧边栏密度。
+
+### 已知问题
+
+- **开启原生 Mica 材质后右键菜单无法呈现亚克力毛玻璃模糊**：由于 Electron / Chromium 的底层合成限制，当窗口启用 Windows 11 原生 `setBackgroundMaterial`（Mica / Mica Alt / Acrylic）时，页面内的 CSS `backdrop-filter` 高斯模糊会整体失效。为保证文字清晰可读，主题在检测到原生云母开启时，会自动将右键菜单、命令面板、悬浮预览与弹窗切换为接近不透明的亚克力回退底色（与 Windows 关闭透明效果时的系统表现一致）；关闭原生云母（使用拟真云母或纯色模式）时，右键菜单与浮层仍正常显示高斯模糊效果。
 
 ---
 
@@ -62,16 +81,30 @@ An Obsidian theme built on Microsoft's **Fluent 2 Design System** ([Fluent UI v9
 
 Companion plugin: [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) (enables native Windows 11 Mica, Mica Alt, and Acrylic window materials plus live 7-shade Windows 11 system accent color synchronization).
 
+### Screenshots
+
+Mica backdrops and accent ramps adapt dynamically to your Windows 11 desktop wallpaper and system accent color:
+
+| Light Mode (Warm Amber Wallpaper & Accent) | Dark Mode (Warm Amber Wallpaper & Accent) |
+| :---: | :---: |
+| ![Light mode with warm amber Mica](screenshot_light_1.png) | ![Dark mode with warm amber Mica](screenshot_dark_1.png) |
+| **Light Mode (Olive Green Wallpaper & Accent)** | **Dark Mode (Olive Green Wallpaper & Accent)** |
+| ![Light mode with olive green Mica](screenshot_light_2.png) | ![Dark mode with olive green Mica](screenshot_dark_2.png) |
+
+| Windows 11 Standalone Settings Window & Style Settings |
+| :---: |
+| ![Windows 11 Settings styling](screenshot_settings.png) |
+
 ### Key Features
 
 - **Authentic Fluent 2 Design Tokens**: Maps `webLightTheme` and `webDarkTheme` tokens from `@fluentui/tokens` (neutral surfaces `1–6`, foregrounds, strokes, `brandWeb` color ramp `10–160`, dual-layer ambient/key shadows `shadow2`–`shadow64`, corner radii, and physical Bezier motion curves).
 - **Windows 11 WinUI 3 Layering & Controls**:
-  - Elevated rounded editor card seamlessly connected to active tabs, with top-edge (`y = 0`) Fitts's Law click support when maximized.
+  - Elevated rounded editor card seamlessly connected to active tabs with Edge-style concave bottom fillets and top-edge (`y = 0`) Fitts's Law click support when maximized.
   - Signature 3px vertical brand pill indicators on active sidebar, outline, ribbon, and settings items.
   - Flat Windows 11 bottom focus indicator on text inputs, 40×22px WinUI 3 toggle switches, subtle beveled buttons, acrylic popovers/menus/command palette, and Windows 11 Settings styling (translucent cards, left-aligned 44px regular-weight titlebar, and clean headings).
 - **Windows 11 Native Materials & Note Editor Mica**:
-  - Works out of the box with a pure-CSS Simulated Mica fallback; automatically adapts when native translucency (`body.is-translucent`) is enabled via [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native).
-  - Includes a Style Settings option to enable Mica inside the note editor itself with an adjustable solid color overlay (`0%`–`100%` opacity) and harmonized translucent tables, blockquotes, code blocks, and properties.
+  - Works out of the box with a full-window pure-CSS Simulated Mica fallback; automatically switches to native Mica layering when translucency (`body.is-translucent`) is enabled via [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native).
+  - Note Editor Mica is enabled by default with an adjustable solid tint color and opacity (`0%`–`100%`) in Style Settings, paired with harmonized translucent tables, blockquotes, code blocks, and properties.
 - **VS Code 2026 Syntax Highlighting**: Uses Visual Studio Code's default **2026 Light** and **2026 Dark** token palettes across Reading View and Live Preview, while respecting Obsidian's configured monospace font in both code blocks and inline code.
 - **Accessibility**: Built-in support for Windows Contrast Themes (`@media (forced-colors: active)`) and OS Reduced Motion (`@media (prefers-reduced-motion: reduce)`).
 
@@ -82,8 +115,13 @@ Companion plugin: [Fluent 2 Windows Native](https://community.obsidian.md/plugin
    git clone https://github.com/zyraxi21/Fluent-2-Obsidian.git "Fluent 2"
    ```
 2. Select **Fluent 2** in **Settings → Appearance → Themes**.
-3. *(Recommended on Windows 11)* Install [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) to enable native Windows 11 Mica / Mica Alt / Acrylic (including Obsidian 1.15+ pop-out Settings windows) and live 7-shade system accent sync. Keep **Settings → Interface → Window frame style** set to **Hidden (default)**.
-4. *(Optional)* Install **Style Settings** to customize window material modes, Note Editor Mica overlay color and opacity, accent presets, heading styles, compact sidebar density, and motion.
+3. **Light / Dark / Follow System**: Configure your color scheme directly in Obsidian's built-in **Settings → Appearance → Base color scheme** (**Adapt to system / Light / Dark**). This is intentionally not duplicated in Style Settings so that native Windows 11 Mica light/dark tint, community plugins, and theme tokens always stay in sync.
+4. *(Recommended on Windows 11)* Install [Fluent 2 Windows Native](https://community.obsidian.md/plugins/fluent-windows-native) to enable native Windows 11 Mica / Mica Alt / Acrylic (including Obsidian 1.15+ pop-out Settings windows) and live 7-shade system accent sync. Keep **Settings → Interface → Window frame style** set to **Hidden (default)**.
+5. *(Optional)* Install **Style Settings** to customize window material modes, Note Editor Mica overlay color and opacity, accent presets, heading styles, centered image captions, compact sidebar density, and motion.
+
+### Known Issues
+
+- **Context menus cannot render frosted Acrylic blur while native Mica is enabled**: Due to an Electron / Chromium compositing limitation, enabling native Windows 11 `setBackgroundMaterial` (Mica / Mica Alt / Acrylic) disables CSS `backdrop-filter` blur across the window. To keep menus and flyouts legible, Fluent 2 automatically switches context menus, the Command Palette, popovers, and dialogs to a near-opaque acrylic fallback whenever native Mica is active (matching Windows behavior when transparency effects are unavailable). When native Mica is off (Simulated Mica or Solid mode), standard CSS Gaussian blur works normally.
 
 ### References & License
 

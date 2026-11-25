@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Fluent 2 for Obsidian (v1.0.2)
+   Fluent 2 for Obsidian (v1.0.3)
    Microsoft Fluent 2 Design System (@fluentui/tokens + Windows 11 WinUI 3)
    ========================================================================== */
 
@@ -11,49 +11,49 @@ settings:
   - id: fluent2-info
     type: info-text
     markdown: true
-    description: "**Fluent 2 Design System for Obsidian** — Built on Microsoft Fluent UI v9 design tokens and Windows 11 material layering. Pair with **Fluent 2 Windows Native** for real Windows 11 Mica / Mica Alt / Acrylic and live 7-shade system accent sync."
-    description.zh: "**Obsidian 的微软 Fluent 2 主题** —— 基于 Microsoft Fluent UI v9 设计令牌与 Windows 11 材质层级构建。搭配配套插件 **Fluent 2 Windows Native** 可开启原生 Windows 11 云母（含独立设置窗口）与 7 阶系统主题色实时同步。"
+    description: "**Fluent 2 Theme** — Windows 11 styling for Obsidian. Pair with **Fluent 2 Windows Native** for native Mica and system accent sync."
+    description.zh: "**Fluent 2 主题**：Windows 11 风格界面。搭配插件 **Fluent 2 Windows Native** 可开启原生云母材质与系统主题色同步。"
 
   - id: fluent2-heading-material
-    title: "Windows 11 Material & Layering"
-    title.zh: "Windows 11 材质与窗口层级"
+    title: "Window Material & Backdrop"
+    title.zh: "窗口材质与背景"
     type: heading
     level: 2
     collapsed: false
 
   - id: fluent2-material-mode
-    title: "Window Material Mode"
+    title: "Window Material"
     title.zh: "窗口材质模式"
-    description: "Choose how window chrome and workspace surfaces render. Auto adapts automatically when native translucency sets body.is-translucent."
-    description.zh: "选择窗口外壳与工作区的渲染材质。「自动」会在检测到原生透明（body.is-translucent）时自动切换为云母层级。"
+    description: "Keep on Auto to use native Mica when the companion plugin is enabled, or simulated Mica otherwise."
+    description.zh: "默认保持「自动」即可，开启配套插件后会自动切换为原生云母。"
     type: class-select
     allowEmpty: false
     default: fluent2-material-auto
     options:
-      - label: "Auto (Simulated Mica + Native Mica Ready)"
+      - label: "自动 (Auto)"
         value: fluent2-material-auto
-      - label: "Native Windows 11 Mica / Mica Alt (Force Translucent Shell)"
+      - label: "原生云母 (Native Mica)"
         value: fluent2-material-native-mica
-      - label: "Native Windows 11 Acrylic (Frosted Shell)"
+      - label: "原生亚克力 (Native Acrylic)"
         value: fluent2-material-native-acrylic
-      - label: "Simulated Mica (Pure CSS, No Plugin Required)"
+      - label: "拟真云母 (Simulated Mica)"
         value: fluent2-material-simulated-mica
-      - label: "Solid Fluent 2 Web (Opaque Surfaces)"
+      - label: "纯色不透明 (Solid)"
         value: fluent2-material-solid
 
   - id: fluent2-editor-mica
-    title: "Note Editor Mica Backdrop"
-    title.zh: "笔记正文区域启用 Mica 材质"
-    description: "Lets the native Windows 11 Mica backdrop show through the note editor and reading view with an adjustable solid tint overlay on top."
-    description.zh: "让笔记正文编辑区与阅读区也透出原生 Windows 11 Mica 云母材质，并在其上叠加一层可自由调节颜色与透明度的纯色叠层。"
+    title: "Mica in Note Editor"
+    title.zh: "笔记正文透出云母背景"
+    description: "Lets the Mica backdrop show through notes, with adjustable tint color and opacity below."
+    description.zh: "让编辑区和阅读区也透出底层云母材质，可在下方调节底色与深浅。"
     type: class-toggle
-    default: false
+    default: true
 
   - id: fluent2-editor-overlay-color
-    title: "Note Editor Solid Overlay Color"
-    title.zh: "正文区域纯色叠层颜色"
-    description: "Tint color layered over Mica in the note editor when Note Editor Mica Backdrop is enabled."
-    description.zh: "开启「笔记正文区域启用 Mica 材质」后，覆盖在 Mica 之上的纯色叠层颜色（浅色/深色独立配置）。"
+    title: "Note Tint Color"
+    title.zh: "正文叠加底色"
+    description: "Overlay tint color when Mica in Note Editor is enabled."
+    description.zh: "开启「笔记正文透出云母背景」时的正文底色。"
     type: variable-themed-color
     format: hex
     opacity: false
@@ -61,10 +61,10 @@ settings:
     default-dark: '#202020'
 
   - id: fluent2-editor-overlay-opacity
-    title: "Note Editor Overlay Opacity"
-    title.zh: "正文区域纯色叠层不透明度"
-    description: "Adjusts the solid tint layer opacity over the note editor Mica backdrop (0% = pure Mica, 100% = solid)."
-    description.zh: "自由调节正文区域纯色叠层的不透明度（0% 为完全透出原生 Mica，100% 为完全不透明纯色）。"
+    title: "Note Tint Opacity"
+    title.zh: "正文底色不透明度"
+    description: "0% is fully transparent; 100% is solid."
+    description.zh: "数值越小越通透（0% 完全透明，100% 纯色不透明）。"
     type: variable-number-slider
     default: 60
     min: 0
@@ -73,10 +73,10 @@ settings:
     format: "%"
 
   - id: fluent2-layer-opacity
-    title: "Default Editor Card Opacity (Native Mica / Acrylic)"
-    title.zh: "默认编辑区卡片不透明度（未开启正文叠层时）"
-    description: "Controls default opacity of the elevated editor card in Native Mica / Acrylic mode."
-    description.zh: "未单独开启「笔记正文区域启用 Mica 材质」时，控制默认编辑区卡片的背景不透明度。"
+    title: "Editor Card Opacity"
+    title.zh: "卡片模式不透明度"
+    description: "Editor card opacity when Mica in Note Editor is turned off."
+    description.zh: "关闭「笔记正文透出云母背景」时的编辑区卡片不透明度。"
     type: variable-number-slider
     default: 0.78
     min: 0.35
@@ -84,10 +84,10 @@ settings:
     step: 0.02
 
   - id: fluent2-acrylic-blur
-    title: "Acrylic Flyout Blur Radius"
-    title.zh: "亚克力浮层模糊半径"
-    description: "Blur strength for menus, modals, command palette, and popovers. Note: Electron disables CSS blur while native Mica is active, so flyouts automatically switch to a near-opaque acrylic fallback."
-    description.zh: "控制右键菜单、弹窗、命令面板与悬浮预览的亚克力毛玻璃模糊强度。注意：开启原生 Mica 时 Electron 会使 CSS 模糊失效，此时浮层会自动切换为接近不透明的亚克力回退底色。"
+    title: "Menu Blur Strength"
+    title.zh: "菜单毛玻璃模糊度"
+    description: "Blur radius for menus and dialogs when native Mica is off."
+    description.zh: "未开启原生云母时，右键菜单与弹窗的毛玻璃模糊强度。"
     type: variable-number-slider
     default: 16
     min: 0
@@ -96,49 +96,49 @@ settings:
     format: px
 
   - id: fluent2-flat-workspace
-    title: "Flat Workspace Layout (Disable Win11 Card)"
-    title.zh: "平面工作区布局（关闭 Win11 圆角编辑卡片）"
-    description: "By default, the main editor renders as an elevated WinUI Layer Card over the Mica shell. Enable this to use a flat full-bleed workspace."
-    description.zh: "默认将主编辑区呈现为类似 Windows 11 设置与记事本的圆角层叠卡片；开启此项后切换为传统平铺工作区。"
+    title: "Flat Workspace Layout"
+    title.zh: "平铺工作区（取消圆角卡片）"
+    description: "Replaces the rounded editor card with a flat full-width layout."
+    description.zh: "关闭编辑区的圆角悬浮卡片外观，改为传统平铺布局。"
     type: class-toggle
     default: false
 
   - id: fluent2-heading-brand
-    title: "Brand & System Accent Color"
-    title.zh: "品牌色与 Windows 系统主题色"
+    title: "Accent Color"
+    title.zh: "主题强调色"
     type: heading
     level: 2
     collapsed: false
 
   - id: fluent2-accent-source
-    title: "Accent Color Source"
+    title: "Accent Source"
     title.zh: "强调色来源"
-    description: "Choose Fluent 2 Web Blue, Custom Color (pick below), Obsidian's native accent, or preset ramps. When Fluent 2 Windows Native plugin sync is ON, live Windows 11 accent takes priority automatically."
-    description.zh: "可选用微软 Fluent 2 官方蓝、下方自定义品牌色、Obsidian 原生强调色或预设配色。若已开启「Fluent 2 Windows Native」插件的系统主题色同步，将自动优先跟随 Windows 11 实时主题色。"
+    description: "Companion plugin system accent takes priority automatically when enabled."
+    description.zh: "若已开启配套插件的「跟随系统主题色」，将自动优先使用系统颜色。"
     type: class-select
     allowEmpty: false
     default: fluent2-accent-brand-web
     options:
-      - label: "Fluent 2 Web Blue (#0F6CBD / #479EF5)"
+      - label: "微软默认蓝 (Default Blue)"
         value: fluent2-accent-brand-web
-      - label: "Custom Brand Color (Pick Below)"
+      - label: "自定义颜色 (Custom)"
         value: fluent2-accent-custom
-      - label: "Obsidian Native Accent Color"
+      - label: "跟随 Obsidian (Obsidian)"
         value: fluent2-accent-obsidian
-      - label: "Microsoft Teams Purple"
+      - label: "Teams 紫 (Teams Purple)"
         value: fluent2-accent-teams
-      - label: "Fluent Copilot Teal"
+      - label: "Copilot 青 (Copilot Teal)"
         value: fluent2-accent-copilot
-      - label: "Surface Warm Terracotta"
+      - label: "暖棕陶土 (Warm Terracotta)"
         value: fluent2-accent-warm
-      - label: "CSS AccentColor (Experimental / Contrast Themes)"
+      - label: "对比度主题色 (Contrast Theme)"
         value: fluent2-accent-windows
 
   - id: fluent2-custom-accent
-    title: "Custom Brand Accent Color"
-    title.zh: "自定义品牌色（选择 Custom Brand Color 时生效）"
-    description: "Automatically generates hover, pressed, link, badge, and selection shades using Fluent 2 color-mix()."
-    description.zh: "选定任意颜色后，自动通过 color-mix() 推导悬停、按下、链接、标签与选区色阶。"
+    title: "Custom Accent Color"
+    title.zh: "自定义强调色"
+    description: "Used when Custom is selected above."
+    description.zh: "上方选择「自定义颜色」时生效，自动匹配深浅交互色。"
     type: variable-themed-color
     format: hex
     opacity: false
@@ -146,96 +146,96 @@ settings:
     default-dark: '#e08b3e'
 
   - id: fluent2-heading-ui
-    title: "Fluent 2 Interface & Motion"
-    title.zh: "Fluent 2 界面与动效"
+    title: "Interface & Motion"
+    title.zh: "界面细节与动画"
     type: heading
     level: 2
     collapsed: true
 
   - id: fluent2-hide-nav-pill
-    title: "Hide Active Navigation Pill Indicator"
-    title.zh: "隐藏左侧导航药丸指示条"
-    description: "Hides the 3px Fluent 2 vertical brand pill on active sidebar items, settings tabs, and ribbon actions."
-    description.zh: "关闭侧边栏当前文件、设置项与左侧工具栏激活项的 3px 垂直圆角品牌指示条。"
+    title: "Hide Active Side Indicator"
+    title.zh: "隐藏选中项左侧竖条"
+    description: "Hides the short vertical bar next to active sidebar and settings items."
+    description.zh: "隐藏侧边栏与设置菜单当前选中项左侧的短竖条。"
     type: class-toggle
     default: false
 
   - id: fluent2-compact-sidebar
-    title: "Compact Sidebar Density"
-    title.zh: "紧凑侧边栏密度"
-    description: "Reduces vertical spacing in the file explorer and outline for large vaults."
-    description.zh: "减小文件列表与大纲的垂直间距，适合笔记数量较多的知识库。"
+    title: "Compact Sidebar"
+    title.zh: "紧凑侧边栏"
+    description: "Reduces row spacing in the file list and outline."
+    description.zh: "缩小文件列表与大纲的行距，一屏显示更多内容。"
     type: class-toggle
     default: false
 
   - id: fluent2-disable-motion
-    title: "Disable Fluent Motion Animations"
-    title.zh: "禁用 Fluent 过渡动效"
-    description: "Disables flyout, modal, and indicator animations. OS Reduced Motion is always respected automatically."
-    description.zh: "关闭弹窗、菜单与指示条的缓动入场动画（系统「减弱动态效果」始终自动生效）。"
+    title: "Disable Animations"
+    title.zh: "关闭界面过渡动画"
+    description: "Turns off menu, dialog, and indicator animations."
+    description.zh: "关闭菜单、弹窗与选中竖条的动画效果。"
     type: class-toggle
     default: false
 
   - id: fluent2-heading-markdown
-    title: "Typography & Markdown Styling"
-    title.zh: "排版与 Markdown 组件样式"
+    title: "Typography & Note Elements"
+    title.zh: "排版与笔记元素"
     type: heading
     level: 2
     collapsed: true
 
   - id: fluent2-use-obsidian-fonts
-    title: "Use Obsidian Custom Fonts (Disable Segoe UI Variable Override)"
-    title.zh: "使用 Obsidian 原生自定义字体（关闭 Segoe UI Variable 覆盖）"
-    description: "By default, Fluent 2 applies Windows 11 Segoe UI Variable and Cascadia Code. Enable this if you prefer your own fonts set in Appearance."
-    description.zh: "默认优先使用 Windows 11 Segoe UI Variable 与 Cascadia Code；如希望完全使用「外观 → 字体」中的自定义字体，请开启此项。"
+    title: "Use Obsidian Custom Fonts"
+    title.zh: "使用自定义字体"
+    description: "Uses your fonts from Appearance settings instead of Windows 11 defaults."
+    description.zh: "关闭主题默认的 Windows 11 字体，完全使用「外观 → 字体」中的设置。"
     type: class-toggle
     default: false
 
   - id: fluent2-heading-style
-    title: "Heading Visual Style"
-    title.zh: "标题视觉样式"
+    title: "Heading Style"
+    title.zh: "正文标题装饰"
     type: class-select
     allowEmpty: false
-    default: fluent2-headings-clean
+    default: fluent2-headings-accent-pill
     options:
-      - label: "Clean Fluent 2 Semibold (Default)"
-        value: fluent2-headings-clean
-      - label: "Subtle Bottom Divider on H1 & H2"
-        value: fluent2-headings-divider
-      - label: "Accent Left Pill on H1 & H2"
+      - label: "左侧强调竖条 (Left Bar)"
         value: fluent2-headings-accent-pill
+      - label: "简洁无装饰 (Clean)"
+        value: fluent2-headings-clean
+      - label: "底部分割线 (Bottom Line)"
+        value: fluent2-headings-divider
 
   - id: fluent2-classic-callouts
-    title: "Use Classic Obsidian Callouts"
-    title.zh: "使用 Obsidian 经典提示框样式"
+    title: "Classic Callouts"
+    title.zh: "使用默认提示框样式"
     type: class-toggle
     default: false
 
   - id: fluent2-classic-tables
-    title: "Use Classic Obsidian Tables"
-    title.zh: "使用 Obsidian 经典表格样式"
+    title: "Classic Tables"
+    title.zh: "使用默认表格样式"
     type: class-toggle
     default: false
 
   - id: fluent2-classic-tags
-    title: "Use Classic Obsidian Tags"
-    title.zh: "使用 Obsidian 经典标签样式"
+    title: "Classic Tags"
+    title.zh: "使用默认标签样式"
     type: class-toggle
     default: false
 
   - id: fluent2-image-caption-reading
-    title: "Show Image Captions Below Images (Reading View)"
-    title.zh: "阅读视图下在图片下方显示图名"
-    description: "Displays custom alt text centered below embedded images in Reading View (ignores raw image filenames)."
-    description.zh: "在阅读视图中将自定义图片说明居中显示在图片正下方（自动忽略原始图片文件名）。"
+    title: "Image Captions (Reading View)"
+    title.zh: "阅读视图显示图片说明"
+    description: "Shows alt text centered below images in Reading View."
+    description.zh: "在图片正下方居中显示图片说明文字。"
     type: class-toggle
     default: false
 
   - id: fluent2-image-caption-editing
-    title: "Show Image Captions Below Images (Editing View)"
-    title.zh: "编辑视图（实时预览）下在图片下方显示图名"
-    description: "Displays custom alt text centered below embedded images in Live Preview Editing View."
-    description.zh: "在实时预览编辑视图中将自定义图片说明居中显示在图片正下方，避免排在图片右侧。"
+    title: "Image Captions (Editing View)"
+    title.zh: "编辑视图显示图片说明"
+    description: "Shows alt text centered below images in Live Preview."
+    description.zh: "在实时预览编辑模式下同样在图片下方显示说明文字。"
     type: class-toggle
     default: false
 
@@ -833,26 +833,28 @@ body:not(.fluent2-use-obsidian-fonts) {
    ========================================================================== */
 
 body.theme-light:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) {
-  --f2-shell-gradient: radial-gradient(
-    120% 90% at 8% 0%,
-    color-mix(in srgb, var(--colorBrandBackground) 7%, #f3f3f3) 0%,
-    #f3f3f3 55%,
-    color-mix(in srgb, var(--colorBrandBackground) 4%, #eceff4) 100%
-  );
+  --f2-shell-gradient:
+    radial-gradient(85% 75% at 10% 5%, color-mix(in srgb, var(--colorBrandBackground) 10%, transparent) 0%, transparent 65%),
+    radial-gradient(75% 75% at 92% 95%, color-mix(in srgb, var(--colorBrandBackground) 7%, transparent) 0%, transparent 62%),
+    linear-gradient(135deg, color-mix(in srgb, var(--colorBrandBackground) 3%, #f4f5f8) 0%, #f3f3f3 50%, color-mix(in srgb, var(--colorBrandBackground) 4%, #eef1f6) 100%);
 }
 
 body.theme-dark:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) {
-  --f2-shell-gradient: radial-gradient(
-    120% 90% at 8% 0%,
-    color-mix(in srgb, var(--colorBrandBackground) 14%, #1f1f1f) 0%,
-    #202020 52%,
-    #1a1b1f 100%
-  );
+  --f2-shell-gradient:
+    radial-gradient(85% 75% at 10% 5%, color-mix(in srgb, var(--colorBrandBackground) 16%, transparent) 0%, transparent 65%),
+    radial-gradient(75% 75% at 92% 95%, color-mix(in srgb, var(--colorBrandBackground) 10%, transparent) 0%, transparent 62%),
+    linear-gradient(135deg, #212227 0%, #202020 52%, #1b1d22 100%);
 }
 
-body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)),
-body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) .app-container {
+body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) {
   background: var(--f2-shell-gradient);
+  --background-secondary: transparent;
+  --background-secondary-alt: transparent;
+  --titlebar-background: transparent;
+  --titlebar-background-focused: transparent;
+  --ribbon-background: transparent;
+  --ribbon-background-collapsed: transparent;
+  --tab-container-background: transparent;
 }
 
 body:not(.is-translucent):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic) .titlebar {
@@ -861,13 +863,22 @@ body:not(.is-translucent):not(.fluent2-material-native-mica):not(.fluent2-materi
 }
 
 body:is(.fluent2-material-simulated-mica, :not(.is-translucent):not(.fluent2-material-solid):not(.fluent2-material-native-mica):not(.fluent2-material-native-acrylic)) :is(
+  .app-container,
+  .horizontal-main-container,
+  .workspace,
   .workspace-ribbon,
   .workspace-split.mod-left-split,
   .workspace-split.mod-right-split,
   .workspace-split.mod-left-split .workspace-tabs,
   .workspace-split.mod-right-split .workspace-tabs,
+  .workspace-split.mod-left-split .workspace-leaf,
+  .workspace-split.mod-right-split .workspace-leaf,
   .workspace-split.mod-left-split .workspace-leaf-content,
-  .workspace-split.mod-right-split .workspace-leaf-content
+  .workspace-split.mod-right-split .workspace-leaf-content,
+  .workspace-sidedock-vault-profile,
+  .workspace-split.mod-root,
+  .workspace-split.mod-root .workspace-tabs,
+  .status-bar
 ) {
   background-color: transparent;
 }
@@ -901,19 +912,21 @@ html body:is(.is-translucent:not(.fluent2-material-solid), .fluent2-material-nat
   .workspace-split.mod-right-split .workspace-leaf,
   .workspace-split.mod-left-split .workspace-leaf-content,
   .workspace-split.mod-right-split .workspace-leaf-content,
+  .workspace-sidedock-vault-profile,
   .workspace-split.mod-root,
-  .workspace-split.mod-root .workspace-tabs
+  .workspace-split.mod-root .workspace-tabs,
+  .status-bar
 ) {
   background-color: transparent;
 }
 
 /* Pop-out & Standalone Settings Windows */
 html body.is-popout-window:not(.fluent2-popout-mica) {
-  background-color: var(--f2-mica-base-solid) !important;
+  background: var(--f2-shell-gradient, var(--f2-mica-base-solid)) !important;
 }
 
 html body.is-popout-window:not(.fluent2-popout-mica) .titlebar {
-  background-color: var(--f2-mica-base-solid) !important;
+  background-color: transparent !important;
   color: var(--colorNeutralForeground1) !important;
 }
 
@@ -927,7 +940,7 @@ html body.fluent2-popout-mica :is(
   .vertical-tab-content-container,
   .vertical-tab-content
 ) {
-  background-color: transparent !important;
+  background: transparent !important;
 }
 
 /* Windows 11 Pop-out / Settings Titlebar (44px, left-aligned, regular weight, no divider) */
@@ -998,9 +1011,8 @@ body.fluent2-material-native-acrylic .workspace-split.mod-root .workspace-tab-co
   -webkit-backdrop-filter: blur(var(--fluent2-acrylic-blur)) saturate(140%);
 }
 
-/* Note Editor Mica Backdrop + Adjustable Solid Tint Overlay */
-html body.fluent2-editor-mica,
-html body.fluent2-editor-mica:is(.is-translucent, .fluent2-material-native-mica, .fluent2-material-native-acrylic) {
+/* Note Editor Mica Backdrop + Adjustable Solid Tint Overlay (enabled by default) */
+html body:not(.fluent2-material-solid):is(.fluent2-editor-mica, :not(.css-settings-manager)) {
   --f2-editor-mica-tint: color-mix(
     in srgb,
     var(--fluent2-editor-overlay-color) var(--fluent2-editor-overlay-opacity),
@@ -1010,11 +1022,11 @@ html body.fluent2-editor-mica:is(.is-translucent, .fluent2-material-native-mica,
   --tab-background-active: var(--f2-editor-mica-tint);
 }
 
-html body.fluent2-editor-mica .workspace-split.mod-root .workspace-tab-container {
+html body:not(.fluent2-material-solid):is(.fluent2-editor-mica, :not(.css-settings-manager)) .workspace-split.mod-root .workspace-tab-container {
   background-color: var(--f2-editor-mica-tint);
 }
 
-html body.fluent2-editor-mica .workspace-split.mod-root :is(
+html body:not(.fluent2-material-solid):is(.fluent2-editor-mica, :not(.css-settings-manager)) .workspace-split.mod-root :is(
   .workspace-leaf,
   .workspace-leaf-content,
   .view-header,
@@ -1643,9 +1655,15 @@ select.dropdown {
   border: 1px solid var(--f2-stroke-control-default);
   border-radius: var(--borderRadiusMedium);
   min-height: 32px;
+  max-width: min(260px, 46vw);
+  text-overflow: ellipsis;
   padding: 4px 28px 4px 10px;
   transition: background-color var(--durationFaster) var(--curveEasyEase),
     border-color var(--durationFaster) var(--curveEasyEase);
+}
+
+.vertical-tabs-container .setting-item-info {
+  min-width: 180px;
 }
 
 .theme-light select.dropdown { border-bottom-color: var(--f2-stroke-control-bottom); }
@@ -1933,7 +1951,7 @@ body:not(.fluent2-disable-motion) :is(.modal, .prompt) {
 
 /* Windows 11 Settings Layout (Modal & Standalone Pop-out Window, zero blur halo) */
 body .modal.mod-settings {
-  background-color: var(--f2-mica-base-solid);
+  background: var(--f2-shell-gradient, var(--f2-mica-base-solid));
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   overflow: hidden;
@@ -2309,12 +2327,12 @@ body.fluent2-headings-divider :is(.markdown-rendered h1, .markdown-rendered h2, 
   border-bottom: 1px solid var(--colorNeutralStroke2);
 }
 
-body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2) {
+body:is(.fluent2-headings-accent-pill, :not(.fluent2-headings-clean):not(.fluent2-headings-divider)) .markdown-rendered :is(h1, h2) {
   position: relative;
   padding-left: 14px;
 }
 
-body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2)::before {
+body:is(.fluent2-headings-accent-pill, :not(.fluent2-headings-clean):not(.fluent2-headings-divider)) .markdown-rendered :is(h1, h2)::before {
   content: "";
   position: absolute;
   left: 0;
@@ -2325,7 +2343,7 @@ body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2)::before {
   background-color: var(--colorCompoundBrandBackground);
 }
 
-body.fluent2-headings-accent-pill .markdown-rendered :is(h1, h2) > .heading-collapse-indicator {
+body:is(.fluent2-headings-accent-pill, :not(.fluent2-headings-clean):not(.fluent2-headings-divider)) .markdown-rendered :is(h1, h2) > .heading-collapse-indicator {
   margin-inline-start: -34px;
 }
 
